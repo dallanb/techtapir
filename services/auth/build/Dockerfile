@@ -28,6 +28,9 @@ COPY src ./src
 # copy bin
 COPY bin ./bin
 
+# create logs directory
+RUN mkdir logs
+
 # copy manage.py
 COPY manage.py .
 

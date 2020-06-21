@@ -25,7 +25,7 @@ class Config(object):
                 'level': 'DEBUG',
                 'formatter': 'debug',
                 'class': 'logging.handlers.RotatingFileHandler',
-                'filename': 'tapir.log',
+                'filename': 'logs/tapir.log',
                 'mode': 'a',
                 'maxBytes': 1048576,
                 'backupCount': 10
@@ -34,7 +34,7 @@ class Config(object):
                 'level': 'WARNING',
                 'formatter': 'error',
                 'class': 'logging.FileHandler',
-                'filename': 'error.log',
+                'filename': 'logs/error.log',
                 'mode': 'a',
             }
         },
