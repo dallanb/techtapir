@@ -16,3 +16,5 @@ services:
       dockerfile: ${HUNCHO_DIR}/services/proxy/build/Dockerfile
     ports:
       - 80:80
+    volumes:
+      - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
