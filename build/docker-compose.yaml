@@ -1,0 +1,20 @@
+version: "3"
+services:
+  auth:
+    container_name: auth
+    build:
+      context: ${HUNCHO_DIR}/services/auth
+      dockerfile: ${HUNCHO_DIR}/services/auth/build/Dockerfile
+    volumes:
+      - ${HUNCHO_DIR}/services/auth/src:/home/app/src
+    env_file:
+      - ${HUNCHO_DIR}/services/auth/env/.env
+  proxy:
+    container_name: proxy
+    build:
+      context: ${HUNCHO_DIR}/services/proxy
+      dockerfile: ${HUNCHO_DIR}/services/proxy/build/Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
