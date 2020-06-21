@@ -6,6 +6,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     ENV = os.getenv("FLASK_ENV")
     PROPAGATE_EXCEPTIONS = os.getenv("PROPAGATE_EXCEPTIONS")
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite://")
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     LOGGING_CONFIG = {
         'version': 1,
         'loggers': {

@@ -9,6 +9,19 @@ services:
       - ${HUNCHO_DIR}/services/auth/src:/home/app/src
     env_file:
       - ${HUNCHO_DIR}/services/auth/env/.env
+    depends_on:
+      - postgresql
+  postgresql:
+    container_name: postgresql
+    build:
+      context: ${HUNCHO_DIR}/services/postgresql
+      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
+    ports:
+      - 5432:5432
+    volumes:
+      - ${HUNCHO_DIR}/services/postgresql/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/services/postgresql/env/.env
   proxy:
     container_name: proxy
     build:
@@ -18,3 +31,5 @@ services:
       - 80:80
     volumes:
       - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
+    depends_on:
+      - auth
