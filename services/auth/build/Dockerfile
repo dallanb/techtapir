@@ -28,6 +28,9 @@ COPY src ./src
 # copy bin
 COPY bin ./bin
 
+# copy build bin
+COPY build/bin ./build/bin
+
 # copy migrations
 COPY migrations ./migrations
 
@@ -38,4 +41,4 @@ RUN mkdir logs
 COPY manage.py .
 
 ## run entrypoint.sh
-ENTRYPOINT ["sh", "./bin/entrypoint.sh"]
+ENTRYPOINT ["sh", "./build/bin/entrypoint.sh"]

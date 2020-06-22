@@ -26,15 +26,21 @@ logging.config.dictConfig(app.config['LOGGING_CONFIG'])
 from .models import *
 
 # import resources
-from .resources.v1 import (Ping)
+from .resources.v1 import (Login, Logout, Ping, Register, User)
 
 # import common
 from .common import (
     ManualException,
-    ErrorResponse
+    ErrorResponse,
+    RoleEnum,
+    StatusEnum
 )
 
+routes.add_resource(Login, '/login', methods=['POST'])
+routes.add_resource(Logout, '/logout', methods=['POST'])
 routes.add_resource(Ping, '/ping', methods=['GET'])
+routes.add_resource(Register, '/register', methods=['POST'])
+routes.add_resource(User, '/user', methods=['GET'])
 
 if app.config['ENV'] != 'development':
     # error handling
@@ -53,7 +59,6 @@ if app.config['ENV'] != 'development':
 # before each request
 @app.before_request
 def handle_request():
-    g.cleaner = False
     g.logger = logging
     g.db = db
     g.config = app.config

@@ -6,8 +6,8 @@ from http import HTTPStatus
 
 class Base(Resource):
     def __init__(self):
-        self.cleaner = g.cleaner
         self.logger = g.logger.getLogger(__name__)
+        self.db = g.db
         self.code = HTTPStatus
 
     @staticmethod

@@ -16,6 +16,8 @@ services:
     volumes:
       - ${HUNCHO_DIR}/services/auth/src:/home/app/src
       - ${HUNCHO_DIR}/services/auth/migrations:/home/app/migrations
+      - ${HUNCHO_DIR}/services/auth/bin:/home/app/bin
+      - ${HUNCHO_DIR}/services/auth/manage.py:/home/app/manage.py
     env_file:
       - ${HUNCHO_DIR}/services/auth/env/.env
     depends_on:
