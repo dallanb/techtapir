@@ -28,6 +28,9 @@ COPY src ./src
 # copy bin
 COPY bin ./bin
 
+# copy migrations
+COPY migrations ./migrations
+
 # create logs directory
 RUN mkdir logs
 

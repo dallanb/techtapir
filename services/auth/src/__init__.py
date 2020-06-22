@@ -1,5 +1,6 @@
 from flask import Flask, g
 from flask_cors import CORS
+from flask_migrate import Migrate
 from flask_restful import Api, marshal_with
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
@@ -10,6 +11,8 @@ app = Flask(__name__)
 app.config.from_object("src.config.Config")
 # db
 db = SQLAlchemy(app)
+# migrate
+migrate = Migrate(app, db)
 # ma
 ma = Marshmallow()
 # routes
