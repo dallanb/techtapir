@@ -3,4 +3,4 @@ from .login import Login
 from .logout import Logout
 from .ping import Ping
 from .register import Register
-from .user import User
+from .status import Status

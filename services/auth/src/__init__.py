@@ -26,7 +26,7 @@ logging.config.dictConfig(app.config['LOGGING_CONFIG'])
 from .models import *
 
 # import resources
-from .resources.v1 import (Login, Logout, Ping, Register, User)
+from .resources.v1 import (Login, Logout, Ping, Register, Status)
 
 # import common
 from .common import (
@@ -40,9 +40,9 @@ routes.add_resource(Login, '/login', methods=['POST'])
 routes.add_resource(Logout, '/logout', methods=['POST'])
 routes.add_resource(Ping, '/ping', methods=['GET'])
 routes.add_resource(Register, '/register', methods=['POST'])
-routes.add_resource(User, '/user', methods=['GET'])
+routes.add_resource(Status, '/status', methods=['GET'])
 
-if app.config['ENV'] != 'development':
+if app.config['ENV'] == 'development':
     # error handling
     @app.errorhandler(Exception)
     @marshal_with(ErrorResponse.marshallable())

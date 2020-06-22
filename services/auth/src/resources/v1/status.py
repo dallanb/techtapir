@@ -1,17 +1,17 @@
 from flask import request
 from flask_restful import marshal_with
 from ...common import DataResponse
-from ...models import User, BlacklistToken
+from ...models import User, UserSchema
 
 from . import Base
 
 
-class Logout(Base):
+class Status(Base):
     def __init__(self):
         Base.__init__(self)
 
     @marshal_with(DataResponse.marshallable())
-    def post(self):
+    def get(self):
         auth = request.headers.get('Authorization')
         if not auth:
             self.logger.error('Missing authorization')
@@ -25,8 +25,8 @@ class Logout(Base):
             self.logger.info(user_id)
             self.throw_error(self.code.BAD_REQUEST)
 
-        blacklist_token = BlacklistToken(token=auth_token)
-        self.db.session.add(blacklist_token)
-        self.db.session.commit()
+        user = User.query.filter(User.id == user_id).first()
 
-        return DataResponse(data=False)
+        user_result = UserSchema().dump(user)
+
+        return DataResponse(data={'user': user_result})

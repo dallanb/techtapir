@@ -33,6 +33,12 @@ class Register(Base):
         self.db.session.add(user)
         self.db.session.commit()
 
+        auth_token = user.encode_auth_token(user.id)
+
+        if not auth_token:
+            self.logger.error('Issues authorizing auth token')
+            self.throw_error(self.code.INTERNAL_SERVER_ERROR)
+
         user_result = UserSchema().dump(user)
 
-        return DataResponse(data={'user': user_result})
+        return DataResponse(data={'user': user_result, 'auth_token': auth_token.decode()})
