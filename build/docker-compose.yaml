@@ -1,5 +1,13 @@
 version: "3"
 services:
+  adminer:
+    container_name: adminer
+    build:
+      context: ${HUNCHO_DIR}/services/adminer
+      dockerfile: ${HUNCHO_DIR}/services/adminer/build/Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
   auth:
     container_name: auth
     build:
@@ -7,8 +15,24 @@ services:
       dockerfile: ${HUNCHO_DIR}/services/auth/build/Dockerfile
     volumes:
       - ${HUNCHO_DIR}/services/auth/src:/home/app/src
+      - ${HUNCHO_DIR}/services/auth/migrations:/home/app/migrations
+      - ${HUNCHO_DIR}/services/auth/bin:/home/app/bin
+      - ${HUNCHO_DIR}/services/auth/manage.py:/home/app/manage.py
     env_file:
       - ${HUNCHO_DIR}/services/auth/env/.env
+    depends_on:
+      - postgresql
+  postgresql:
+    container_name: postgresql
+    build:
+      context: ${HUNCHO_DIR}/services/postgresql
+      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
+    ports:
+      - 5432:5432
+    volumes:
+      - ${HUNCHO_DIR}/services/postgresql/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/services/postgresql/env/.env
   proxy:
     container_name: proxy
     build:
@@ -18,3 +42,5 @@ services:
       - 80:80
     volumes:
       - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
+    depends_on:
+      - auth

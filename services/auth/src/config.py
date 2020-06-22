@@ -6,6 +6,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     ENV = os.getenv("FLASK_ENV")
     PROPAGATE_EXCEPTIONS = os.getenv("PROPAGATE_EXCEPTIONS")
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite://")
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = os.getenv("SECRET_KEY")
     LOGGING_CONFIG = {
         'version': 1,
         'loggers': {
@@ -25,7 +28,7 @@ class Config(object):
                 'level': 'DEBUG',
                 'formatter': 'debug',
                 'class': 'logging.handlers.RotatingFileHandler',
-                'filename': 'tapir.log',
+                'filename': 'logs/tapir.log',
                 'mode': 'a',
                 'maxBytes': 1048576,
                 'backupCount': 10
@@ -34,7 +37,7 @@ class Config(object):
                 'level': 'WARNING',
                 'formatter': 'error',
                 'class': 'logging.FileHandler',
-                'filename': 'error.log',
+                'filename': 'logs/error.log',
                 'mode': 'a',
             }
         },
