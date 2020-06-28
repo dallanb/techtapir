@@ -14,5 +14,5 @@ deploy:
 					up
 deploy-prod:
 	@docker-compose \
-					-f build.docker-compose.prod.yaml \
-					up --build --force-recreate
+					-f build/docker-compose.prod.yaml \
+					up
