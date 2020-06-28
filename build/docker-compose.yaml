@@ -7,7 +7,7 @@ services:
       dockerfile: ${HUNCHO_DIR}/services/adminer/build/Dockerfile
     restart: always
     ports:
-      - 8080:8080
+      - 8090:8080
   auth:
     container_name: auth
     build:

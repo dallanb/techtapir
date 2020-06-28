@@ -1,3 +1,5 @@
+.PHONY: build
+
 certbot:
 	@sh build/bin/init-letsencrypt.sh
 
