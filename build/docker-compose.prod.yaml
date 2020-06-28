@@ -2,15 +2,7 @@ version: "3"
 services:
   auth:
     container_name: auth
-    build:
-      context: ${HUNCHO_DIR}/services/auth
-      dockerfile: ${HUNCHO_DIR}/services/auth/build/Dockerfile.prod
-    volumes:
-      - ${HUNCHO_DIR}/services/auth/src:/home/app/src
-      - ${HUNCHO_DIR}/services/auth/migrations:/home/app/migrations
-      - ${HUNCHO_DIR}/services/auth/bin:/home/app/bin
-      - ${HUNCHO_DIR}/services/auth/tests:/home/app/tests
-      - ${HUNCHO_DIR}/services/auth/manage.py:/home/app/manage.py
+    image: dallanbhatti/auth:latest
     env_file:
       - ${HUNCHO_DIR}/services/auth/env/.env.prod
   certbot:
@@ -25,9 +17,7 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
   nginx:
     container_name: nginx
-    build:
-      context: ${HUNCHO_DIR}/services/nginx
-      dockerfile: ${HUNCHO_DIR}/services/nginx/build/Dockerfile
+    image: dallanbhatti/nginx:latest
     restart: unless-stopped
     ports:
       - 80:80
