@@ -8,6 +8,11 @@ build:
 	@docker-compose \
 					-f build/docker-compose.yaml \
 					build
+
+build-prod:
+	@docker-compose \
+					-f build/docker-compose.prod.yaml \
+					build
 deploy:
 	@docker-compose \
 					-f build/docker-compose.yaml \
