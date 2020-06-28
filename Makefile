@@ -11,8 +11,8 @@ build:
 deploy:
 	@docker-compose \
 					-f build/docker-compose.yaml \
-					up
+					up --build
 deploy-prod:
 	@docker-compose \
 					-f build/docker-compose.prod.yaml \
-					up
+					up --build
