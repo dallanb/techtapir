@@ -7,9 +7,7 @@ services:
       - ${HUNCHO_DIR}/services/auth/env/.env.prod
   certbot:
     container_name: certbot
-    build:
-      context: ${HUNCHO_DIR}/services/certbot
-      dockerfile: ${HUNCHO_DIR}/services/certbot/build/Dockerfile
+    image: dallanbhatti/certbot:latest
     restart: unless-stopped
     volumes:
       - ${HUNCHO_DIR}/services/certbot/conf:/etc/letsencrypt
@@ -28,9 +26,7 @@ services:
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   postgresql:
     container_name: postgresql
-    build:
-      context: ${HUNCHO_DIR}/services/postgresql
-      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile.prod
+    image: dallanbhatti/postgresql:latest
     ports:
       - 5432:5432
     volumes:
