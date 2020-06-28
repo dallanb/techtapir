@@ -1,15 +1,15 @@
 [submodule "services/adminer"]
 	path = services/adminer
-	url = https://github.com/dallanb/adminer.git
+	url = git@github.com:dallanb/adminer.git
 [submodule "services/auth"]
 	path = services/auth
-	url = https://github.com/dallanb/auth.git
+	url = git@github.com:dallanb/auth.git
 [submodule "services/certbot"]
 	path = services/certbot
-	url = https://github.com/dallanb/certbot.git
+	url = git@github.com:dallanb/certbot.git
 [submodule "services/nginx"]
 	path = services/nginx
-	url = https://github.com/dallanb/nginx.git
+	url = git@github.com:dallanb/nginx.git
 [submodule "services/postgresql"]
 	path = services/postgresql
-	url = https://github.com/dallanb/postgresql.git
+	url = git@github.com:dallanb/postgresql.git
