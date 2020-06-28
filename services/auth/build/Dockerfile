@@ -34,6 +34,9 @@ COPY build/bin ./build/bin
 # copy migrations
 COPY migrations ./migrations
 
+# copy tests
+COPY tests ./tests
+
 # create logs directory
 RUN mkdir logs
 
