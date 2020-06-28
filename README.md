@@ -6,6 +6,7 @@
 2. `> cat $HOME/.ssh/github.pub`
 3. Copy and Paste the output into Github Profile
 4. `> ssh-agent bash -c 'ssh-add $HOME/.ssh/github; git clone git@github.com:dallanb/huncho.git`
+4a. `> eval 'ssh-agent -s'` (Linux) 
 5. `>ssh-add $HOME/.ssh/github`
 
 ## Prepare Submodules
