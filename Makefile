@@ -20,7 +20,7 @@ deploy:
 deploy-prod:
 	@docker-compose \
 					-f build/docker-compose.prod.yaml \
-					up --build
+					up --build --force-recreate -d
 
 down:
 	@docker-compose \
