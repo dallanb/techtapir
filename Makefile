@@ -16,3 +16,13 @@ deploy-prod:
 	@docker-compose \
 					-f build/docker-compose.prod.yaml \
 					up --build
+
+down:
+	@docker-compose \
+					-f build/docker-compose.yaml \
+					down
+
+down-prod:
+	@docker-compose \
+					-f build/docker-compose.prod.yaml \
+					down --rmi all --remove-orphans
