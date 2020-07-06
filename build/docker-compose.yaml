@@ -21,16 +21,6 @@ services:
       - ${HUNCHO_DIR}/services/auth/manage.py:/home/app/manage.py
     env_file:
       - ${HUNCHO_DIR}/services/auth/env/.env
-  certbot:
-    container_name: certbot
-    build:
-      context: ${HUNCHO_DIR}/services/certbot
-      dockerfile: ${HUNCHO_DIR}/services/certbot/build/Dockerfile
-    restart: unless-stopped
-    volumes:
-      - ${HUNCHO_DIR}/services/certbot/conf:/etc/letsencrypt
-      - ${HUNCHO_DIR}/services/certbot/cloudflare.ini:/cloudflare.ini
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
   nginx:
     container_name: nginx
     build:
@@ -39,11 +29,8 @@ services:
     restart: unless-stopped
     ports:
       - 80:80
-      - 443:443
     volumes:
       - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
-      - ${HUNCHO_DIR}/services/certbot/conf:/etc/letsencrypt
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   postgresql:
     container_name: postgresql
     build:
