@@ -27,7 +27,7 @@ deploy-prod:
 down:
 	@docker-compose \
 					-f build/docker-compose.yaml \
-					down
+					down --remove-orphans
 
 down-prod:
 	@docker-compose \
