@@ -7,6 +7,12 @@
 [submodule "services/certbot"]
 	path = services/certbot
 	url = git@github.com:dallanb/certbot.git
+[submodule "services/kong"]
+	path = services/kong
+	url = git@github.com:dallanb/kong.git
+[submodule "services/konga"]
+	path = services/konga
+	url = git@github.com:dallanb/konga.git
 [submodule "services/nginx"]
 	path = services/nginx
 	url = git@github.com:dallanb/nginx.git
