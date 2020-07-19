@@ -13,6 +13,7 @@ services:
     build:
       context: ${HUNCHO_DIR}/services/auth
       dockerfile: ${HUNCHO_DIR}/services/auth/build/Dockerfile
+    restart: on-failure
     volumes:
       - ${HUNCHO_DIR}/services/auth/src:/home/app/src
       - ${HUNCHO_DIR}/services/auth/migrations:/home/app/migrations
@@ -27,8 +28,26 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
+      auth_cache:
+        condition: service_healthy
       auth_db:
         condition: service_healthy
+  auth_cache:
+    container_name: auth_cache
+    build:
+      context: ${HUNCHO_DIR}/services/redis
+      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ${HUNCHO_DIR}/data/auth_cache/redis_data:/var/lib/redis
+      - ${HUNCHO_DIR}/data/auth_cache/redis.conf:/usr/local/etc/redis/redis.conf
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.auth_cache
+    healthcheck:
+      test: ["CMD", "redis-cli","ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   auth_db:
     container_name: auth_db
     build:
@@ -112,4 +131,17 @@ services:
       - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
     depends_on:
       auth:
+        condition: service_healthy
+  redis-commander:
+    container_name: redis-commander
+    build:
+      context: ${HUNCHO_DIR}/services/redis-commander
+      dockerfile: ${HUNCHO_DIR}/services/redis-commander/build/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.redis-commander
+    depends_on:
+      auth_cache:
         condition: service_healthy

@@ -19,3 +19,9 @@
 [submodule "services/postgresql"]
 	path = services/postgresql
 	url = git@github.com:dallanb/postgresql.git
+[submodule "services/redis"]
+	path = services/redis
+	url = git@github.com:dallanb/redis.git
+[submodule "services/redis-commander"]
+	path = services/redis-commander
+	url = git@github.com:dallanb/redis-commander.git
