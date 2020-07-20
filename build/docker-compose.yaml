@@ -63,7 +63,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U auth"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 20
   kong:
     container_name: kong
     build:
@@ -95,7 +95,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U kong"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 20
   kong_migration:
     container_name: kong_migration
     build:

@@ -10,4 +10,4 @@
 5. `> ssh-add $HOME/.ssh/github`
 
 ## Prepare Submodules
-1. `> git submodule update --init --force --remote`
+1. `> git submodule update --init --force --remote --merge`
