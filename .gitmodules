@@ -25,3 +25,12 @@
 [submodule "services/redis-commander"]
 	path = services/redis-commander
 	url = git@github.com:dallanb/redis-commander.git
+[submodule "services/elasticsearch"]
+	path = services/elasticsearch
+	url = git@github.com:dallanb/elasticsearch.git
+[submodule "services/kibana"]
+	path = services/kibana
+	url = git@github.com:dallanb/kibana.git
+[submodule "services/logstash"]
+	path = services/logstash
+	url = git@github.com:dallanb/logstash.git

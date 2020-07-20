@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.2'
 services:
   adminer:
     container_name: adminer
@@ -28,10 +28,8 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
-      auth_cache:
-        condition: service_healthy
-      auth_db:
-        condition: service_healthy
+      - auth_cache
+      - auth_db
   auth_cache:
     container_name: auth_cache
     build:
@@ -53,6 +51,8 @@ services:
     build:
       context: ${HUNCHO_DIR}/services/postgresql
       dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
+      args:
+        POSTGRES_VERSION: $POSTGRES_VERSION
     ports:
       - 5432:5432
     volumes:
@@ -64,6 +64,34 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
+  elasticsearch:
+    build:
+      context: ${HUNCHO_DIR}/services/elasticsearch
+      dockerfile: ${HUNCHO_DIR}/services/elasticsearch/build/Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/services/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ${HUNCHO_DIR}/data/elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.elasticsearch
+  kibana:
+    build:
+      context: ${HUNCHO_DIR}/services/kibana
+      dockerfile: ${HUNCHO_DIR}/services/kibana/build/Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/services/kibana/config/kibana.secret.yml:/usr/share/kibana/config/kibana.yml:ro
+    ports:
+      - 5601:5601
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.kibana
+    depends_on:
+      - elasticsearch
   kong:
     container_name: kong
     build:
@@ -78,13 +106,14 @@ services:
       - 8443:8443
       - 8444:8444
     depends_on:
-      kong_db:
-        condition: service_healthy
+      - kong_db
   kong_db:
     container_name: kong_db
     build:
       context: ${HUNCHO_DIR}/services/postgresql
       dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
+      args:
+        POSTGRES_VERSION: $POSTGRES_VERSION
     ports:
       - 5433:5432
     volumes:
@@ -96,16 +125,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
-  kong_migration:
-    container_name: kong_migration
-    build:
-      context: ${HUNCHO_DIR}/services/kong
-      dockerfile: ${HUNCHO_DIR}/services/kong/build/Dockerfile.migration
-    env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.kong_migration
-    depends_on:
-      kong_db:
-        condition: service_healthy
   konga:
     container_name: konga
     build:
@@ -117,8 +136,24 @@ services:
     ports:
       - 1337:1337
     depends_on:
-      kong_db:
-        condition: service_healthy
+      - kong_db
+  logstash:
+    build:
+      context: ${HUNCHO_DIR}/services/logstash
+      dockerfile: ${HUNCHO_DIR}/services/logstash/build/Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/services/logstash/config/logstash.secret.yml:/usr/share/logstash/config/logstash.yml
+      - ${HUNCHO_DIR}/services/logstash/pipeline/logstash.secret.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - 5000:5000/tcp
+      - 5000:5000/udp
+      - 9600:9600
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.logstash
+    depends_on:
+      - elasticsearch
   nginx:
     container_name: nginx
     build:
@@ -130,8 +165,7 @@ services:
     volumes:
       - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
     depends_on:
-      auth:
-        condition: service_healthy
+      - auth
   redis-commander:
     container_name: redis-commander
     build:
@@ -143,5 +177,4 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/dev/.env.redis-commander
     depends_on:
-      auth_cache:
-        condition: service_healthy
+      - auth_cache
