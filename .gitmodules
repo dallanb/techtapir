@@ -13,9 +13,6 @@
 [submodule "services/konga"]
 	path = services/konga
 	url = git@github.com:dallanb/konga.git
-[submodule "services/nginx"]
-	path = services/nginx
-	url = git@github.com:dallanb/nginx.git
 [submodule "services/postgresql"]
 	path = services/postgresql
 	url = git@github.com:dallanb/postgresql.git
@@ -34,3 +31,6 @@
 [submodule "services/logstash"]
 	path = services/logstash
 	url = git@github.com:dallanb/logstash.git
+[submodule "services/mailer"]
+	path = services/mailer
+	url = git@github.com:dallanb/mailer.git

@@ -16,8 +16,8 @@
 1. `> git submodule add git@github.com:dallanb/<reponame>.git services/<reponame>`
 
 ## Remove Submodule
-1. `> git submodule deinit git@github.com:dallanb/<reponame>.git`
-2. `> git rm git@github.com:dallanb/<reponame>.git`
+1. `> git submodule deinit services/<reponame>`
+2. `> git rm services/<reponame>`
 
 ## ELK Setup
 [deviantony setup](https://github.com/deviantony/docker-elk#initial-setup)
