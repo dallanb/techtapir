@@ -1,35 +1,35 @@
-version: "3"
+version: '3'
 services:
-  auth:
-    container_name: auth
-    image: dallanbhatti/auth:latest
-    env_file:
-      - ${HUNCHO_DIR}/services/auth/env/.env.prod
-  certbot:
-    container_name: certbot
-    image: dallanbhatti/certbot:latest
-    restart: unless-stopped
-    volumes:
-      - ${HUNCHO_DIR}/services/certbot/conf:/etc/letsencrypt
-      - ${HUNCHO_DIR}/services/certbot/cloudflare.ini:/cloudflare.ini
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-  nginx:
-    container_name: nginx
-    image: dallanbhatti/nginx:latest
-    restart: unless-stopped
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
-      - ${HUNCHO_DIR}/services/certbot/conf:/etc/letsencrypt
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-  postgresql:
-    container_name: postgresql
-    image: dallanbhatti/postgresql:latest
-    ports:
-      - 5432:5432
-    volumes:
-      - ${HUNCHO_DIR}/services/postgresql/prod/data:/var/lib/postgresql/data/
-    env_file:
-      - ${HUNCHO_DIR}/services/postgresql/env/.env.prod
+    auth:
+        container_name: auth
+        image: dallanbhatti/auth:latest
+        env_file:
+            - ${HUNCHO_DIR}/services/auth/env/.env.prod
+    certbot:
+        container_name: certbot
+        image: dallanbhatti/certbot:latest
+        restart: unless-stopped
+        volumes:
+            - ${HUNCHO_DIR}/services/certbot/conf:/etc/letsencrypt
+            - ${HUNCHO_DIR}/services/certbot/cloudflare.ini:/cloudflare.ini
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    nginx:
+        container_name: nginx
+        image: dallanbhatti/nginx:latest
+        restart: unless-stopped
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
+            - ${HUNCHO_DIR}/services/certbot/conf:/etc/letsencrypt
+        command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+    postgresql:
+        container_name: postgresql
+        image: dallanbhatti/postgresql:latest
+        ports:
+            - 5432:5432
+        volumes:
+            - ${HUNCHO_DIR}/services/postgresql/prod/data:/var/lib/postgresql/data/
+        env_file:
+            - ${HUNCHO_DIR}/services/postgresql/env/.env.prod

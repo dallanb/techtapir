@@ -1,13 +1,13 @@
 version: '3.2'
 services:
-  mailer:
-    container_name: mailer
-    build:
-      context: ${HUNCHO_DIR}/services/mailer
-      dockerfile: ${HUNCHO_DIR}/services/mailer/build/Dockerfile
-    restart: always
-    ports:
-      - 8000:8000
+    mailer:
+        container_name: mailer
+        build:
+            context: ${HUNCHO_DIR}/services/mailer
+            dockerfile: ${HUNCHO_DIR}/services/mailer/build/Dockerfile
+        restart: always
+        ports:
+            - 8000:8000
 #  adminer:
 #    container_name: adminer
 #    build:
@@ -72,11 +72,11 @@ services:
 #      interval: 10s
 #      timeout: 5s
 #      retries: 20
-#  auth-proxy:
-#    container_name: auth-proxy
+#  auth-web:
+#    container_name: auth-web
 #    build:
-#      context: ${HUNCHO_DIR}/services/auth/proxy
-#      dockerfile: ${HUNCHO_DIR}/services/auth/proxy/build/Dockerfile
+#      context: ${HUNCHO_DIR}/services/auth/web
+#      dockerfile: ${HUNCHO_DIR}/services/auth/web/build/Dockerfile
 #    restart: unless-stopped
 #    ports:
 #      - 80:80
