@@ -27,3 +27,72 @@ In the ELK services (Elasticsearch, Kibana, Logstash) the project is brought up 
 password we will bring up the project with a docker-compose for ELK and then generate passwords. After the passwords are generated we will 
 bring up the main docker-compose with configuration files that use these new passwords
 
+## Kong
+### Konga Setup
+#### Add Consumer
+```
+POST localhost:8001/consumers/
+{
+  "username": "konga",
+  "custom_id": "1"
+}
+```
+#### Add Service
+```
+POST 0.0.0.0:8001/services/
+{
+  "name": "api-v1-admin",
+  "url": "http://kong:8001"
+}
+```
+#### Add Route
+```
+POST 0.0.0.0:8001/services/api-v1-admin/routes/
+{
+  "name": "default-admin",
+  "paths": ["/admin"]
+}
+```
+#### Add Key Auth Plugin
+```
+POST 0.0.0.0:8001/services/api-v1-admin/plugins/
+{
+  "name": "key-auth"
+}
+```
+#### Generate API Key
+```
+curl --location --request POST 'http://localhost:8001/consumers/konga/key-auth' 
+```
+
+#### Configure Konga to use Kong Admin API
+```
+1. Open Browser to 0.0.0.0:1337
+2. Navigate To Connections
+3. + New Connection
+4. Key Auth tab
+    - Name: api-v1-admin
+    - Loopback API URL: http://kong:8000/admin
+    - API KEY: <previously generated API key>
+```
+
+### Auth Setup
+#### Add Service
+```
+POST 0.0.0.0:8001/services/
+{
+  "name": "api-v1-auth",
+  "url": "http://auth:5000"
+}
+```
+#### Add Route
+```
+POST 0.0.0.0:8001/services/api-v1-auth/routes/
+{
+  "name": "default-auth",
+  "paths": ["/api/v1/auth"]
+}
+```
+
+
+
