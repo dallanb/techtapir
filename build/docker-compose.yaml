@@ -5,9 +5,20 @@ services:
     build:
       context: ${HUNCHO_DIR}/services/mailer
       dockerfile: ${HUNCHO_DIR}/services/mailer/build/Dockerfile
-    restart: always
+    volumes:
+      - ${HUNCHO_DIR}/services/mailer/src/app:/var/www/src/codeignitor
     ports:
-      - 8000:8000
+      - 9001:9000
+  mailer_proxy:
+    container_name: mailer_proxy
+    build:
+      context: ${HUNCHO_DIR}/services/mailer/proxy
+      dockerfile: ${HUNCHO_DIR}/services/mailer/proxy/build/Dockerfile
+    volumes:
+      - ${HUNCHO_DIR}/services/mailer/src/app:/var/www/src/codeignitor
+    ports:
+      - 80:80
+
 #  adminer:
 #    container_name: adminer
 #    build:
@@ -73,10 +84,10 @@ services:
 #      timeout: 5s
 #      retries: 20
 #  auth-proxy:
-#    container_name: auth-proxy
+#    container_name: auth-external
 #    build:
-#      context: ${HUNCHO_DIR}/services/auth/proxy
-#      dockerfile: ${HUNCHO_DIR}/services/auth/proxy/build/Dockerfile
+#      context: ${HUNCHO_DIR}/services/auth/external
+#      dockerfile: ${HUNCHO_DIR}/services/auth/external/build/Dockerfile
 #    restart: unless-stopped
 #    ports:
 #      - 80:80
