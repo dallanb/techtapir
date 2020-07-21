@@ -18,7 +18,6 @@ services:
       - ${HUNCHO_DIR}/services/mailer/src/app:/var/www/src/codeignitor
     ports:
       - 80:80
-
 #  adminer:
 #    container_name: adminer
 #    build:
@@ -83,11 +82,19 @@ services:
 #      interval: 10s
 #      timeout: 5s
 #      retries: 20
-#  auth-proxy:
-#    container_name: auth-external
+  <<<<<<< HEAD
+  #  auth-proxy:
+  #    container_name: auth-external
+  #    build:
+  #      context: ${HUNCHO_DIR}/services/auth/external
+  #      dockerfile: ${HUNCHO_DIR}/services/auth/external/build/Dockerfile
+  =======
+#  auth-web:
+#    container_name: auth-web
 #    build:
-#      context: ${HUNCHO_DIR}/services/auth/external
-#      dockerfile: ${HUNCHO_DIR}/services/auth/external/build/Dockerfile
+#      context: ${HUNCHO_DIR}/services/auth/web
+#      dockerfile: ${HUNCHO_DIR}/services/auth/web/build/Dockerfile
+  >>>>>>> 958a4986b3e99c91df93235add6a684e04197143
 #    restart: unless-stopped
 #    ports:
 #      - 80:80

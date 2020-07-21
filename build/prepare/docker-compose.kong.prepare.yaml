@@ -1,30 +1,30 @@
 version: '2.2'
 services:
-  kong_db:
-    container_name: kong_db
-    build:
-      context: ${HUNCHO_DIR}/services/postgresql
-      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-      args:
-        POSTGRES_VERSION: $POSTGRES_VERSION
-    ports:
-      - 5433:5432
-    volumes:
-      - ${HUNCHO_DIR}/data/kong_db/data:/var/lib/postgresql/data
-    env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.kong_db
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U kong"]
-      interval: 10s
-      timeout: 5s
-      retries: 20
-  kong_migration:
-    container_name: kong_migration
-    build:
-      context: ${HUNCHO_DIR}/services/kong
-      dockerfile: ${HUNCHO_DIR}/services/kong/build/Dockerfile.migration
-    env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.kong_migration
-    depends_on:
-      kong_db:
-        condition: service_healthy
+    kong_db:
+        container_name: kong_db
+        build:
+            context: ${HUNCHO_DIR}/services/postgresql
+            dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
+            args:
+                POSTGRES_VERSION: $POSTGRES_VERSION
+        ports:
+            - 5433:5432
+        volumes:
+            - ${HUNCHO_DIR}/data/kong_db/data:/var/lib/postgresql/data
+        env_file:
+            - ${HUNCHO_DIR}/env/dev/.env.kong_db
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U kong']
+            interval: 10s
+            timeout: 5s
+            retries: 20
+    kong_migration:
+        container_name: kong_migration
+        build:
+            context: ${HUNCHO_DIR}/services/kong
+            dockerfile: ${HUNCHO_DIR}/services/kong/build/Dockerfile.migration
+        env_file:
+            - ${HUNCHO_DIR}/env/dev/.env.kong_migration
+        depends_on:
+            kong_db:
+                condition: service_healthy
