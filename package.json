@@ -4,8 +4,8 @@
     "repository": "git@github.com:dallanb/techtapir.git",
     "author": "Dallan Bhatti <dallan.bhatti@techtapir.com>",
     "license": "MIT",
-    "dependencies": {},
-    "devDependencies": {
+    "dependencies": {
+        "node": "^14.5.0",
         "prettier": "^2.0.5",
         "@prettier/plugin-php": "^0.14.2"
     }
