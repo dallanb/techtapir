@@ -1,191 +1,211 @@
 version: '3.2'
 services:
-    mailer:
-        container_name: mailer
-        build:
-            context: ${HUNCHO_DIR}/services/mailer
-            dockerfile: ${HUNCHO_DIR}/services/mailer/build/Dockerfile
-        restart: always
-        ports:
-            - 8000:8000
-#  adminer:
-#    container_name: adminer
-#    build:
-#      context: ${HUNCHO_DIR}/services/adminer
-#      dockerfile: ${HUNCHO_DIR}/services/adminer/build/Dockerfile
-#    restart: always
-#    ports:
-#      - 8090:8080
-#  auth:
-#    container_name: auth
-#    build:
-#      context: ${HUNCHO_DIR}/services/auth
-#      dockerfile: ${HUNCHO_DIR}/services/auth/build/Dockerfile
-#    restart: on-failure
-#    volumes:
-#      - ${HUNCHO_DIR}/services/auth/src:/home/app/src
-#      - ${HUNCHO_DIR}/services/auth/migrations:/home/app/migrations
-#      - ${HUNCHO_DIR}/services/auth/bin:/home/app/bin
-#      - ${HUNCHO_DIR}/services/auth/tests:/home/app/tests
-#      - ${HUNCHO_DIR}/services/auth/manage.py:/home/app/manage.py
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.auth
-#    healthcheck:
-#      test: curl --fail -s auth:5000/ping || exit 1
-#      interval: 60s
-#      timeout: 5s
-#      retries: 5
-#    depends_on:
-#      - auth_cache
-#      - auth_db
-#  auth_cache:
-#    container_name: auth_cache
-#    build:
-#      context: ${HUNCHO_DIR}/services/redis
-#      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
-#    restart: unless-stopped
-#    volumes:
-#      - ${HUNCHO_DIR}/data/auth_cache/redis_data:/var/lib/redis
-#      - ${HUNCHO_DIR}/data/auth_cache/redis.conf:/usr/local/etc/redis/redis.conf
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.auth_cache
-#    healthcheck:
-#      test: ["CMD", "redis-cli","ping"]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 5
-#  auth_db:
-#    container_name: auth_db
-#    build:
-#      context: ${HUNCHO_DIR}/services/postgresql
-#      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-#      args:
-#        POSTGRES_VERSION: $POSTGRES_VERSION
-#    ports:
-#      - 5432:5432
-#    volumes:
-#      - ${HUNCHO_DIR}/data/auth_db/data:/var/lib/postgresql/data/
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.auth_db
-#    healthcheck:
-#      test: ["CMD-SHELL", "pg_isready -U auth"]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 20
-#  auth-web:
-#    container_name: auth-web
-#    build:
-#      context: ${HUNCHO_DIR}/services/auth/web
-#      dockerfile: ${HUNCHO_DIR}/services/auth/web/build/Dockerfile
-#    restart: unless-stopped
-#    ports:
-#      - 80:80
-#    volumes:
-#      - ${HUNCHO_DIR}/services/auth/statics/.:/usr/share/nginx/
-#    depends_on:
-#      - auth
-#  elasticsearch:
-#    container_name: elasticsearch
-#    build:
-#      context: ${HUNCHO_DIR}/services/elasticsearch
-#      dockerfile: ${HUNCHO_DIR}/services/elasticsearch/build/Dockerfile
-#      args:
-#        ELK_VERSION: $ELK_VERSION
-#    volumes:
-#      - ${HUNCHO_DIR}/services/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-#      - ${HUNCHO_DIR}/data/elasticsearch/data:/usr/share/elasticsearch/data
-#    ports:
-#      - 9200:9200
-#      - 9300:9300
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.elasticsearch
-#  kibana:
-#    container_name: kibana
-#    build:
-#      context: ${HUNCHO_DIR}/services/kibana
-#      dockerfile: ${HUNCHO_DIR}/services/kibana/build/Dockerfile
-#      args:
-#        ELK_VERSION: $ELK_VERSION
-#    volumes:
-#      - ${HUNCHO_DIR}/services/kibana/config/kibana.secret.yml:/usr/share/kibana/config/kibana.yml:ro
-#    ports:
-#      - 5601:5601
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.kibana
-#    depends_on:
-#      - elasticsearch
-#  kong:
-#    container_name: kong
-#    build:
-#      context: ${HUNCHO_DIR}/services/kong
-#      dockerfile: ${HUNCHO_DIR}/services/kong/build/Dockerfile
-#    restart: on-failure
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.kong
-#    ports:
-#      - 7000:8000
-#      - 8001:8001
-#      - 8443:8443
-#      - 8444:8444
-#    depends_on:
-#      - kong_db
-#  kong_db:
-#    container_name: kong_db
-#    build:
-#      context: ${HUNCHO_DIR}/services/postgresql
-#      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-#      args:
-#        POSTGRES_VERSION: $POSTGRES_VERSION
-#    ports:
-#      - 5433:5432
-#    volumes:
-#      - ${HUNCHO_DIR}/data/kong_db/data:/var/lib/postgresql/data
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.kong_db
-#    healthcheck:
-#      test: ["CMD-SHELL", "pg_isready -U kong"]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 20
-#  konga:
-#    container_name: konga
-#    build:
-#      context: ${HUNCHO_DIR}/services/konga
-#      dockerfile: ${HUNCHO_DIR}/services/konga/build/Dockerfile
-#    restart: on-failure
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.konga
-#    ports:
-#      - 1337:1337
-#    depends_on:
-#      - kong_db
-#  logstash:
-#    container_name: logstash
-#    build:
-#      context: ${HUNCHO_DIR}/services/logstash
-#      dockerfile: ${HUNCHO_DIR}/services/logstash/build/Dockerfile
-#      args:
-#        ELK_VERSION: $ELK_VERSION
-#    volumes:
-#      - ${HUNCHO_DIR}/services/logstash/config/logstash.secret.yml:/usr/share/logstash/config/logstash.yml
-#      - ${HUNCHO_DIR}/services/logstash/pipeline/logstash.secret.conf:/usr/share/logstash/pipeline/logstash.conf
-#    ports:
-#      - 5000:5000/tcp
-#      - 5000:5000/udp
-#      - 9600:9600
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.logstash
-#    depends_on:
-#      - elasticsearch
-#  redis-commander:
-#    container_name: redis-commander
-#    build:
-#      context: ${HUNCHO_DIR}/services/redis-commander
-#      dockerfile: ${HUNCHO_DIR}/services/redis-commander/build/Dockerfile
-#    restart: unless-stopped
-#    ports:
-#      - 8081:8081
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.redis-commander
-#    depends_on:
-#      - auth_cache
+  adminer:
+    container_name: adminer
+    build:
+      context: ${HUNCHO_DIR}/services/adminer
+      dockerfile: ${HUNCHO_DIR}/services/adminer/build/Dockerfile
+    restart: always
+    ports:
+      - 8090:8080
+  auth:
+    container_name: auth
+    build:
+      context: ${HUNCHO_DIR}/services/auth
+      dockerfile: ${HUNCHO_DIR}/services/auth/build/Dockerfile
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/services/auth/src:/home/app/src
+      - ${HUNCHO_DIR}/services/auth/migrations:/home/app/migrations
+      - ${HUNCHO_DIR}/services/auth/bin:/home/app/bin
+      - ${HUNCHO_DIR}/services/auth/tests:/home/app/tests
+      - ${HUNCHO_DIR}/services/auth/manage.py:/home/app/manage.py
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.auth
+    healthcheck:
+      test: curl --fail -s auth:5000/ping || exit 1
+      interval: 60s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - auth_cache
+      - auth_db
+  auth_cache:
+    container_name: auth_cache
+    build:
+      context: ${HUNCHO_DIR}/services/redis
+      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ${HUNCHO_DIR}/data/auth_cache/redis_data:/var/lib/redis
+      - ${HUNCHO_DIR}/data/auth_cache/redis.conf:/usr/local/etc/redis/redis.conf
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.auth_cache
+    healthcheck:
+      test: ["CMD", "redis-cli","ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  auth_db:
+    container_name: auth_db
+    build:
+      context: ${HUNCHO_DIR}/services/postgresql
+      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
+      args:
+        POSTGRES_VERSION: $POSTGRES_VERSION
+    ports:
+      - 5432:5432
+    volumes:
+      - ${HUNCHO_DIR}/data/auth_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.auth_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U auth"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+  auth_proxy:
+    container_name: auth_proxy
+    build:
+      context: ${HUNCHO_DIR}/services/auth/proxy
+      dockerfile: ${HUNCHO_DIR}/services/auth/proxy/build/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ${HUNCHO_DIR}/services/auth/statics/.:/usr/share/nginx/
+    depends_on:
+      - auth
+  elasticsearch:
+    container_name: elasticsearch
+    build:
+      context: ${HUNCHO_DIR}/services/elasticsearch
+      dockerfile: ${HUNCHO_DIR}/services/elasticsearch/build/Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/services/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ${HUNCHO_DIR}/data/elasticsearch/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.elasticsearch
+  kibana:
+    container_name: kibana
+    build:
+      context: ${HUNCHO_DIR}/services/kibana
+      dockerfile: ${HUNCHO_DIR}/services/kibana/build/Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/services/kibana/config/kibana.secret.yml:/usr/share/kibana/config/kibana.yml:ro
+    ports:
+      - 5601:5601
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.kibana
+    depends_on:
+      - elasticsearch
+  kong:
+    container_name: kong
+    build:
+      context: ${HUNCHO_DIR}/services/kong
+      dockerfile: ${HUNCHO_DIR}/services/kong/build/Dockerfile
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.kong
+    ports:
+      - 7000:8000
+      - 8001:8001
+      - 8443:8443
+      - 8444:8444
+    depends_on:
+      - kong_db
+  kong_db:
+    container_name: kong_db
+    build:
+      context: ${HUNCHO_DIR}/services/postgresql
+      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
+      args:
+        POSTGRES_VERSION: $POSTGRES_VERSION
+    ports:
+      - 5433:5432
+    volumes:
+      - ${HUNCHO_DIR}/data/kong_db/data:/var/lib/postgresql/data
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.kong_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kong"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+  konga:
+    container_name: konga
+    build:
+      context: ${HUNCHO_DIR}/services/konga
+      dockerfile: ${HUNCHO_DIR}/services/konga/build/Dockerfile
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.konga
+    ports:
+      - 1337:1337
+    depends_on:
+      - kong_db
+  logstash:
+    container_name: logstash
+    build:
+      context: ${HUNCHO_DIR}/services/logstash
+      dockerfile: ${HUNCHO_DIR}/services/logstash/build/Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/services/logstash/config/logstash.secret.yml:/usr/share/logstash/config/logstash.yml
+      - ${HUNCHO_DIR}/services/logstash/pipeline/logstash.secret.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - 5000:5000/tcp
+      - 5000:5000/udp
+      - 9600:9600
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.logstash
+    depends_on:
+      - elasticsearch
+  mailer:
+    container_name: mailer
+    build:
+      context: ${HUNCHO_DIR}/services/mailer
+      dockerfile: ${HUNCHO_DIR}/services/mailer/build/Dockerfile
+    restart: always
+    volumes:
+      - ${HUNCHO_DIR}/services/mailer/src/public:/var/www/html/public
+      - mailer_volume:/var/www/html
+    healthcheck:
+      test: curl --fail -s mailer:9000/ping || exit 1
+      interval: 60s
+      timeout: 5s
+      retries: 5
+  mailer_web:
+    container_name: mailer_web
+    build:
+      context: ${HUNCHO_DIR}/services/mailer/web
+      dockerfile: ${HUNCHO_DIR}/services/mailer/web/build/Dockerfile
+    restart: always
+    volumes:
+      - mailer_volume:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - mailer
+  redis-commander:
+    container_name: redis-commander
+    build:
+      context: ${HUNCHO_DIR}/services/redis-commander
+      dockerfile: ${HUNCHO_DIR}/services/redis-commander/build/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.redis-commander
+    depends_on:
+      - auth_cache
+volumes:
+  mailer_volume:
