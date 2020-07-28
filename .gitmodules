@@ -34,3 +34,6 @@
 [submodule "services/mailer"]
 	path = services/mailer
 	url = git@github.com:dallanb/mailer.git
+[submodule "services/wager"]
+	path = services/wager
+	url = git@github.com:dallanb/wager.git
