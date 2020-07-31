@@ -37,8 +37,8 @@ services:
       dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
     restart: unless-stopped
     volumes:
-      - ${HUNCHO_DIR}/data/auth_cache/redis_data:/var/lib/redis
-      - ${HUNCHO_DIR}/data/auth_cache/redis.conf:/usr/local/etc/redis/redis.conf
+      - ${HUNCHO_DIR}/data/dev/auth_cache/redis_data:/var/lib/redis
+      - ${HUNCHO_DIR}/data/dev/auth_cache/redis.conf:/usr/local/etc/redis/redis.conf
     env_file:
       - ${HUNCHO_DIR}/env/dev/.env.auth_cache
     healthcheck:
@@ -56,7 +56,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ${HUNCHO_DIR}/data/auth_db/data:/var/lib/postgresql/data/
+      - ${HUNCHO_DIR}/data/dev/auth_db/data:/var/lib/postgresql/data/
     env_file:
       - ${HUNCHO_DIR}/env/dev/.env.auth_db
     healthcheck:
@@ -85,7 +85,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - ${HUNCHO_DIR}/services/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-      - ${HUNCHO_DIR}/data/elasticsearch/data:/usr/share/elasticsearch/data
+      - ${HUNCHO_DIR}/data/dev/elasticsearch/data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
       - 9300:9300
@@ -131,7 +131,7 @@ services:
     ports:
       - 5433:5432
     volumes:
-      - ${HUNCHO_DIR}/data/kong_db/data:/var/lib/postgresql/data
+      - ${HUNCHO_DIR}/data/dev/kong_db/data:/var/lib/postgresql/data
     env_file:
       - ${HUNCHO_DIR}/env/dev/.env.kong_db
     healthcheck:
@@ -181,7 +181,7 @@ services:
       - ${HUNCHO_DIR}/services/mailer/manage.php:/home/app/manage.php
       - mailer_volume:/home/app
     env_file:
-      - ${HUNCHO_DIR}/env/prod/.env.mailer
+      - ${HUNCHO_DIR}/env/dev/.env.mailer
   mailer_web:
     container_name: mailer_web
     build:
