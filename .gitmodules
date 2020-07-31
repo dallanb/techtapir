@@ -7,12 +7,24 @@
 [submodule "services/certbot"]
 	path = services/certbot
 	url = git@github.com:dallanb/certbot.git
+[submodule "services/elasticsearch"]
+	path = services/elasticsearch
+	url = git@github.com:dallanb/elasticsearch.git
+[submodule "services/kibana"]
+	path = services/kibana
+	url = git@github.com:dallanb/kibana.git
 [submodule "services/kong"]
 	path = services/kong
 	url = git@github.com:dallanb/kong.git
 [submodule "services/konga"]
 	path = services/konga
 	url = git@github.com:dallanb/konga.git
+[submodule "services/logstash"]
+	path = services/logstash
+	url = git@github.com:dallanb/logstash.git
+[submodule "services/mailer"]
+	path = services/mailer
+	url = git@github.com:dallanb/mailer.git
 [submodule "services/postgresql"]
 	path = services/postgresql
 	url = git@github.com:dallanb/postgresql.git
@@ -22,18 +34,6 @@
 [submodule "services/redis-commander"]
 	path = services/redis-commander
 	url = git@github.com:dallanb/redis-commander.git
-[submodule "services/elasticsearch"]
-	path = services/elasticsearch
-	url = git@github.com:dallanb/elasticsearch.git
-[submodule "services/kibana"]
-	path = services/kibana
-	url = git@github.com:dallanb/kibana.git
-[submodule "services/logstash"]
-	path = services/logstash
-	url = git@github.com:dallanb/logstash.git
-[submodule "services/mailer"]
-	path = services/mailer
-	url = git@github.com:dallanb/mailer.git
 [submodule "services/wager"]
 	path = services/wager
 	url = git@github.com:dallanb/wager.git

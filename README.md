@@ -22,6 +22,10 @@
 1. `> git submodule deinit services/<reponame>`
 2. `> git rm services/<reponame>`
 
+## Batch Submodule Operation
+
+1. `> git submodule foreach --recursive 'git pull origin dev'`
+
 ## ELK Setup
 
 [deviantony setup](https://github.com/deviantony/docker-elk#initial-setup)
