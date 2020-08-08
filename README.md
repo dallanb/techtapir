@@ -118,3 +118,7 @@ POST 0.0.0.0:8001/services/api-v1-auth/routes/
   "paths": ["/api/v1/auth"]
 }
 ```
+
+## Let's Encrypt Wildcard Certificates for HAProxy with Cloudflare DNS Challenge
+This is a good tutorial that I followed for setting up a wildcard certificate on my HAProxy Load Balancer Raspberry Pi  
+https://docs.j7k6.org/letsencrypt-haproxy-cloudflare-wildcard-cert/ 

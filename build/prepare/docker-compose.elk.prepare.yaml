@@ -1,6 +1,7 @@
 version: '2.2'
 services:
     elasticsearch:
+        container_name: elasticsearch
         build:
             context: ${HUNCHO_DIR}/services/elasticsearch
             dockerfile: ${HUNCHO_DIR}/services/elasticsearch/build/Dockerfile
@@ -15,6 +16,7 @@ services:
         env_file:
             - ${HUNCHO_DIR}/env/dev/.env.elasticsearch
     kibana:
+        container_name: kibana
         build:
             context: ${HUNCHO_DIR}/services/kibana
             dockerfile: ${HUNCHO_DIR}/services/kibana/build/Dockerfile
@@ -29,6 +31,7 @@ services:
         depends_on:
             - elasticsearch
     logstash:
+        container_name: logstash
         build:
             context: ${HUNCHO_DIR}/services/logstash
             dockerfile: ${HUNCHO_DIR}/services/logstash/build/Dockerfile
