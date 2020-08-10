@@ -37,3 +37,6 @@
 [submodule "services/wager"]
 	path = services/wager
 	url = git@github.com:dallanb/wager.git
+[submodule "services/contest"]
+	path = services/contest
+	url = git@github.com:dallanb/contest.git
