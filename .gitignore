@@ -2,3 +2,6 @@
 .idea
 env/prod
 data
+secrets
+node_modules
+yarn.lock
