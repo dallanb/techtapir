@@ -40,3 +40,6 @@
 [submodule "services/contest"]
 	path = services/contest
 	url = git@github.com:dallanb/contest.git
+[submodule "services/account"]
+	path = services/account
+	url = git@github.com:dallanb/account.git
