@@ -22,6 +22,10 @@
 1. `> git submodule deinit services/<reponame>`
 2. `> git rm services/<reponame>`
 
+## Apply a Submodule
+
+1. `> git submodule update --init services/<reponame>`
+
 ## Batch Submodule Operation
 
 1. `> git submodule foreach --recursive 'git pull origin dev'`
