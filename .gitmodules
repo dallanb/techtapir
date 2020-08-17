@@ -1,3 +1,6 @@
+[submodule "services/account"]
+	path = services/account
+	url = git@github.com:dallanb/account.git
 [submodule "services/adminer"]
 	path = services/adminer
 	url = git@github.com:dallanb/adminer.git
@@ -7,6 +10,9 @@
 [submodule "services/certbot"]
 	path = services/certbot
 	url = git@github.com:dallanb/certbot.git
+[submodule "services/contest"]
+	path = services/contest
+	url = git@github.com:dallanb/contest.git
 [submodule "services/elasticsearch"]
 	path = services/elasticsearch
 	url = git@github.com:dallanb/elasticsearch.git
@@ -37,9 +43,3 @@
 [submodule "services/wager"]
 	path = services/wager
 	url = git@github.com:dallanb/wager.git
-[submodule "services/contest"]
-	path = services/contest
-	url = git@github.com:dallanb/contest.git
-[submodule "services/account"]
-	path = services/account
-	url = git@github.com:dallanb/account.git
