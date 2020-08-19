@@ -43,3 +43,9 @@
 [submodule "services/wager"]
 	path = services/wager
 	url = git@github.com:dallanb/wager.git
+[submodule "services/score"]
+	path = services/score
+	url = git@github.com:dallanb/score.git
+[submodule "services/mongodb"]
+	path = services/mongodb
+	url = git@github.com:dallanb/mongodb.git

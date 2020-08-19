@@ -21,7 +21,7 @@
 
 1. `> git submodule deinit services/<reponame>`
 2. `> git rm services/<reponame>`
-
+b
 ## Apply a Submodule
 
 1. `> git submodule update --init services/<reponame>`
