@@ -52,3 +52,9 @@
 [submodule "services/pgadmin4"]
 	path = services/pgadmin4
 	url = git@github.com:dallanb/pgadmin4.git
+[submodule "services/mongo-express"]
+	path = services/mongo-express
+	url = git@github.com:dallanb/mongo-express.git
+[submodule "services/sport"]
+	path = services/sport
+	url = git@github.com:dallanb/sport.git
