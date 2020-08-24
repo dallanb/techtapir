@@ -30,6 +30,11 @@ b
 
 1. `> git submodule foreach --recursive 'git pull origin dev'`
 
+## Initialize from Flask-SDK
+
+1. `> git remote add other git@github.com:dallanb/flask-sdk.git`
+2. `> git pull other dev --allow-unrelated-histories`
+
 ## ELK Setup
 
 [deviantony setup](https://github.com/deviantony/docker-elk#initial-setup)
