@@ -49,3 +49,6 @@
 [submodule "services/mongodb"]
 	path = services/mongodb
 	url = git@github.com:dallanb/mongodb.git
+[submodule "services/notification"]
+	path = services/notification
+	url = git@github.com:dallanb/notification.git
