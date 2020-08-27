@@ -10,7 +10,7 @@ build:
 	@docker-compose \
 					-f build/docker-compose.yaml \
 					--env-file build/env/.env \
-					build
+					build --no-cache
 
 build-prod:
 	@docker-compose \
@@ -21,7 +21,7 @@ deploy:
 	@docker-compose \
 					-f build/docker-compose.yaml \
 					--env-file build/env/.env \
-					up --build --remove-orphans -d
+					up --build --remove-orphans
 deploy-prod:
 	@docker-compose \
 					-f build/docker-compose.prod.yaml \

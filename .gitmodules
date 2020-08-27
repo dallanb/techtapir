@@ -61,3 +61,6 @@
 [submodule "services/wager"]
 	path = services/wager
 	url = git@github.com:dallanb/wager.git
+[submodule "services/web-pusher"]
+	path = services/web-pusher
+	url = git@github.com:dallanb/web-pusher.git
