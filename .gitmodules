@@ -64,3 +64,6 @@
 [submodule "services/web-pusher"]
 	path = services/web-pusher
 	url = git@github.com:dallanb/web-pusher.git
+[submodule "services/golftapir"]
+	path = services/golftapir
+	url = git@github.com:dallanb/golftapir.git
