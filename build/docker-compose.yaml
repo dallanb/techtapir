@@ -25,6 +25,9 @@ services:
     depends_on:
       - account_cache
       - account_db
+    networks:
+      - app-net
+      - kong-net
   account_cache:
     container_name: account_cache
     build:
@@ -41,6 +44,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    networks:
+      - app-net
   account_db:
     container_name: account_db
     build:
@@ -57,6 +62,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
+    networks:
+      - app-net
   account_proxy:
     container_name: account_proxy
     build:
@@ -67,6 +74,8 @@ services:
       - ${HUNCHO_DIR}/services/account/statics/.:/usr/share/nginx/
     depends_on:
       - account
+    networks:
+      - app-net
 #  adminer:
 #    container_name: adminer
 #    build:
@@ -97,6 +106,9 @@ services:
     depends_on:
       - auth_cache
       - auth_db
+    networks:
+      - kong-net
+      - app-net
   auth_cache:
     container_name: auth_cache
     build:
@@ -113,6 +125,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    networks:
+      - app-net
   auth_db:
     container_name: auth_db
     build:
@@ -129,6 +143,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
+    networks:
+      - app-net
   auth_proxy:
     container_name: auth_proxy
     build:
@@ -139,6 +155,9 @@ services:
       - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
     depends_on:
       - auth
+    networks:
+      - app-net
+      - kong-net
 #  contest:
 #    container_name: contest
 #    build:
@@ -249,6 +268,8 @@ services:
       - 8444:8444
     depends_on:
       - kong_db
+    networks:
+      - kong-net
   kong_db:
     container_name: kong_db
     build:
@@ -265,16 +286,20 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
-#  konga:
-#    container_name: konga
-#    build:
-#      context: ${HUNCHO_DIR}/services/konga
-#      dockerfile: ${HUNCHO_DIR}/services/konga/build/Dockerfile
-#    restart: on-failure
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.konga
-#    depends_on:
-#      - kong_db
+    networks:
+      - kong-net
+  konga:
+    container_name: konga
+    build:
+      context: ${HUNCHO_DIR}/services/konga
+      dockerfile: ${HUNCHO_DIR}/services/konga/build/Dockerfile
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.konga
+    depends_on:
+      - kong_db
+    networks:
+      - kong-net
 #  logstash:
 #    container_name: logstash
 #    build:
@@ -541,3 +566,8 @@ services:
 #      - wager
 #volumes:
 #  mailer_volume:
+networks:
+  app-net:
+    driver: bridge
+  kong-net:
+    driver: bridge
