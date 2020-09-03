@@ -1,72 +1,81 @@
 version: '3.2'
 services:
-#  account:
-#    container_name: account
-#    build:
-#      context: ${HUNCHO_DIR}/services/account
-#      dockerfile: ${HUNCHO_DIR}/services/account/build/Dockerfile
-#    restart: on-failure
-#    volumes:
-#      - ${HUNCHO_DIR}/services/account/migrations:/home/app/migrations
-#      - ${HUNCHO_DIR}/services/account/bin:/home/app/bin
-#      - ${HUNCHO_DIR}/services/account/tests:/home/app/tests
-#      - ${HUNCHO_DIR}/services/account/seeds:/home/app/seeds
-#      - ${HUNCHO_DIR}/services/account/src:/home/app/src
-#      - ${HUNCHO_DIR}/services/account/statics:/home/app/statics
-#      - ${HUNCHO_DIR}/services/account/manage.py:/home/app/manage.py
-#      - ${HUNCHO_DIR}/services/account/setup.py:/home/app/setup.py
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.account
-#    healthcheck:
-#      test: curl --fail -s account:5000/ping || exit 1
-#      interval: 60s
-#      timeout: 5s
-#      retries: 5
-#    depends_on:
-#      - account_cache
-#      - account_db
-#  account_cache:
-#    container_name: account_cache
-#    build:
-#      context: ${HUNCHO_DIR}/services/redis
-#      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
-#    restart: unless-stopped
-#    volumes:
-#      - ${HUNCHO_DIR}/data/dev/account_cache/redis_data:/var/lib/redis
-#      - ${HUNCHO_DIR}/data/dev/account_cache/redis.conf:/usr/local/etc/redis/redis.conf
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.account_cache
-#    healthcheck:
-#      test: ["CMD", "redis-cli","ping"]
-#      interval: 30s
-#      timeout: 10s
-#      retries: 5
-#  account_db:
-#    container_name: account_db
-#    build:
-#      context: ${HUNCHO_DIR}/services/postgresql
-#      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-#      args:
-#        POSTGRES_VERSION: 9.6
-#    volumes:
-#      - ${HUNCHO_DIR}/data/dev/account_db/data:/var/lib/postgresql/data/
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.account_db
-#    healthcheck:
-#      test: ["CMD-SHELL", "pg_isready -U account"]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 20
-#  account_proxy:
-#    container_name: account_proxy
-#    build:
-#      context: ${HUNCHO_DIR}/services/account/proxy
-#      dockerfile: ${HUNCHO_DIR}/services/account/proxy/build/Dockerfile
-#    restart: on-failure
-#    volumes:
-#      - ${HUNCHO_DIR}/services/account/statics/.:/usr/share/nginx/
-#    depends_on:
-#      - account
+  account:
+    container_name: account
+    build:
+      context: ${HUNCHO_DIR}/services/account
+      dockerfile: ${HUNCHO_DIR}/services/account/build/Dockerfile
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/services/account/migrations:/home/app/migrations
+      - ${HUNCHO_DIR}/services/account/bin:/home/app/bin
+      - ${HUNCHO_DIR}/services/account/tests:/home/app/tests
+      - ${HUNCHO_DIR}/services/account/seeds:/home/app/seeds
+      - ${HUNCHO_DIR}/services/account/src:/home/app/src
+      - ${HUNCHO_DIR}/services/account/statics:/home/app/statics
+      - ${HUNCHO_DIR}/services/account/manage.py:/home/app/manage.py
+      - ${HUNCHO_DIR}/services/account/setup.py:/home/app/setup.py
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.account
+    healthcheck:
+      test: curl --fail -s account:5000/ping || exit 1
+      interval: 60s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      - account_cache
+      - account_db
+    networks:
+      - app-net
+      - kong-net
+  account_cache:
+    container_name: account_cache
+    build:
+      context: ${HUNCHO_DIR}/services/redis
+      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ${HUNCHO_DIR}/data/dev/account_cache/redis_data:/var/lib/redis
+      - ${HUNCHO_DIR}/data/dev/account_cache/redis.conf:/usr/local/etc/redis/redis.conf
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.account_cache
+    healthcheck:
+      test: ["CMD", "redis-cli","ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - app-net
+  account_db:
+    container_name: account_db
+    build:
+      context: ${HUNCHO_DIR}/services/postgresql
+      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
+      args:
+        POSTGRES_VERSION: 9.6
+    volumes:
+      - ${HUNCHO_DIR}/data/dev/account_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.account_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U account"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - app-net
+  account_proxy:
+    container_name: account_proxy
+    build:
+      context: ${HUNCHO_DIR}/services/account/proxy
+      dockerfile: ${HUNCHO_DIR}/services/account/proxy/build/Dockerfile
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/services/account/statics/.:/usr/share/nginx/
+    depends_on:
+      - account
+    networks:
+      - app-net
 #  adminer:
 #    container_name: adminer
 #    build:
@@ -97,6 +106,9 @@ services:
     depends_on:
       - auth_cache
       - auth_db
+    networks:
+      - kong-net
+      - app-net
   auth_cache:
     container_name: auth_cache
     build:
@@ -113,6 +125,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    networks:
+      - app-net
   auth_db:
     container_name: auth_db
     build:
@@ -129,6 +143,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
+    networks:
+      - app-net
   auth_proxy:
     container_name: auth_proxy
     build:
@@ -139,6 +155,9 @@ services:
       - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
     depends_on:
       - auth
+    networks:
+      - app-net
+      - kong-net
 #  contest:
 #    container_name: contest
 #    build:
@@ -249,6 +268,8 @@ services:
       - 8444:8444
     depends_on:
       - kong_db
+    networks:
+      - kong-net
   kong_db:
     container_name: kong_db
     build:
@@ -265,16 +286,20 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
-#  konga:
-#    container_name: konga
-#    build:
-#      context: ${HUNCHO_DIR}/services/konga
-#      dockerfile: ${HUNCHO_DIR}/services/konga/build/Dockerfile
-#    restart: on-failure
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.konga
-#    depends_on:
-#      - kong_db
+    networks:
+      - kong-net
+  konga:
+    container_name: konga
+    build:
+      context: ${HUNCHO_DIR}/services/konga
+      dockerfile: ${HUNCHO_DIR}/services/konga/build/Dockerfile
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/dev/.env.konga
+    depends_on:
+      - kong_db
+    networks:
+      - kong-net
 #  logstash:
 #    container_name: logstash
 #    build:
@@ -541,3 +566,8 @@ services:
 #      - wager
 #volumes:
 #  mailer_volume:
+networks:
+  app-net:
+    driver: bridge
+  kong-net:
+    driver: bridge
