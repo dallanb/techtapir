@@ -76,14 +76,14 @@ services:
       - account
     networks:
       - app-net
-#  adminer:
-#    container_name: adminer
-#    build:
-#      context: ${HUNCHO_DIR}/services/adminer
-#      dockerfile: ${HUNCHO_DIR}/services/adminer/build/Dockerfile
-#    restart: always
-#    ports:
-#      - 8080:8080
+  adminer:
+    container_name: adminer
+    build:
+      context: ${HUNCHO_DIR}/services/adminer
+      dockerfile: ${HUNCHO_DIR}/services/adminer/build/Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
   auth:
     container_name: auth
     build:
