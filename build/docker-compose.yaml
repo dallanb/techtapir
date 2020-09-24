@@ -16,36 +16,37 @@ services:
       - ${HUNCHO_DIR}/services/account/manage.py:/home/app/manage.py
       - ${HUNCHO_DIR}/services/account/setup.py:/home/app/setup.py
     env_file:
-      - ${HUNCHO_DIR}/env/prod/.env.account
+      - ${HUNCHO_DIR}/env/dev/.env.account
+      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
     healthcheck:
       test: curl --fail -s account:5000/ping || exit 1
       interval: 60s
       timeout: 5s
       retries: 5
     depends_on:
-      - account_cache
+#      - account_cache
       - account_db
     networks:
       - app-net
       - kong-net
-  account_cache:
-    container_name: account_cache
-    build:
-      context: ${HUNCHO_DIR}/services/redis
-      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
-    restart: unless-stopped
-    volumes:
-      - ${HUNCHO_DIR}/data/dev/account_cache/redis_data:/var/lib/redis
-      - ${HUNCHO_DIR}/data/dev/account_cache/redis.conf:/usr/local/etc/redis/redis.conf
-    env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.account_cache
-    healthcheck:
-      test: ["CMD", "redis-cli","ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    networks:
-      - app-net
+#  account_cache:
+#    container_name: account_cache
+#    build:
+#      context: ${HUNCHO_DIR}/services/redis
+#      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+#    restart: unless-stopped
+#    volumes:
+#      - ${HUNCHO_DIR}/data/dev/account_cache/redis_data:/var/lib/redis
+#      - ${HUNCHO_DIR}/data/dev/account_cache/redis.conf:/usr/local/etc/redis/redis.conf
+#    env_file:
+#      - ${HUNCHO_DIR}/env/dev/.env.account_cache
+#    healthcheck:
+#      test: ["CMD", "redis-cli","ping"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
+#    networks:
+#      - app-net
   account_db:
     container_name: account_db
     build:
@@ -64,26 +65,28 @@ services:
       retries: 20
     networks:
       - app-net
-  account_proxy:
-    container_name: account_proxy
+#  account_proxy:
+#    container_name: account_proxy
+#    build:
+#      context: ${HUNCHO_DIR}/services/account/proxy
+#      dockerfile: ${HUNCHO_DIR}/services/account/proxy/build/Dockerfile
+#    restart: on-failure
+#    volumes:
+#      - ${HUNCHO_DIR}/services/account/statics/.:/usr/share/nginx/
+#    depends_on:
+#      - account
+#    networks:
+#      - app-net
+  adminer:
+    container_name: adminer
     build:
-      context: ${HUNCHO_DIR}/services/account/proxy
-      dockerfile: ${HUNCHO_DIR}/services/account/proxy/build/Dockerfile
-    restart: on-failure
-    volumes:
-      - ${HUNCHO_DIR}/services/account/statics/.:/usr/share/nginx/
-    depends_on:
-      - account
+      context: ${HUNCHO_DIR}/services/adminer
+      dockerfile: ${HUNCHO_DIR}/services/adminer/build/Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
     networks:
       - app-net
-#  adminer:
-#    container_name: adminer
-#    build:
-#      context: ${HUNCHO_DIR}/services/adminer
-#      dockerfile: ${HUNCHO_DIR}/services/adminer/build/Dockerfile
-#    restart: always
-#    ports:
-#      - 8080:8080
   auth:
     container_name: auth
     build:
@@ -104,29 +107,29 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
-      - auth_cache
+#      - auth_cache
       - auth_db
     networks:
       - kong-net
       - app-net
-  auth_cache:
-    container_name: auth_cache
-    build:
-      context: ${HUNCHO_DIR}/services/redis
-      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
-    restart: unless-stopped
-    volumes:
-      - ${HUNCHO_DIR}/data/dev/auth_cache/redis_data:/var/lib/redis
-      - ${HUNCHO_DIR}/data/dev/auth_cache/redis.conf:/usr/local/etc/redis/redis.conf
-    env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.auth_cache
-    healthcheck:
-      test: ["CMD", "redis-cli","ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    networks:
-      - app-net
+#  auth_cache:
+#    container_name: auth_cache
+#    build:
+#      context: ${HUNCHO_DIR}/services/redis
+#      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+#    restart: unless-stopped
+#    volumes:
+#      - ${HUNCHO_DIR}/data/dev/auth_cache/redis_data:/var/lib/redis
+#      - ${HUNCHO_DIR}/data/dev/auth_cache/redis.conf:/usr/local/etc/redis/redis.conf
+#    env_file:
+#      - ${HUNCHO_DIR}/env/dev/.env.auth_cache
+#    healthcheck:
+#      test: ["CMD", "redis-cli","ping"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
+#    networks:
+#      - app-net
   auth_db:
     container_name: auth_db
     build:
@@ -181,29 +184,29 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
-      - contest_cache
+#      - contest_cache
       - contest_db
     networks:
       - app-net
       - kong-net
-  contest_cache:
-    container_name: contest_cache
-    build:
-      context: ${HUNCHO_DIR}/services/redis
-      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
-    restart: unless-stopped
-    volumes:
-      - ${HUNCHO_DIR}/data/dev/contest_cache/redis_data:/var/lib/redis
-      - ${HUNCHO_DIR}/data/dev/contest_cache/redis.conf:/usr/local/etc/redis/redis.conf
-    env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.contest_cache
-    healthcheck:
-      test: ["CMD", "redis-cli","ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    networks:
-      - app-net
+#  contest_cache:
+#    container_name: contest_cache
+#    build:
+#      context: ${HUNCHO_DIR}/services/redis
+#      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+#    restart: unless-stopped
+#    volumes:
+#      - ${HUNCHO_DIR}/data/dev/contest_cache/redis_data:/var/lib/redis
+#      - ${HUNCHO_DIR}/data/dev/contest_cache/redis.conf:/usr/local/etc/redis/redis.conf
+#    env_file:
+#      - ${HUNCHO_DIR}/env/dev/.env.contest_cache
+#    healthcheck:
+#      test: ["CMD", "redis-cli","ping"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
+#    networks:
+#      - app-net
   contest_db:
     container_name: contest_db
     build:
@@ -222,18 +225,18 @@ services:
       retries: 20
     networks:
       - app-net
-  contest_proxy:
-    container_name: contest_proxy
-    build:
-      context: ${HUNCHO_DIR}/services/contest/proxy
-      dockerfile: ${HUNCHO_DIR}/services/contest/proxy/build/Dockerfile
-    restart: on-failure
-    volumes:
-      - ${HUNCHO_DIR}/services/contest/statics/.:/usr/share/nginx/
-    depends_on:
-      - contest
-    networks:
-      - app-net
+#  contest_proxy:
+#    container_name: contest_proxy
+#    build:
+#      context: ${HUNCHO_DIR}/services/contest/proxy
+#      dockerfile: ${HUNCHO_DIR}/services/contest/proxy/build/Dockerfile
+#    restart: on-failure
+#    volumes:
+#      - ${HUNCHO_DIR}/services/contest/statics/.:/usr/share/nginx/
+#    depends_on:
+#      - contest
+#    networks:
+#      - app-net
 #  elasticsearch:
 #    container_name: elasticsearch
 #    build:
@@ -249,6 +252,18 @@ services:
 #      - 9300:9300
 #    env_file:
 #      - ${HUNCHO_DIR}/env/dev/.env.elasticsearch
+#  golftapir:
+#    container_name: golftapir
+#    build:
+#      context: ${HUNCHO_DIR}/services/golftapir/proxy
+#      dockerfile: ${HUNCHO_DIR}/services/golftapir/proxy/build/Dockerfile
+#    restart: unless-stopped
+#    volumes:
+#      - ${HUNCHO_DIR}/services/golftapir/dist/.:/usr/share/nginx/dist
+#      - ${HUNCHO_DIR}/services/golftapir/public/.:/usr/share/nginx/public
+#    networks:
+#      - app-net
+#      - kong-net
 #  kibana:
 #    container_name: kibana
 #    build:
@@ -327,6 +342,46 @@ services:
 #      - ${HUNCHO_DIR}/env/dev/.env.logstash
 #    depends_on:
 #      - elasticsearch
+#  notification:
+#    container_name: notification
+#    build:
+#      context: ${HUNCHO_DIR}/services/notification
+#      dockerfile: ${HUNCHO_DIR}/services/notification/build/Dockerfile
+#      args:
+#          NODE_VERSION: 12
+#    volumes:
+#      - ${HUNCHO_DIR}/services/notification/src:/home/app/src
+#    env_file:
+#      - ${HUNCHO_DIR}/env/dev/.env.notification
+#    networks:
+#      - app-net
+#      - kong-net
+#  notification_cache:
+#    container_name: notification_cache
+#    build:
+#      context: ${HUNCHO_DIR}/services/redis
+#      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+#    volumes:
+#      - ${HUNCHO_DIR}/data/dev/notification_cache/redis_data:/var/lib/redis
+#      - ${HUNCHO_DIR}/data/dev/notification_cache/redis.conf:/usr/local/etc/redis/redis.conf
+#    env_file:
+#      - ${HUNCHO_DIR}/env/dev/.env.notification_cache
+#    networks:
+#      - app-net
+#  notification_mongodb:
+#    container_name: notification_mongodb
+#    build:
+#      context: ${HUNCHO_DIR}/services/mongodb
+#      dockerfile: ${HUNCHO_DIR}/services/mongodb/build/Dockerfile
+#      args:
+#        MONGO_VERSION: 3.6
+#    volumes:
+#      - ${HUNCHO_DIR}/data/dev/notification_mongodb/data:/data/db
+#      - ${HUNCHO_DIR}/services/notification/bin/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+#    env_file:
+#      - ${HUNCHO_DIR}/env/dev/.env.notification_mongodb
+#    networks:
+#      - app-net
 #  mailer:
 #    container_name: mailer
 #    build:
@@ -339,7 +394,8 @@ services:
 #      - ${HUNCHO_DIR}/services/mailer/manage.php:/home/app/manage.php
 #      - mailer_volume:/home/app
 #    env_file:
-#      - ${HUNCHO_DIR}/env/prod/.env.mailer
+#      - ${HUNCHO_DIR}/env/dev/.env.mailer
+#      - ${HUNCHO_DIR}/secrets/mailer/mailer_password.txt
 #  mailer_web:
 #    container_name: mailer_web
 #    build:
@@ -350,16 +406,6 @@ services:
 #      - mailer_volume:/var/www/html
 #    depends_on:
 #      - mailer
-#  mongo-express:
-#    container_name: mongo-express
-#    build:
-#      context: ${HUNCHO_DIR}/services/mongo-express
-#      dockerfile: ${HUNCHO_DIR}/services/mongo-express/build/Dockerfile
-#    restart: always
-#    ports:
-#      - 8081:8081
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.mongo-express
 #  score:
 #    container_name: score
 #    build:
@@ -462,29 +508,29 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
-      - sport_cache
+#      - sport_cache
       - sport_db
     networks:
       - app-net
       - kong-net
-  sport_cache:
-    container_name: sport_cache
-    build:
-      context: ${HUNCHO_DIR}/services/redis
-      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
-    restart: unless-stopped
-    volumes:
-      - ${HUNCHO_DIR}/data/dev/sport_cache/redis_data:/var/lib/redis
-      - ${HUNCHO_DIR}/data/dev/sport_cache/redis.conf:/usr/local/etc/redis/redis.conf
-    env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.sport_cache
-    healthcheck:
-      test: ["CMD", "redis-cli","ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    networks:
-      - app-net
+#  sport_cache:
+#    container_name: sport_cache
+#    build:
+#      context: ${HUNCHO_DIR}/services/redis
+#      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+#    restart: unless-stopped
+#    volumes:
+#      - ${HUNCHO_DIR}/data/dev/sport_cache/redis_data:/var/lib/redis
+#      - ${HUNCHO_DIR}/data/dev/sport_cache/redis.conf:/usr/local/etc/redis/redis.conf
+#    env_file:
+#      - ${HUNCHO_DIR}/env/dev/.env.sport_cache
+#    healthcheck:
+#      test: ["CMD", "redis-cli","ping"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
+#    networks:
+#      - app-net
   sport_db:
     container_name: sport_db
     build:
@@ -503,18 +549,18 @@ services:
       retries: 20
     networks:
       - app-net
-  sport_proxy:
-    container_name: sport_proxy
-    build:
-      context: ${HUNCHO_DIR}/services/sport/proxy
-      dockerfile: ${HUNCHO_DIR}/services/sport/proxy/build/Dockerfile
-    restart: on-failure
-    volumes:
-      - ${HUNCHO_DIR}/services/sport/statics/.:/usr/share/nginx/
-    depends_on:
-      - sport
-    networks:
-      - app-net
+#  sport_proxy:
+#    container_name: sport_proxy
+#    build:
+#      context: ${HUNCHO_DIR}/services/sport/proxy
+#      dockerfile: ${HUNCHO_DIR}/services/sport/proxy/build/Dockerfile
+#    restart: on-failure
+#    volumes:
+#      - ${HUNCHO_DIR}/services/sport/statics/.:/usr/share/nginx/
+#    depends_on:
+#      - sport
+#    networks:
+#      - app-net
   wager:
     container_name: wager
     build:
@@ -538,29 +584,29 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
-      - wager_cache
+#      - wager_cache
       - wager_db
     networks:
       - app-net
       - kong-net
-  wager_cache:
-    container_name: wager_cache
-    build:
-      context: ${HUNCHO_DIR}/services/redis
-      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
-    restart: unless-stopped
-    volumes:
-      - ${HUNCHO_DIR}/data/dev/wager_cache/redis_data:/var/lib/redis
-      - ${HUNCHO_DIR}/data/dev/wager_cache/redis.conf:/usr/local/etc/redis/redis.conf
-    env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.wager_cache
-    healthcheck:
-      test: ["CMD", "redis-cli","ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    networks:
-      - app-net
+#  wager_cache:
+#    container_name: wager_cache
+#    build:
+#      context: ${HUNCHO_DIR}/services/redis
+#      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+#    restart: unless-stopped
+#    volumes:
+#      - ${HUNCHO_DIR}/data/dev/wager_cache/redis_data:/var/lib/redis
+#      - ${HUNCHO_DIR}/data/dev/wager_cache/redis.conf:/usr/local/etc/redis/redis.conf
+#    env_file:
+#      - ${HUNCHO_DIR}/env/dev/.env.wager_cache
+#    healthcheck:
+#      test: ["CMD", "redis-cli","ping"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 5
+#    networks:
+#      - app-net
   wager_db:
     container_name: wager_db
     build:
@@ -579,18 +625,32 @@ services:
       retries: 20
     networks:
       - app-net
-  wager_proxy:
-    container_name: wager_proxy
-    build:
-      context: ${HUNCHO_DIR}/services/wager/proxy
-      dockerfile: ${HUNCHO_DIR}/services/wager/proxy/build/Dockerfile
-    restart: on-failure
-    volumes:
-      - ${HUNCHO_DIR}/services/wager/statics/.:/usr/share/nginx/
-    depends_on:
-      - wager
-    networks:
-      - app-net
+#  wager_proxy:
+#    container_name: wager_proxy
+#    build:
+#      context: ${HUNCHO_DIR}/services/wager/proxy
+#      dockerfile: ${HUNCHO_DIR}/services/wager/proxy/build/Dockerfile
+#    restart: on-failure
+#    volumes:
+#      - ${HUNCHO_DIR}/services/wager/statics/.:/usr/share/nginx/
+#    depends_on:
+#      - wager
+#    networks:
+#      - app-net
+#  web_pusher:
+#    container_name: web_pusher
+#    build:
+#      context: ${HUNCHO_DIR}/services/web-pusher
+#      dockerfile: ${HUNCHO_DIR}/services/web-pusher/build/Dockerfile
+#      args:
+#        NODE_VERSION: 12
+#    volumes:
+#      - ${HUNCHO_DIR}/services/web-pusher/src:/home/app/src
+#      - ${HUNCHO_DIR}/secrets/golftapir/tech-tapir-firebase-adminsdk-3zrlh-3720b4d899.json:/home/app/secrets/firebase.json
+#    env_file:
+#      - ${HUNCHO_DIR}/env/dev/.env.web-pusher
+#    networks:
+#      - app-net
 #volumes:
 #  mailer_volume:
 networks:

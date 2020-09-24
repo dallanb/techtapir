@@ -10,9 +10,9 @@ services:
     ports:
       - 5433:5432
     volumes:
-      - ${HUNCHO_DIR}/data/dev/kong_db/data:/var/lib/postgresql/data
+      - ${HUNCHO_DIR}/data/qaw/kong_db/data:/var/lib/postgresql/data
     env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.kong_db
+      - ${HUNCHO_DIR}/env/qaw/.env.kong_db
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U kong']
       interval: 10s
@@ -24,7 +24,7 @@ services:
       context: ${HUNCHO_DIR}/services/kong
       dockerfile: ${HUNCHO_DIR}/services/kong/build/Dockerfile.migration
     env_file:
-      - ${HUNCHO_DIR}/env/dev/.env.kong_migration
+      - ${HUNCHO_DIR}/env/qaw/.env.kong_migration
     depends_on:
       kong_db:
         condition: service_healthy
