@@ -67,3 +67,6 @@
 [submodule "services/golftapir"]
 	path = services/golftapir
 	url = git@github.com:dallanb/golftapir.git
+[submodule "services/static"]
+	path = services/static
+	url = git@github.com:dallanb/static.git
