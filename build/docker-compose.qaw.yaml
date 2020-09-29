@@ -148,9 +148,7 @@ services:
       - kong-net
   notification_cache:
     container_name: notification_cache
-    build:
-      context: ${HUNCHO_DIR}/services/redis
-      dockerfile: ${HUNCHO_DIR}/services/redis/build/Dockerfile
+    image: redis:$REDIS_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/notification_cache/redis_data:/var/lib/redis
       - ${HUNCHO_DIR}/data/qaw/notification_cache/redis.conf:/usr/local/etc/redis/redis.conf
