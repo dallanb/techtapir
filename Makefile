@@ -59,6 +59,11 @@ down-prod:
 					-f build/docker-compose.prod.yaml \
 					down --rmi all --remove-orphans
 
+down-backend:
+	@docker-compose \
+					-f build/docker-compose.backend.yaml \
+					down --remove-orphans
+
 elk-prepare:
 	@docker-compose \
 					-f build/prepare/docker-compose.elk.prepare.yaml \
