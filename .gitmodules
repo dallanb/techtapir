@@ -1,15 +1,9 @@
 [submodule "services/account"]
 	path = services/account
 	url = git@github.com:dallanb/account.git
-[submodule "services/adminer"]
-	path = services/adminer
-	url = git@github.com:dallanb/adminer.git
 [submodule "services/auth"]
 	path = services/auth
 	url = git@github.com:dallanb/auth.git
-[submodule "services/certbot"]
-	path = services/certbot
-	url = git@github.com:dallanb/certbot.git
 [submodule "services/contest"]
 	path = services/contest
 	url = git@github.com:dallanb/contest.git
@@ -22,36 +16,15 @@
 [submodule "services/kong"]
 	path = services/kong
 	url = git@github.com:dallanb/kong.git
-[submodule "services/konga"]
-	path = services/konga
-	url = git@github.com:dallanb/konga.git
 [submodule "services/logstash"]
 	path = services/logstash
 	url = git@github.com:dallanb/logstash.git
 [submodule "services/mailer"]
 	path = services/mailer
 	url = git@github.com:dallanb/mailer.git
-[submodule "services/mongo-express"]
-	path = services/mongo-express
-	url = git@github.com:dallanb/mongo-express.git
-[submodule "services/mongodb"]
-	path = services/mongodb
-	url = git@github.com:dallanb/mongodb.git
 [submodule "services/notification"]
 	path = services/notification
 	url = git@github.com:dallanb/notification.git
-[submodule "services/postgresql"]
-	path = services/postgresql
-	url = git@github.com:dallanb/postgresql.git
-[submodule "services/pgadmin4"]
-	path = services/pgadmin4
-	url = git@github.com:dallanb/pgadmin4.git
-[submodule "services/redis"]
-	path = services/redis
-	url = git@github.com:dallanb/redis.git
-[submodule "services/redis-commander"]
-	path = services/redis-commander
-	url = git@github.com:dallanb/redis-commander.git
 [submodule "services/score"]
 	path = services/score
 	url = git@github.com:dallanb/score.git
