@@ -12,6 +12,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - 30000:5000
     depends_on:
       - account_db
     networks:
@@ -49,6 +51,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - 30001:5000
     depends_on:
       - auth_db
     networks:
@@ -78,6 +82,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - 30002:5000
     depends_on:
       - contest_db
     networks:
@@ -101,6 +107,8 @@ services:
     image: dallanbhatti/notification:qaw
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.notification
+    ports:
+      - 30003:5000
     networks:
       - app-net
   notification_cache:
@@ -135,6 +143,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - 30004:5000
     depends_on:
       - sport_db
     networks:
@@ -164,6 +174,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - 30005:5000
     depends_on:
       - wager_db
     networks:
