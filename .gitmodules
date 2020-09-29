@@ -13,9 +13,6 @@
 [submodule "services/kibana"]
 	path = services/kibana
 	url = git@github.com:dallanb/kibana.git
-[submodule "services/kong"]
-	path = services/kong
-	url = git@github.com:dallanb/kong.git
 [submodule "services/logstash"]
 	path = services/logstash
 	url = git@github.com:dallanb/logstash.git
