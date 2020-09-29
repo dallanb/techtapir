@@ -119,7 +119,7 @@ services:
     volumes:
       - ${HUNCHO_DIR}/data/qaw/notification_mongodb/data:/data/db
       - ${HUNCHO_DIR}/data/qaw/notification_home:/home/mongodb # this must be manually created and chown'd to 999 https://github.com/docker-library/mongo/issues/323
-      - ${HUNCHO_DIR}/build/bin/init-notification-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ${HUNCHO_DIR}/build/bin/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.notification_mongodb
     networks:
