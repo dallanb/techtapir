@@ -108,7 +108,7 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.notification
     ports:
-      - 30003:5000
+      - 30003:3000
     networks:
       - app-net
   notification_cache:
