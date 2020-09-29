@@ -19,7 +19,7 @@ services:
       - kong-net
   account_db:
     container_name: account_db
-    image: postgresql:$POSTGRES_VERSION
+    image: postgres:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/account_db/data:/var/lib/postgresql/data/
     env_file:
@@ -57,7 +57,7 @@ services:
       - kong-net
   auth_db:
     container_name: auth_db
-    image: postgresql:$POSTGRES_VERSION
+    image: postgres:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/auth_db/data:/var/lib/postgresql/data/
     env_file:
@@ -87,7 +87,7 @@ services:
       - kong-net
   contest_db:
     container_name: contest_db
-    image: postgresql:$POSTGRES_VERSION
+    image: postgres:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/contest_db/data:/var/lib/postgresql/data/
     env_file:
@@ -116,7 +116,7 @@ services:
       - kong-net
   kong_db:
     container_name: kong_db
-    image: postgresql:$POSTGRES_VERSION
+    image: postgres:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/kong_db/data:/var/lib/postgresql/data
     env_file:
@@ -184,7 +184,7 @@ services:
       - kong-net
   sport_db:
     container_name: sport_db
-    image: postgresql:$POSTGRES_VERSION
+    image: postgres:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/sport_db/data:/var/lib/postgresql/data/
     env_file:
@@ -223,7 +223,7 @@ services:
       - kong-net
   wager_db:
     container_name: wager_db
-    image: postgresql:$POSTGRES_VERSION
+    image: postgres:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/wager_db/data:/var/lib/postgresql/data/
     env_file:
