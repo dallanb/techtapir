@@ -5,13 +5,13 @@ CLEAN_PW=`echo $ELASTIC_PW | sed 's/ *$//g'`
 echo "Extracted this password for Elasticsearch: $CLEAN_PW"
 
 # Handle Kibana
-cp services/kibana/config/kibana.yml services/kibana/config/kibana.secret.yml
-sed -i "s/changeme/$CLEAN_PW/" services/kibana/config/kibana.secret.yml
+cp secrets/kibana/config/kibana.yml secrets/kibana/config/kibana.secret.yml
+sed -i "s/changeme/$CLEAN_PW/" secrets/kibana/config/kibana.secret.yml
 
 
 # Handle Logstash
-cp services/logstash/config/logstash.yml services/logstash/config/logstash.secret.yml
-sed -i "s/changeme/$CLEAN_PW/" services/logstash/config/logstash.secret.yml
+cp secrets/logstash/config/logstash.yml secrets/logstash/config/logstash.secret.yml
+sed -i "s/changeme/$CLEAN_PW/" secrets/logstash/config/logstash.secret.yml
 
-cp services/logstash/pipeline/logstash.conf services/logstash/pipeline/logstash.secret.conf
-sed -i "s/changeme/$CLEAN_PW/" services/logstash/pipeline/logstash.secret.conf
+cp secrets/logstash/pipeline/logstash.conf secrets/logstash/pipeline/logstash.secret.conf
+sed -i "s/changeme/$CLEAN_PW/" secrets/logstash/pipeline/logstash.secret.conf
