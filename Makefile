@@ -32,17 +32,30 @@ deploy-qaw:
 	@docker-compose \
 					-f build/docker-compose.qaw.yaml \
 					--env-file build/env/.env \
-					up --build --remove-orphans -d
+					-p qaw up --build --remove-orphans -d
 deploy-prod:
 	@docker-compose \
 					-f build/docker-compose.prod.yaml \
 					--env-file build/env/.env.prod \
-					up --build --force-recreate -d
+					-p prod up --build --force-recreate -d
+deploy-frontend:
+	@docker-compose \
+					-f build/docker-compose.frontend.yaml \
+					--env-file build/env/.env \
+					-p frontend up --build --remove-orphans -d
+
 deploy-backend:
 	@docker-compose \
 					-f build/docker-compose.backend.yaml \
 					--env-file build/env/.env \
-					up --build --remove-orphans -d
+					-p backend up --build --remove-orphans -d
+
+
+deploy-event:
+	@docker-compose \
+					-f build/docker-compose.event.yaml \
+					--env-file build/env/.env \
+					-p event up --build --remove-orphans -d
 
 down:
 	@docker-compose \
@@ -52,17 +65,27 @@ down:
 down-qaw:
 	@docker-compose \
 					-f build/docker-compose.qaw.yaml \
-					down --remove-orphans
+					-p qaw down --remove-orphans
 
 down-prod:
 	@docker-compose \
 					-f build/docker-compose.prod.yaml \
-					down --rmi all --remove-orphans
+					-p prod down --rmi all --remove-orphans
+
+down-frontend:
+	@docker-compose \
+					-f build/docker-compose.frontend.yaml \
+					-p frontend down --remove-orphans
 
 down-backend:
 	@docker-compose \
 					-f build/docker-compose.backend.yaml \
-					down --remove-orphans
+					-p backend down --remove-orphans
+
+down-event:
+	@docker-compose \
+					-f build/docker-compose.event.yaml \
+					-p event down --remove-orphans
 
 elk-prepare:
 	@docker-compose \
