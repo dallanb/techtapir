@@ -12,6 +12,12 @@ build:
 					--env-file build/env/.env \
 					build --no-cache
 
+build-qaw:
+	@docker-compose \
+					-f build/docker-compose.qaw.yaml \
+					--env-file build/env/.env \
+					build --no-cache
+
 build-prod:
 	@docker-compose \
 					-f build/docker-compose.prod.yaml \
@@ -20,6 +26,11 @@ build-prod:
 deploy:
 	@docker-compose \
 					-f build/docker-compose.yaml \
+					--env-file build/env/.env \
+					up --build --remove-orphans -d
+deploy-qaw:
+	@docker-compose \
+					-f build/docker-compose.qaw.yaml \
 					--env-file build/env/.env \
 					up --build --remove-orphans -d
 deploy-prod:
@@ -31,6 +42,11 @@ deploy-prod:
 down:
 	@docker-compose \
 					-f build/docker-compose.yaml \
+					down --remove-orphans
+
+down-qaw:
+	@docker-compose \
+					-f build/docker-compose.qaw.yaml \
 					down --remove-orphans
 
 down-prod:
@@ -58,5 +74,11 @@ elk-apply-pwd:
 kong-prepare:
 	@docker-compose \
 					-f build/prepare/docker-compose.kong.prepare.yaml \
+					--env-file build/env/.env \
+					up --build
+
+kong-prepare-qaw:
+	@docker-compose \
+					-f build/prepare/docker-compose.kong.qaw.prepare.yaml \
 					--env-file build/env/.env \
 					up --build
