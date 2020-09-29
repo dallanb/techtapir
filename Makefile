@@ -56,6 +56,11 @@ deploy-event:
 					-f build/docker-compose.event.yaml \
 					--env-file build/env/.env \
 					-p event up --build --remove-orphans -d
+deploy-monitoring:
+	@docker-compose \
+					-f build/docker-compose.monitoring.yaml \
+					--env-file build/env/.env \
+					-p monitoring up --build --remove-orphans -d
 
 down:
 	@docker-compose \
@@ -86,6 +91,10 @@ down-event:
 	@docker-compose \
 					-f build/docker-compose.event.yaml \
 					-p event down --remove-orphans
+down-monitoring:
+	@docker-compose \
+					-f build/docker-compose.monitoring.yaml \
+					-p monitoring down --remove-orphans
 
 elk-prepare:
 	@docker-compose \
