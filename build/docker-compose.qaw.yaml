@@ -2,19 +2,8 @@ version: '3.2'
 services:
   account:
     container_name: account
-    build:
-      context: ${HUNCHO_DIR}/services/account
-      dockerfile: ${HUNCHO_DIR}/services/account/build/Dockerfile.qaw
+    image: dallanbhatti/account:qaw
     restart: on-failure
-    volumes:
-      - ${HUNCHO_DIR}/services/account/migrations:/home/app/migrations
-      - ${HUNCHO_DIR}/services/account/bin:/home/app/bin
-      - ${HUNCHO_DIR}/services/account/tests:/home/app/tests
-      - ${HUNCHO_DIR}/services/account/seeds:/home/app/seeds
-      - ${HUNCHO_DIR}/services/account/src:/home/app/src
-      - ${HUNCHO_DIR}/services/account/statics:/home/app/statics
-      - ${HUNCHO_DIR}/services/account/manage.py:/home/app/manage.py
-      - ${HUNCHO_DIR}/services/account/setup.py:/home/app/setup.py
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.account
       - ${HUNCHO_DIR}/secrets/s3/credentials.txt
@@ -30,11 +19,7 @@ services:
       - kong-net
   account_db:
     container_name: account_db
-    build:
-      context: ${HUNCHO_DIR}/services/postgresql
-      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-      args:
-        POSTGRES_VERSION: 9.6
+    image: postgresql:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/account_db/data:/var/lib/postgresql/data/
     env_file:
@@ -48,9 +33,7 @@ services:
       - app-net
   adminer:
     container_name: adminer
-    build:
-      context: ${HUNCHO_DIR}/services/adminer
-      dockerfile: ${HUNCHO_DIR}/services/adminer/build/Dockerfile
+    image: adminer:$ADMINER_VERSION
     restart: always
     ports:
       - 8080:8080
@@ -58,18 +41,8 @@ services:
       - app-net
   auth:
     container_name: auth
-    build:
-      context: ${HUNCHO_DIR}/services/auth
-      dockerfile: ${HUNCHO_DIR}/services/auth/build/Dockerfile.qaw
+    image: dallanbhatti/auth:qaw
     restart: on-failure
-    volumes:
-      - ${HUNCHO_DIR}/services/auth/migrations:/home/app/migrations
-      - ${HUNCHO_DIR}/services/auth/bin:/home/app/bin
-      - ${HUNCHO_DIR}/services/auth/tests:/home/app/tests
-      - ${HUNCHO_DIR}/services/auth/src:/home/app/src
-      - ${HUNCHO_DIR}/services/auth/statics:/home/app/statics
-      - ${HUNCHO_DIR}/services/auth/manage.py:/home/app/manage.py
-      - ${HUNCHO_DIR}/services/auth/setup.py:/home/app/setup.py
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.auth
     healthcheck:
@@ -84,11 +57,7 @@ services:
       - kong-net
   auth_db:
     container_name: auth_db
-    build:
-      context: ${HUNCHO_DIR}/services/postgresql
-      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-      args:
-        POSTGRES_VERSION: 9.6
+    image: postgresql:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/auth_db/data:/var/lib/postgresql/data/
     env_file:
@@ -102,19 +71,8 @@ services:
       - app-net
   contest:
     container_name: contest
-    build:
-      context: ${HUNCHO_DIR}/services/contest
-      dockerfile: ${HUNCHO_DIR}/services/contest/build/Dockerfile.qaw
+    image: dallanbhatti/contest:qaw
     restart: on-failure
-    volumes:
-      - ${HUNCHO_DIR}/services/contest/migrations:/home/app/migrations
-      - ${HUNCHO_DIR}/services/contest/bin:/home/app/bin
-      - ${HUNCHO_DIR}/services/contest/tests:/home/app/tests
-      - ${HUNCHO_DIR}/services/contest/seeds:/home/app/seeds
-      - ${HUNCHO_DIR}/services/contest/src:/home/app/src
-      - ${HUNCHO_DIR}/services/contest/statics:/home/app/statics
-      - ${HUNCHO_DIR}/services/contest/manage.py:/home/app/manage.py
-      - ${HUNCHO_DIR}/services/contest/setup.py:/home/app/setup.py
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.contest
     healthcheck:
@@ -129,11 +87,7 @@ services:
       - kong-net
   contest_db:
     container_name: contest_db
-    build:
-      context: ${HUNCHO_DIR}/services/postgresql
-      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-      args:
-        POSTGRES_VERSION: 9.6
+    image: postgresql:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/contest_db/data:/var/lib/postgresql/data/
     env_file:
@@ -147,9 +101,7 @@ services:
       - app-net
   kong:
     container_name: kong
-    build:
-      context: ${HUNCHO_DIR}/services/kong
-      dockerfile: ${HUNCHO_DIR}/services/kong/build/Dockerfile
+    image: kong:$KONG_VERSION
     restart: on-failure
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.kong
@@ -164,11 +116,7 @@ services:
       - kong-net
   kong_db:
     container_name: kong_db
-    build:
-      context: ${HUNCHO_DIR}/services/postgresql
-      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-      args:
-        POSTGRES_VERSION: $POSTGRES_VERSION
+    image: postgresql:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/kong_db/data:/var/lib/postgresql/data
     env_file:
@@ -182,9 +130,7 @@ services:
       - kong-net
   konga:
     container_name: konga
-    build:
-      context: ${HUNCHO_DIR}/services/konga
-      dockerfile: ${HUNCHO_DIR}/services/konga/build/Dockerfile
+    image: pantsel/konga:$KONGA_VERSION
     restart: on-failure
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.konga
@@ -194,11 +140,7 @@ services:
       - kong-net
   notification:
     container_name: notification
-    build:
-      context: ${HUNCHO_DIR}/services/notification
-      dockerfile: ${HUNCHO_DIR}/services/notification/build/Dockerfile.qaw
-      args:
-        NODE_VERSION: 12
+    image: dallanbhatti/notification:qaw
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.notification
     networks:
@@ -218,11 +160,7 @@ services:
       - app-net
   notification_mongodb:
     container_name: notification_mongodb
-    build:
-      context: ${HUNCHO_DIR}/services/mongodb
-      dockerfile: ${HUNCHO_DIR}/services/mongodb/build/Dockerfile
-      args:
-        MONGO_VERSION: 3.6
+    image: mongo:$MONGO_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/notification_mongodb/data:/data/db
       - ${HUNCHO_DIR}/services/notification/bin/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
@@ -232,19 +170,8 @@ services:
       - app-net
   sport:
     container_name: sport
-    build:
-      context: ${HUNCHO_DIR}/services/sport
-      dockerfile: ${HUNCHO_DIR}/services/sport/build/Dockerfile.qaw
+    image: dallanbhatti/sport:qaw
     restart: on-failure
-    volumes:
-      - ${HUNCHO_DIR}/services/sport/migrations:/home/app/migrations
-      - ${HUNCHO_DIR}/services/sport/bin:/home/app/bin
-      - ${HUNCHO_DIR}/services/sport/tests:/home/app/tests
-      - ${HUNCHO_DIR}/services/sport/seeds:/home/app/seeds
-      - ${HUNCHO_DIR}/services/sport/src:/home/app/src
-      - ${HUNCHO_DIR}/services/sport/statics:/home/app/statics
-      - ${HUNCHO_DIR}/services/sport/manage.py:/home/app/manage.py
-      - ${HUNCHO_DIR}/services/sport/setup.py:/home/app/setup.py
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.sport
     healthcheck:
@@ -259,11 +186,7 @@ services:
       - kong-net
   sport_db:
     container_name: sport_db
-    build:
-      context: ${HUNCHO_DIR}/services/postgresql
-      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-      args:
-        POSTGRES_VERSION: 9.6
+    image: postgresql:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/sport_db/data:/var/lib/postgresql/data/
     env_file:
@@ -277,9 +200,7 @@ services:
       - app-net
   static:
     container_name: static
-    build:
-      context: ${HUNCHO_DIR}/services/static
-      dockerfile: ${HUNCHO_DIR}/services/static/Dockerfile
+    image: dallanbhatti/static:latest
     restart: unless-stopped
     volumes:
       - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
@@ -288,19 +209,8 @@ services:
       - kong-net
   wager:
     container_name: wager
-    build:
-      context: ${HUNCHO_DIR}/services/wager
-      dockerfile: ${HUNCHO_DIR}/services/wager/build/Dockerfile.qaw
+    image: dallanbhatti/wager:qaw
     restart: on-failure
-    volumes:
-      - ${HUNCHO_DIR}/services/wager/migrations:/home/app/migrations
-      - ${HUNCHO_DIR}/services/wager/bin:/home/app/bin
-      - ${HUNCHO_DIR}/services/wager/tests:/home/app/tests
-      - ${HUNCHO_DIR}/services/wager/seeds:/home/app/seeds
-      - ${HUNCHO_DIR}/services/wager/src:/home/app/src
-      - ${HUNCHO_DIR}/services/wager/statics:/home/app/statics
-      - ${HUNCHO_DIR}/services/wager/manage.py:/home/app/manage.py
-      - ${HUNCHO_DIR}/services/wager/setup.py:/home/app/setup.py
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.wager
     healthcheck:
@@ -315,11 +225,7 @@ services:
       - kong-net
   wager_db:
     container_name: wager_db
-    build:
-      context: ${HUNCHO_DIR}/services/postgresql
-      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-      args:
-        POSTGRES_VERSION: 9.6
+    image: postgresql:$POSTGRES_VERSION
     volumes:
       - ${HUNCHO_DIR}/data/qaw/wager_db/data:/var/lib/postgresql/data/
     env_file:
@@ -333,11 +239,7 @@ services:
       - app-net
   web_pusher:
     container_name: web_pusher
-    build:
-      context: ${HUNCHO_DIR}/services/web-pusher
-      dockerfile: ${HUNCHO_DIR}/services/web-pusher/build/Dockerfile.qaw
-      args:
-        NODE_VERSION: 12
+    image: dallanbhatti/web-pusher:qaw
     volumes:
       - ${HUNCHO_DIR}/secrets/golftapir/tech-tapir-firebase-adminsdk-3zrlh-3720b4d899.json:/home/app/secrets/firebase.json
     env_file:
