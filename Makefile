@@ -38,6 +38,11 @@ deploy-prod:
 					-f build/docker-compose.prod.yaml \
 					--env-file build/env/.env.prod \
 					up --build --force-recreate -d
+deploy-backend:
+	@docker-compose \
+					-f build/docker-compose.backend.yaml \
+					--env-file build/env/.env \
+					up --build --remove-orphans -d
 
 down:
 	@docker-compose \
