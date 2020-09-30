@@ -60,7 +60,7 @@ deploy-monitoring:
 	@docker-compose \
 					-f build/docker-compose.monitoring.yaml \
 					--env-file build/env/.env \
-					-p monitoring up --build --remove-orphans -d
+					-p monitoring up --build --remove-orphans
 
 down:
 	@docker-compose \

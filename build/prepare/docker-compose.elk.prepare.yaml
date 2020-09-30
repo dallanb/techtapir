@@ -5,7 +5,7 @@ services:
         image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
         volumes:
             - ${HUNCHO_DIR}/secrets/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-            - ${HUNCHO_DIR}/data/qaw/elasticsearch/data:/usr/share/elasticsearch/data
+            - ${HUNCHO_DIR}/data/qaw/elasticsearch/data:/usr/share/elasticsearch/data # sudo chown -R 1000:0 elasticsearch/
         ports:
             - 9200:9200
             - 9300:9300
