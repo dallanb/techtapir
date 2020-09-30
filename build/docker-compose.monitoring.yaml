@@ -16,6 +16,8 @@ services:
     image: docker.elastic.co/kibana/kibana:$ELK_VERSION
     volumes:
       - ${HUNCHO_DIR}/secrets/kibana/config/kibana.secret.yml:/usr/share/kibana/config/kibana.yml:ro
+    ports:
+      - 5601:5601
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.kibana
     depends_on:
