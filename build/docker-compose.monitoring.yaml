@@ -5,12 +5,14 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:$ELK_VERSION
     volumes:
       - ${HUNCHO_DIR}/secrets/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
-      - ${HUNCHO_DIR}/data/qaw/elasticsearch/data:/usr/share/elasticsearch/data
+      - ${HUNCHO_DIR}/data/qaw/elasticsearch/data:/usr/share/elasticsearch/data # sudo chown -R 1000:0 elasticsearch/
     ports:
       - 9200:9200
       - 9300:9300
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.elasticsearch
+    networks:
+      - elastic-net
   kibana:
     container_name: kibana
     image: docker.elastic.co/kibana/kibana:$ELK_VERSION
@@ -22,6 +24,8 @@ services:
       - ${HUNCHO_DIR}/env/qaw/.env.kibana
     depends_on:
       - elasticsearch
+    networks:
+      - elastic-net
   logstash:
     container_name: logstash
     image: docker.elastic.co/logstash/logstash:$ELK_VERSION
@@ -36,6 +40,8 @@ services:
       - ${HUNCHO_DIR}/env/qaw/.env.logstash
     depends_on:
       - elasticsearch
+    networks:
+      - elastic-net
   # possibly also add grafana & prometheus
 networks:
   elastic-net:

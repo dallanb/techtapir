@@ -151,4 +151,18 @@ docker run -d --name kong --network=kong-net -e "KONG_DATABASE=postgres" \
 
 ## Let's Encrypt Wildcard Certificates for HAProxy with Cloudflare DNS Challenge
 This is a good tutorial that I followed for setting up a wildcard certificate on my HAProxy Load Balancer Raspberry Pi  
-https://docs.j7k6.org/letsencrypt-haproxy-cloudflare-wildcard-cert/ 
+https://docs.j7k6.org/letsencrypt-haproxy-cloudflare-wildcard-cert/
+
+## Configure Adminer to use MongoDB
+
+1. Go to portainer and enter adminer console as root
+2. `> apk add autoconf gcc g++ make libffi-dev openssl-dev`
+3. `> pecl install mongodb`
+4. `> echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/docker-php-ext-mongodb.ini`
+5. restart docker container
+
+## Mongo Home Creation
+
+Due to lack of permissions from the container we must manually create a home directory for mongo that will allow
+for saving of data from the container onto our host machine. To do this we will need to create a directory in data/{env} folder 
+and chown this directory to user and group 999. We will also need to map this directory to volume in container at path /home/mongodb. 
