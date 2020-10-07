@@ -133,6 +133,58 @@ services:
       - ${HUNCHO_DIR}/env/qaw/.env.notification_mongodb
     networks:
       - app-net
+  score:
+    container_name: score
+    build:
+      context: ${HUNCHO_DIR}/services/score
+      dockerfile: ${HUNCHO_DIR}/services/score/build/Dockerfile.qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/services/score/migrations:/home/app/migrations
+      - ${HUNCHO_DIR}/services/score/bin:/home/app/bin
+      - ${HUNCHO_DIR}/services/score/tests:/home/app/tests
+      - ${HUNCHO_DIR}/services/score/seeds:/home/app/seeds
+      - ${HUNCHO_DIR}/services/score/src:/home/app/src
+      - ${HUNCHO_DIR}/services/score/statics:/home/app/statics
+      - ${HUNCHO_DIR}/services/score/manage.py:/home/app/manage.py
+      - ${HUNCHO_DIR}/services/score/setup.py:/home/app/setup.py
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.score
+    healthcheck:
+      test: curl --fail -s score:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+    ports:
+      - 30006:5000
+    networks:
+      - app-net
+  score_db:
+    container_name: score_db
+    image: postgres:9.6
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/score_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.score_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U score" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - app-net
+  score_mongodb:
+    container_name: score_mongodb
+    image: mongo:3.6
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/score_mongodb/data:/data/db
+      - ${HUNCHO_DIR}/data/qaw/score_home:/home/mongodb # this must be manually created and chown'd to 999 https://github.com/docker-library/mongo/issues/323
+      - ${HUNCHO_DIR}/build/bin/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.score_mongodb
+    networks:
+      - app-net
   sport:
     container_name: sport
     image: dallanbhatti/sport:qaw
