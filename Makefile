@@ -56,11 +56,29 @@ deploy-event:
 					-f build/docker-compose.event.yaml \
 					--env-file build/env/.env \
 					-p event up --build --remove-orphans -d
+
+deploy-event-rpi:
+	@docker-compose \
+					-f build/docker-compose.event.rpi.yaml \
+					--env-file build/env/.env \
+					-p event up --build --remove-orphans -d
 deploy-monitoring:
 	@docker-compose \
 					-f build/docker-compose.monitoring.yaml \
 					--env-file build/env/.env \
 					-p monitoring up --build --remove-orphans -d
+
+deploy-kong-rpi:
+	@docker-compose \
+					-f build/docker-compose.kong.rpi.yaml \
+					--env-file build/env/.env \
+					-p kong up --build --remove-orphans -d
+
+deploy-static:
+	@docker-compose \
+					-f build/docker-compose.static.yaml \
+					--env-file build/env/.env \
+					-p static up --build --remove-orphans -d
 
 down:
 	@docker-compose \
@@ -91,10 +109,25 @@ down-event:
 	@docker-compose \
 					-f build/docker-compose.event.yaml \
 					-p event down --remove-orphans
+
+down-event-rpi:
+	@docker-compose \
+					-f build/docker-compose.event.rpi.yaml \
+					-p event down --remove-orphans
 down-monitoring:
 	@docker-compose \
 					-f build/docker-compose.monitoring.yaml \
 					-p monitoring down --remove-orphans
+
+down-kong-rpi:
+	@docker-compose \
+					-f build/docker-compose.kong.rpi.yaml \
+					-p kong down --remove-orphans
+
+down-static:
+	@docker-compose \
+					-f build/docker-compose.static.yaml \
+					-p static down --remove-orphans
 
 elk-prepare:
 	@docker-compose \
@@ -122,5 +155,11 @@ kong-prepare:
 kong-prepare-qaw:
 	@docker-compose \
 					-f build/prepare/docker-compose.kong.qaw.prepare.yaml \
+					--env-file build/env/.env \
+					up --build
+
+kong-prepare-rpi:
+	@docker-compose \
+					-f build/prepare/docker-compose.kong.rpi.prepare.yaml \
 					--env-file build/env/.env \
 					up --build
