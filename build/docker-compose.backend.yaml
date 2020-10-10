@@ -109,6 +109,10 @@ services:
       - ${HUNCHO_DIR}/env/qaw/.env.notification
     ports:
       - 30003:3000
+    depends_on:
+      - notification_db
+      - notification_mongodb
+      - notification_cache
     networks:
       - app-net
   notification_cache:
@@ -119,6 +123,20 @@ services:
       - ${HUNCHO_DIR}/data/qaw/notification_cache/redis.conf:/usr/local/etc/redis/redis.conf
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.notification_cache
+    networks:
+      - app-net
+  notification_db:
+    container_name: notification_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/notification_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.notification_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U notification" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
     networks:
       - app-net
   notification_mongodb:
