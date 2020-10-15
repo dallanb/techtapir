@@ -6,7 +6,8 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
     && docker exec contest python manage.py init
 
   # Notification
-  docker exec notification
+  docker exec notification npm run resetDB \
+    && docker exec notification_mongodb bash /bin/reset-mongo.sh
 
   # Score
   docker exec score python manage.py reset_db \
@@ -16,8 +17,5 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
   # Wager
   docker exec wager python manage.py reset_db \
     && docker exec wager python manage.py init
-
-  # Web Pusher
-  docker exec web-pusher
 EOF
 exit
