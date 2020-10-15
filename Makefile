@@ -163,3 +163,6 @@ kong-prepare-rpi:
 					-f build/prepare/docker-compose.kong.rpi.prepare.yaml \
 					--env-file build/env/.env \
 					up --build
+
+reset-backend-db:
+	@bash bin/reset-db.sh
