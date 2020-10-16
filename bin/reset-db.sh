@@ -7,7 +7,8 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
 
   # Notification
   docker exec notification npm run resetDB \
-    && docker exec notification_mongodb bash /bin/reset-mongo.sh
+    && docker exec notification_mongodb bash /bin/reset-mongo.sh \
+    && docker exec notification_cache bash /bin/reset-redis.sh
 
   # Score
   docker exec score python manage.py reset_db \
