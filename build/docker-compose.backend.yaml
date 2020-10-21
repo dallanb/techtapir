@@ -166,24 +166,9 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
-      - score_db
       - score_mongodb
     ports:
       - 30006:5000
-    networks:
-      - app-net
-  score_db:
-    container_name: score_db
-    image: postgres:$POSTGRES_VERSION
-    volumes:
-      - ${HUNCHO_DIR}/data/qaw/score_db/data:/var/lib/postgresql/data/
-    env_file:
-      - ${HUNCHO_DIR}/env/qaw/.env.score_db
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U score" ]
-      interval: 10s
-      timeout: 5s
-      retries: 20
     networks:
       - app-net
   score_mongodb:

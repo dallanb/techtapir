@@ -430,7 +430,6 @@ services:
 #      retries: 5
 #    depends_on:
 #      - score_cache
-#      - score_db
 #  score_cache:
 #    container_name: score_cache
 #    build:
@@ -447,22 +446,6 @@ services:
 #      interval: 30s
 #      timeout: 10s
 #      retries: 5
-#  score_db:
-#    container_name: score_db
-#    build:
-#      context: ${HUNCHO_DIR}/services/postgresql
-#      dockerfile: ${HUNCHO_DIR}/services/postgresql/build/Dockerfile
-#      args:
-#        POSTGRES_VERSION: $POSTGRES_VERSION
-#    volumes:
-#      - ${HUNCHO_DIR}/data/dev/score_db/data:/var/lib/postgresql/data/
-#    env_file:
-#      - ${HUNCHO_DIR}/env/dev/.env.score_db
-#    healthcheck:
-#      test: ["CMD-SHELL", "pg_isready -U score"]
-#      interval: 10s
-#      timeout: 5s
-#      retries: 20
 #  score_mongodb:
 #    container_name: score_mongodb
 #    build:
