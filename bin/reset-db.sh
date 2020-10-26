@@ -21,6 +21,10 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
   # Score
   docker exec score_mongodb bash /bin/reset-mongo.sh
 
+  # Sport
+  docker exec sport python manage.py reset_db \
+    && docker exec sport python manage.py init
+
   # Wager
   docker exec wager python manage.py reset_db \
     && docker exec wager python manage.py init
