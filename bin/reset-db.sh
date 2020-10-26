@@ -11,9 +11,7 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
     && docker exec notification_cache bash /bin/reset-redis.sh
 
   # Score
-  docker exec score python manage.py reset_db \
-    && docker exec score python manage.py init \
-    && docker exec score python manage.py reset_mongodb
+  docker exec score python manage.py reset_mongodb
 
   # Wager
   docker exec wager python manage.py reset_db \
