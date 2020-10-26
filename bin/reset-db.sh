@@ -1,6 +1,14 @@
 #!/bin/bash
 
 ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
+  # Account
+    docker exec account python manage.py reset_db \
+    && docker exec account python manage.py init
+
+  # Auth
+  docker exec auth python manage.py reset_db \
+    && docker exec auth python manage.py init
+
   # Contest
   docker exec contest python manage.py reset_db \
     && docker exec contest python manage.py init
@@ -11,7 +19,7 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
     && docker exec notification_cache bash /bin/reset-redis.sh
 
   # Score
-  docker exec score python manage.py reset_mongodb
+  docker exec score_mongodb bash /bin/reset-mongo.sh
 
   # Wager
   docker exec wager python manage.py reset_db \
