@@ -2,12 +2,12 @@
 
 ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
   # Account
-    docker exec account python manage.py reset_db \
-    && docker exec account python manage.py init
+   docker exec account python manage.py reset_db \
+   && docker exec account python manage.py init
 
   # Auth
   docker exec auth python manage.py reset_db \
-    && docker exec auth python manage.py init
+   && docker exec auth python manage.py init
 
   # Contest
   docker exec contest python manage.py reset_db \
@@ -23,10 +23,10 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
 
   # Sport
   docker exec sport python manage.py reset_db \
-    && docker exec sport python manage.py init
+   && docker exec sport python manage.py init
 
   # Wager
   docker exec wager python manage.py reset_db \
-    && docker exec wager python manage.py init
+   && docker exec wager python manage.py init
 EOF
 exit
