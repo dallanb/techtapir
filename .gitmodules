@@ -31,3 +31,6 @@
 [submodule "services/static"]
 	path = services/static
 	url = git@github.com:dallanb/static.git
+[submodule "services/course"]
+	path = services/course
+	url = git@github.com:dallanb/course.git
