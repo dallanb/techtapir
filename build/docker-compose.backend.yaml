@@ -103,6 +103,38 @@ services:
       retries: 20
     networks:
       - app-net
+  course:
+    container_name: course
+    image: dallanbhatti/course:qaw
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.course
+      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
+    healthcheck:
+      test: curl --fail -s course:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 30007:5000
+    depends_on:
+      - course_db
+    networks:
+      - app-net
+  course_db:
+    container_name: course_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/course_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.course_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U course"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - app-net
   notification:
     container_name: notification
     image: dallanbhatti/notification:qaw
