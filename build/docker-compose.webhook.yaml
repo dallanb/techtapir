@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+  webhook:
+    container_name: webhook
+    image: almir/webhook:$WEBHOOK_VERSION
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/webhooks:/etc/webhook
+    command: [ "-verbose", "-hooks=/etc/webhook/hooks.json", "-hotreload" ]
+    ports:
+      - 10001:9000
+    networks:
+      - webhook-net
+networks:
+  webhook-net:
+    driver: bridge
