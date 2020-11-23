@@ -13,9 +13,9 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
   docker exec contest python manage.py reset_db \
     && docker exec contest python manage.py init
 
-  # Course
-  docker exec course python manage.py reset_db \
-    && docker exec course python manage.py init
+#  # Course
+#  docker exec course python manage.py reset_db \
+#    && docker exec course python manage.py init
 
   # Notification
   docker exec notification npm run resetDB \
