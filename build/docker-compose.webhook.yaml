@@ -2,10 +2,12 @@ version: '3.2'
 services:
   webhook:
     container_name: webhook
-    image: almir/webhook:$WEBHOOK_VERSION
+    image: dallanbhatti/webhook
     restart: on-failure
     volumes:
       - ${HUNCHO_DIR}/webhooks:/etc/webhook
+      - /home/dallanbhatti/.ssh/github:/home/.ssh/mega
+      - ${HUNCHO_DIR}/bin/redeploy.sh:/etc/webhook/redeploy.sh
     command: [ "-verbose", "-hooks=/etc/webhook/hooks.json", "-hotreload" ]
     ports:
       - 10001:9000
