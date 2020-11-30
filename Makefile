@@ -80,6 +80,18 @@ deploy-static:
 					--env-file build/env/.env \
 					-p static up --build --remove-orphans -d
 
+deploy-webhook:
+	@docker-compose \
+					-f build/docker-compose.webhook.yaml \
+					--env-file build/env/.env \
+					-p webhook up --build --remove-orphans -d
+
+deploy-kafka:
+	@docker-compose \
+					-f build/docker-compose.kafka.yaml \
+					--env-file build/env/.env \
+					-p kafka up --build --remove-orphans -d
+
 down:
 	@docker-compose \
 					-f build/docker-compose.yaml \
@@ -123,6 +135,16 @@ down-kong-rpi:
 	@docker-compose \
 					-f build/docker-compose.kong.rpi.yaml \
 					-p kong down --remove-orphans
+
+down-webhook:
+	@docker-compose \
+					-f build/docker-compose.webhook.yaml \
+					-p webhook down --remove-orphans
+
+down-kafka:
+	@docker-compose \
+					-f build/docker-compose.kafka.yaml \
+					-p kafka down --remove-orphans
 
 down-static:
 	@docker-compose \
