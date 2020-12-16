@@ -3,7 +3,7 @@ services:
   webhook:
     container_name: webhook
     image: dallanbhatti/webhook
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - ${HUNCHO_DIR}/webhooks:/etc/webhook
       - /home/dallanbhatti/.ssh/github:/home/.ssh/mega

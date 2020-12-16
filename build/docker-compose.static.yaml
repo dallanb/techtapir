@@ -3,7 +3,7 @@ services:
   konga:
     container_name: konga
     image: pantsel/konga:$KONGA_VERSION
-    restart: on-failure
+    restart: unless-stopped
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.konga
     ports:
