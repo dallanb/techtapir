@@ -183,6 +183,37 @@ services:
       retries: 20
     networks:
       - app-net
+  league:
+    container_name: league
+    image: dallanbhatti/league:qaw
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.league
+    healthcheck:
+      test: curl --fail -s league:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 30004:5000
+    depends_on:
+      - league_db
+    networks:
+      - app-net
+  league_db:
+    container_name: league_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/league_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.league_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U league" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - app-net
   notification:
     container_name: notification
     image: dallanbhatti/notification:qaw
