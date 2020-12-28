@@ -65,7 +65,7 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.auth_db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U auth"]
+      test: [ "CMD-SHELL", "pg_isready -U auth" ]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -113,7 +113,39 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.contest_db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U contest"]
+      test: [ "CMD-SHELL", "pg_isready -U contest" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - app-net
+  contestant:
+    container_name: contestant
+    image: dallanbhatti/contestant:qaw
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.contestant
+      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
+    healthcheck:
+      test: curl --fail -s contestant:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 30008:5000
+    depends_on:
+      - contestant_db
+    networks:
+      - app-net
+  contestant_db:
+    container_name: contestant_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/contestant_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.contestant_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U contestant" ]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -145,7 +177,38 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.course_db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U course"]
+      test: [ "CMD-SHELL", "pg_isready -U course" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - app-net
+  league:
+    container_name: league
+    image: dallanbhatti/league:qaw
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.league
+    healthcheck:
+      test: curl --fail -s league:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 30004:5000
+    depends_on:
+      - league_db
+    networks:
+      - app-net
+  league_db:
+    container_name: league_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/league_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.league_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U league" ]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -197,7 +260,7 @@ services:
       - ${HUNCHO_DIR}/data/qaw/notification_home:/home/mongodb # this must be manually created and chown'd to 999 https://github.com/docker-library/mongo/issues/323
       - ${HUNCHO_DIR}/build/bin/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
       - ${HUNCHO_DIR}/build/bin/reset-mongo.sh:/bin/reset-mongo.sh
-    command: [--auth]
+    command: [ --auth ]
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.notification_mongodb
     networks:
@@ -256,7 +319,7 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.sport_db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U sport"]
+      test: [ "CMD-SHELL", "pg_isready -U sport" ]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -287,7 +350,7 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.wager_db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U wager"]
+      test: [ "CMD-SHELL", "pg_isready -U wager" ]
       interval: 10s
       timeout: 5s
       retries: 20

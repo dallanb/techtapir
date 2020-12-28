@@ -1,13 +1,13 @@
 #!/bin/bash
 
 ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
-#  # Account
-#   docker exec account python manage.py reset_db \
-#   && docker exec account python manage.py init
-#
-#  # Auth
-#  docker exec auth python manage.py reset_db \
-#   && docker exec auth python manage.py init
+  # Account
+   docker exec account python manage.py reset_db \
+   && docker exec account python manage.py init
+
+  # Auth
+  docker exec auth python manage.py reset_db \
+   && docker exec auth python manage.py init
 
   # Contest
   docker exec contest python manage.py reset_db \
