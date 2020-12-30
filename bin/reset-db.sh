@@ -17,6 +17,10 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
 #  docker exec course python manage.py delete \
 #    && docker exec course python manage.py load
 
+  # League
+  docker exec league python manage.py delete \
+    && docker exec contest python manage.py load
+
   # Notification
   docker exec notification npm run resetDB \
     && docker exec notification_mongodb bash /bin/reset-mongo.sh \
