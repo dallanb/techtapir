@@ -189,13 +189,14 @@ services:
     restart: on-failure
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.league
+      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
     healthcheck:
       test: curl --fail -s league:5000/ping || exit 1
       interval: 10s
       timeout: 5s
       retries: 5
     ports:
-      - 30004:5000
+      - 30009:5000
     depends_on:
       - league_db
     networks:

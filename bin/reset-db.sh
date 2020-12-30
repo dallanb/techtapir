@@ -2,20 +2,20 @@
 
 ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
   # Account
-   docker exec account python manage.py reset_db \
-   && docker exec account python manage.py init
+   docker exec account python manage.py delete \
+   && docker exec account python manage.py load
 
   # Auth
   docker exec auth python manage.py reset_db \
    && docker exec auth python manage.py init
 
   # Contest
-  docker exec contest python manage.py reset_db \
-    && docker exec contest python manage.py init
+  docker exec contest python manage.py delete \
+    && docker exec contest python manage.py load
 
 #  # Course
-#  docker exec course python manage.py reset_db \
-#    && docker exec course python manage.py init
+#  docker exec course python manage.py delete \
+#    && docker exec course python manage.py load
 
   # Notification
   docker exec notification npm run resetDB \
