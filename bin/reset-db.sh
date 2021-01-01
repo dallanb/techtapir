@@ -19,7 +19,7 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
 
   # League
   docker exec league python manage.py delete \
-    && docker exec contest python manage.py load
+    && docker exec league python manage.py load
 
   # Notification
   docker exec notification npm run resetDB \
