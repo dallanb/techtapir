@@ -37,3 +37,6 @@
 [submodule "services/league"]
 	path = services/league
 	url = git@github.com:dallanb/league.git
+[submodule "services/member"]
+	path = services/member
+	url = git@github.com:dallanb/member.git

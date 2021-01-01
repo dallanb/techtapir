@@ -119,38 +119,6 @@ services:
       retries: 20
     networks:
       - app-net
-  contestant:
-    container_name: contestant
-    image: dallanbhatti/contestant:qaw
-    restart: on-failure
-    env_file:
-      - ${HUNCHO_DIR}/env/qaw/.env.contestant
-      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
-    healthcheck:
-      test: curl --fail -s contestant:5000/ping || exit 1
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    ports:
-      - 30008:5000
-    depends_on:
-      - contestant_db
-    networks:
-      - app-net
-  contestant_db:
-    container_name: contestant_db
-    image: postgres:$POSTGRES_VERSION
-    volumes:
-      - ${HUNCHO_DIR}/data/qaw/contestant_db/data:/var/lib/postgresql/data/
-    env_file:
-      - ${HUNCHO_DIR}/env/qaw/.env.contestant_db
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U contestant" ]
-      interval: 10s
-      timeout: 5s
-      retries: 20
-    networks:
-      - app-net
   course:
     container_name: course
     image: dallanbhatti/course:qaw
@@ -210,6 +178,38 @@ services:
       - ${HUNCHO_DIR}/env/qaw/.env.league_db
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U league" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - app-net
+  member:
+    container_name: member
+    image: dallanbhatti/member:qaw
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.member
+      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
+    healthcheck:
+      test: curl --fail -s member:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 30008:5000
+    depends_on:
+      - member_db
+    networks:
+      - app-net
+  member_db:
+    container_name: member_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/member_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.member_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U member" ]
       interval: 10s
       timeout: 5s
       retries: 20
