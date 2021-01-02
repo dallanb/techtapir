@@ -166,6 +166,19 @@ services:
       - 30009:5000
     depends_on:
       - league_db
+      - league_cache
+    networks:
+      - app-net
+  league_cache:
+    container_name: league_cache
+    image: redis:$REDIS_VERSION
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/league_cache/redis_data:/var/libs/redis
+      - ${HUNCHO_DIR}/data/qaw/league_cache/redis.conf:/usr/local/etc/redis/redis.conf
+      - ${HUNCHO_DIR}/build/bin/reset-redis.sh:/bin/reset-redis.sh
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.league_cache
     networks:
       - app-net
   league_db:
