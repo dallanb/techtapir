@@ -1,13 +1,13 @@
 #!/bin/bash
 
 ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
-  # Account
-   docker exec account python manage.py delete \
-   && docker exec account python manage.py load
+#  # Account
+#   docker exec account python manage.py delete \
+#   && docker exec account python manage.py load
 
-  # Auth
-  docker exec auth python manage.py reset_db \
-   && docker exec auth python manage.py init
+#  # Auth
+#  docker exec auth python manage.py reset_db \
+#   && docker exec auth python manage.py init
 
   # Contest
   docker exec contest python manage.py delete \
@@ -20,6 +20,10 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
   # League
   docker exec league python manage.py delete \
     && docker exec league python manage.py load
+
+#  # Member
+#  docker exec member python manage.py delete \
+#    && docker exec member python manage.py load
 
   # Notification
   docker exec notification npm run resetDB \
