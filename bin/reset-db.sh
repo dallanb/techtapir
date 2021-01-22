@@ -37,8 +37,8 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
 #  docker exec sport python manage.py reset_db \
 #   && docker exec sport python manage.py init
 #
-#  # Wager
-#  docker exec wager python manage.py reset_db \
-#   && docker exec wager python manage.py init
+  # Wager
+  docker exec wager python manage.py delete \
+   && docker exec wager python manage.py load
 EOF
 exit

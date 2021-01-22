@@ -195,6 +195,25 @@ services:
       retries: 20
     networks:
       - app-net
+  mailer:
+    container_name: mailer
+    image: dallanbhatti/mailer:qaw
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.mailer
+      - ${HUNCHO_DIR}/secrets/mailer/mailer_password.txt
+    volumes:
+      - mailer_volume:/home/app
+  mailer_web:
+    container_name: mailer_web
+    image: dallanbhatti/mailer_web:qaw
+    restart: on-failure
+    ports:
+      - 30010:80
+    volumes:
+      - mailer_volume:/var/www/html
+    depends_on:
+      - mailer
   member:
     container_name: member
     image: dallanbhatti/member:qaw
@@ -378,6 +397,8 @@ services:
       - ${HUNCHO_DIR}/env/qaw/.env.web-pusher
     networks:
       - app-net
+volumes:
+  mailer_volume:
 networks:
   app-net:
     driver: bridge
