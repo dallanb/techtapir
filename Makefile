@@ -92,6 +92,12 @@ deploy-kafka:
 					--env-file build/env/.env \
 					-p kafka up --build --remove-orphans -d
 
+deploy-web:
+	@docker-compose \
+					-f build/docker-compose.web.yaml \
+					--env-file build/env/.env \
+					-p web up --build --remove-orphans -d
+
 down:
 	@docker-compose \
 					-f build/docker-compose.yaml \
@@ -150,6 +156,11 @@ down-static:
 	@docker-compose \
 					-f build/docker-compose.static.yaml \
 					-p static down --remove-orphans
+
+down-web:
+	@docker-compose \
+					-f build/docker-compose.web.yaml \
+					-p web down --remove-orphans
 
 elk-prepare:
 	@docker-compose \
