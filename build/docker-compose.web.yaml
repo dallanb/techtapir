@@ -3,7 +3,7 @@ version: "3.2"
 services:
   golftapir:
     container_name: golftapir
-    image: dallanbhatti/golftapir
+    image: dallanbhatti/golftapir:rpi
     restart: unless-stopped
     volumes:
       - ${HUNCHO_DIR}/statics/dist/.:/usr/share/nginx/dist
