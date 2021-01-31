@@ -1,0 +1,19 @@
+version: "3.2"
+
+services:
+  golftapir:
+    container_name: golftapir
+    image: dallanbhatti/golftapir
+    restart: unless-stopped
+    volumes:
+      - ${HUNCHO_DIR}/statics/dist/.:/usr/share/nginx/dist
+      - ${HUNCHO_DIR}/services/public/.:/usr/share/nginx/public
+      - ${HUNCHO_DIR}/secrets/golftapir/firebase-messaging-sw.js:/usr/share/nginx/public/firebase-messaging-sw.js
+      - ${HUNCHO_DIR}/secrets/golftapir/firebase-messaging-sw.js:/usr/share/nginx/dist/firebase-messaging-sw.js
+    ports:
+      - 80:80
+    networks:
+      - web-net
+networks:
+  web-net:
+    driver: bridge
