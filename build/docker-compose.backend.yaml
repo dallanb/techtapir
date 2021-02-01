@@ -154,6 +154,8 @@ services:
     container_name: league
     image: dallanbhatti/league:qaw
     restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/league:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.league
       - ${HUNCHO_DIR}/secrets/s3/credentials.txt
