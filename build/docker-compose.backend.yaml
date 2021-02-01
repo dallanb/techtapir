@@ -4,6 +4,8 @@ services:
     container_name: account
     image: dallanbhatti/account:qaw
     restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/account:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.account
     healthcheck:
@@ -43,6 +45,8 @@ services:
     container_name: auth
     image: dallanbhatti/auth:qaw
     restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/auth:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.auth
     healthcheck:
@@ -74,6 +78,8 @@ services:
     container_name: contest
     image: dallanbhatti/contest:qaw
     restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/contest:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.contest
       - ${HUNCHO_DIR}/secrets/s3/credentials.txt
@@ -122,6 +128,8 @@ services:
     container_name: course
     image: dallanbhatti/course:qaw
     restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/course:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.course
       - ${HUNCHO_DIR}/secrets/s3/credentials.txt
@@ -224,6 +232,8 @@ services:
     container_name: member
     image: dallanbhatti/member:qaw
     restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/member:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.member
       - ${HUNCHO_DIR}/secrets/s3/credentials.txt
@@ -255,6 +265,8 @@ services:
   notification:
     container_name: notification
     image: dallanbhatti/notification:qaw
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/notification:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.notification
     ports:
@@ -307,6 +319,8 @@ services:
     container_name: score
     image: dallanbhatti/score:qaw
     restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/score:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.score
     healthcheck:
@@ -336,6 +350,8 @@ services:
     container_name: sport
     image: dallanbhatti/sport:qaw
     restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/sport:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.sport
     healthcheck:
@@ -367,6 +383,8 @@ services:
     container_name: wager
     image: dallanbhatti/wager:qaw
     restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/wager:/home/app/migrations
     env_file:
       - ${HUNCHO_DIR}/env/qaw/.env.wager
     healthcheck:
