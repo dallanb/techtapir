@@ -2,6 +2,7 @@
 .idea
 env/prod
 data
+migrations
 secrets
 node_modules
 yarn.lock
