@@ -6,8 +6,8 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
    && docker exec account python manage.py load
 
   # Auth
-  docker exec auth python manage.py reset_db \
-   && docker exec auth python manage.py init
+  docker exec auth python manage.py delete \
+   && docker exec auth python manage.py load
 
   # Contest
   docker exec contest python manage.py delete \
@@ -34,8 +34,8 @@ ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega <<EOF
   docker exec score_mongodb bash /bin/reset-mongo.sh
 
 #  # Sport
-#  docker exec sport python manage.py reset_db \
-#   && docker exec sport python manage.py init
+#  docker exec sport python manage.py delete \
+#   && docker exec sport python manage.py load
 #
   # Wager
   docker exec wager python manage.py delete \
