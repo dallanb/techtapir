@@ -35,6 +35,10 @@ b
 1. `> git remote add other git@github.com:dallanb/flask-sdk.git`
 2. `> git pull other dev --allow-unrelated-histories`
 
+## Diagrams
+[System Component Diagram](https://drive.google.com/file/d/1wI9KgLVSBMGdCZI7l0wpYpSfIZ9m6E2y/view?usp=sharing)
+[System Interaction Diagram](https://drive.google.com/file/d/1I4qd8TWiNAW0mLw97XzvMVPcviF5VnoR/view?usp=sharing)
+
 ## ELK Setup
 
 [deviantony setup](https://github.com/deviantony/docker-elk#initial-setup)
@@ -165,4 +169,5 @@ https://docs.j7k6.org/letsencrypt-haproxy-cloudflare-wildcard-cert/
 
 Due to lack of permissions from the container we must manually create a home directory for mongo that will allow
 for saving of data from the container onto our host machine. To do this we will need to create a directory in data/{env} folder 
-and chown this directory to user and group 999. We will also need to map this directory to volume in container at path /home/mongodb. 
+and chown this directory to user and group 999. We will also need to map this directory to volume in container at path /home/mongodb.
+
