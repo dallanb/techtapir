@@ -36,8 +36,9 @@ b
 2. `> git pull other dev --allow-unrelated-histories`
 
 ## Diagrams
-[System Component Diagram](https://drive.google.com/file/d/1wI9KgLVSBMGdCZI7l0wpYpSfIZ9m6E2y/view?usp=sharing)
-[System Interaction Diagram](https://drive.google.com/file/d/1I4qd8TWiNAW0mLw97XzvMVPcviF5VnoR/view?usp=sharing)
+- [System Component Diagram](https://drive.google.com/file/d/1wI9KgLVSBMGdCZI7l0wpYpSfIZ9m6E2y/view?usp=sharing)
+- [System Interaction Diagram](https://drive.google.com/file/d/1I4qd8TWiNAW0mLw97XzvMVPcviF5VnoR/view?usp=sharing)
+- [Automated Build Overview](https://drive.google.com/file/d/1F-E_JWUe55KcaqDOAZV_Y7XK2gjsSDr4/view?usp=sharing)
 
 ## ELK Setup
 
