@@ -170,3 +170,7 @@ and chown this directory to user and group 999. We will also need to map this di
 ## Diagrams
 https://drive.google.com/file/d/1wI9KgLVSBMGdCZI7l0wpYpSfIZ9m6E2y/view?usp=sharing
 https://drive.google.com/drive/folders/1NhlKEAj2Hg5ODR9GAKWCYDE6L6Lpfo9u?usp=sharing
+
+## AWS Components
+
+Region: Oregon US-WEST 2
