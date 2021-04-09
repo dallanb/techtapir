@@ -177,3 +177,13 @@ and chown this directory to user and group 999. We will also need to map this di
 ## AWS Components
 
 Region: Oregon US-WEST 2
+
+
+## Building Multi-Arch Docker Images
+
+### Background
+Since I develop locally on an x86 processor, but the app will run on an arm64 processor, I need a way to build images
+that are multi-arch. I will use docker buildx for this.
+
+### Tutorial
+ - https://medium.com/@artur.klauser/building-multi-architecture-docker-images-with-buildx-27d80f7e2408
