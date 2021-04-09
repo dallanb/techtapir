@@ -158,6 +158,11 @@ down-kafka:
 					-f build/docker-compose.kafka.yaml \
 					-p kafka down --remove-orphans
 
+down-data:
+	@docker-compose \
+					-f build/docker-compose.data.yaml \
+					-p data down --remove-orphans
+
 down-static:
 	@docker-compose \
 					-f build/docker-compose.static.yaml \
