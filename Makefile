@@ -92,6 +92,12 @@ deploy-kafka:
 					--env-file build/env/.env \
 					-p kafka up --build --remove-orphans -d
 
+deploy-data:
+	@docker-compose \
+					-f build/docker-compose.data.yaml \
+					--env-file build/env/.env \
+					-p data up --build --remove-orphans -d
+
 deploy-web:
 	@docker-compose \
 					-f build/docker-compose.web.yaml \
