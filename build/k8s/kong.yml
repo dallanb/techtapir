@@ -609,7 +609,6 @@ metadata:
   name: kong-admin
   namespace: kong
 spec:
-#  type: NodePort
   ports:
   - name: admin
     port: 8001
@@ -621,7 +620,7 @@ spec:
     protocol: TCP
   selector:
     app: ingress-kong
-# type: ClusterIP
+ type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
