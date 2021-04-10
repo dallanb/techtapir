@@ -652,8 +652,6 @@ spec:
           value: 0.0.0.0:8001,0.0.0.0:8444 ssl
         - name: KONG_PORT_MAPS
           value: 80:8000, 443:8443
-        - name: KONG_ADMIN_LISTEN
-          value: 127.0.0.1:8444 ssl
         - name: KONG_STATUS_LISTEN
           value: 0.0.0.0:8100
         - name: KONG_DATABASE
