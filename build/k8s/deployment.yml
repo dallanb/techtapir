@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: account
+  name: account
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: account
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: account
+    spec:
+      containers:
+      - image: dallanbhatti/account:prod
+        name: account
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-account
+        resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: static
+  name: static
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: static
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: static
+    spec:
+      containers:
+      - image: dallanbhatti/static:prod
+        name: static
+        ports:
+        - containerPort: 80
+        resources: {}
