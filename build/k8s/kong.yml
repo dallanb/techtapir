@@ -781,10 +781,13 @@ metadata:
   name: admin-api
   annotations:
     kubernetes.io/ingress.class: kong
+  namespace: kong
 spec:
   rules:
-  - host: 0.0.0.0:8001
-    http:
+  - http:
       paths:
       - path: /admin-api
+        backend:
+          serviceName: kong-proxy
+          servicePort: 31996
 ---
