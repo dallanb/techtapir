@@ -774,3 +774,17 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
       serviceAccountName: kong-serviceaccount
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: admin-api
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: 0.0.0.0:8001
+    http:
+      paths:
+      - path: /admin-api
+---
