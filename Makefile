@@ -202,6 +202,12 @@ kong-prepare-qaw:
 					--env-file build/env/.env \
 					up --build
 
+kong-prepare-prod:
+	@docker-compose \
+					-f build/prepare/docker-compose.kong.prod.prepare.yaml \
+					--env-file build/env/.env \
+					up --build
+
 kong-prepare-rpi:
 	@docker-compose \
 					-f build/prepare/docker-compose.kong.rpi.prepare.yaml \
