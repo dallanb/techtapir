@@ -620,7 +620,7 @@ spec:
     protocol: TCP
   selector:
     app: ingress-kong
- type: NodePort
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
