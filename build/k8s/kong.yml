@@ -674,6 +674,9 @@ spec:
           value: /dev/stderr
         - name: KONG_PROXY_ERROR_LOG
           value: /dev/stderr
+        envFrom:
+        - secretRef:
+            name: env-kong-secret
         image: kong:2.3
         lifecycle:
           preStop:
