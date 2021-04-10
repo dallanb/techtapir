@@ -789,5 +789,5 @@ spec:
       - path: /admin-api
         backend:
           serviceName: kong-admin
-          servicePort: 8001
+          servicePort: 31998
 ---
