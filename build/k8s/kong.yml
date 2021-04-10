@@ -662,8 +662,11 @@ spec:
           value: "kong"
         - name: KONG_PG_USER
           value: "kong"
-#        - name: KONG_PG_PASSWORD
-#          value: "password"
+        - name: KONG_PG_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: env-kong-secret
+              key: KONG_PG_PASSWORD
         - name: KONG_PG_PORT
           value: "44320"
         - name: KONG_NGINX_WORKER_PROCESSES
@@ -674,9 +677,9 @@ spec:
           value: /dev/stderr
         - name: KONG_PROXY_ERROR_LOG
           value: /dev/stderr
-        envFrom:
-        - secretRef:
-            name: env-kong-secret
+#        envFrom:
+#        - secretRef:
+#            name: env-kong-secret
         image: kong:2.3
         lifecycle:
           preStop:
