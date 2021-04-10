@@ -657,7 +657,7 @@ spec:
         - name: KONG_DATABASE
           value: "postgres"
         - name: KONG_PG_HOST
-          value: 192.168.0.125
+          value: "192.168.0.125"
         - name: KONG_PG_DATABASE
           value: "kong"
         - name: KONG_PG_USER
@@ -665,7 +665,7 @@ spec:
 #        - name: KONG_PG_PASSWORD
 #          value: "password"
         - name: KONG_PG_PORT
-          value: 44320
+          value: "44320"
         - name: KONG_NGINX_WORKER_PROCESSES
           value: "2"
         - name: KONG_ADMIN_ACCESS_LOG
