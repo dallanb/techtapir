@@ -775,6 +775,16 @@ spec:
           timeoutSeconds: 1
       serviceAccountName: kong-serviceaccount
 ---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: admin-key-auth
+  namespace: kong
+config:
+  key_names:
+  - apikey
+plugin: key-auth
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -782,6 +792,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: kong
     konghq.com/strip-path: "true"
+    konghq.com/plugins: admin-key-auth
   namespace: kong
 spec:
   rules:
