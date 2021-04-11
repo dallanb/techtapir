@@ -16,6 +16,21 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  name: auth
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: auth.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: auth
+          servicePort: 50001
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
   name: static
   annotations:
     kubernetes.io/ingress.class: kong
