@@ -781,7 +781,7 @@ metadata:
   name: admin-api
   annotations:
     kubernetes.io/ingress.class: kong
-    konghq.com/strip-path: true
+    konghq.com/strip-path: "true"
   namespace: kong
 spec:
   rules:
