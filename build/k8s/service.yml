@@ -4,6 +4,8 @@ metadata:
   labels:
     app: account
   name: account
+  annotations:
+    konghq.com/plugins: kong-jwt
 spec:
   ports:
   - port: 50000
