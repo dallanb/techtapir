@@ -811,5 +811,5 @@ metadata:
     kubernetes.io/ingress.class: kong
   namespace: kong
 username: konga
-custom_id: 0
+custom_id: "0"
 ---
