@@ -785,14 +785,14 @@ config:
   - apikey
 plugin: key-auth
 ---
-#apiVersion: configuration.konghq.com/v1
-#kind: KongPlugin
-#metadata:
-#  name: kong-jwt
-#config:
-#  secret_is_base64: false
-#  run_on_preflight: false
-#plugin: jwt
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: kong-jwt
+config:
+  secret_is_base64: false
+  run_on_preflight: false
+plugin: jwt
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
