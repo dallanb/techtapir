@@ -813,3 +813,13 @@ metadata:
 username: konga
 custom_id: "0"
 ---
+apiVersion: configuration.konghq.com/v1
+kind: KongConsumer
+metadata:
+  name: auth
+  annotations:
+    kubernetes.io/ingress.class: kong
+  namespace: kong
+username: auth
+custom_id: "1"
+---
