@@ -48,6 +48,15 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
+### ADMINER
+  adminer:
+    container_name: adminer
+    image: adminer:$ADMINER_VERSION
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - data-net
 #volumes:
 #  mailer_volume:
 networks:
