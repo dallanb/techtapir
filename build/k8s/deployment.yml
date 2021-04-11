@@ -18,6 +18,7 @@ spec:
     spec:
       containers:
       - image: dallanbhatti/account:prod
+        imagePullPolicy: Always
         name: account
         ports:
         - containerPort: 5000
@@ -46,6 +47,7 @@ spec:
     spec:
       containers:
       - image: dallanbhatti/auth:prod
+        imagePullPolicy: Always
         name: auth
         ports:
         - containerPort: 5000
@@ -74,6 +76,7 @@ spec:
     spec:
       containers:
       - image: dallanbhatti/static:prod
+        imagePullPolicy: Always
         name: static
         ports:
         - containerPort: 80
