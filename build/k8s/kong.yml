@@ -820,7 +820,8 @@ metadata:
     kubernetes.io/ingress.class: kong
   namespace: kong
 username: konga
-custom_id: "0"
+credentials:
+- konga-apikey
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongConsumer
@@ -830,5 +831,6 @@ metadata:
     kubernetes.io/ingress.class: kong
   namespace: kong
 username: auth
-custom_id: "1"
+credentials:
+- auth-apikey
 ---
