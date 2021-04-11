@@ -803,3 +803,13 @@ spec:
           serviceName: kong-admin
           servicePort: 8001
 ---
+apiVersion: configuration.konghq.com/v1
+kind: KongConsumer
+metadata:
+  name: konga
+  annotations:
+    kubernetes.io/ingress.class: kong
+  namespace: kong
+username: konga
+custom_id: 0
+---
