@@ -104,6 +104,12 @@ deploy-web:
 					--env-file build/env/.env \
 					-p web up --build --remove-orphans -d
 
+deploy-konga:
+	@docker-compose \
+					-f build/docker-compose.konga.yaml \
+					--env-file build/env/.env \
+					-p konga up --build --remove-orphans -d
+
 down:
 	@docker-compose \
 					-f build/docker-compose.yaml \
@@ -172,6 +178,11 @@ down-web:
 	@docker-compose \
 					-f build/docker-compose.web.yaml \
 					-p web down --remove-orphans
+
+down-konga:
+	@docker-compose \
+					-f build/docker-compose.konga.yaml \
+					-p konga down --remove-orphans
 
 elk-prepare:
 	@docker-compose \
