@@ -16,6 +16,10 @@ spec:
       labels:
         app: account
     spec:
+      volumes:
+      - name: account-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc
       containers:
       - image: dallanbhatti/account:prod
         imagePullPolicy: Always
@@ -26,6 +30,9 @@ spec:
         - configMapRef:
             name: env-account
         resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: account-pv-storage
 ---
 apiVersion: apps/v1
 kind: Deployment
