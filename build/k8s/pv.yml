@@ -16,3 +16,22 @@ spec:
   nfs:
     path: /migrations/account
     server: 192.168.0.125
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-auth
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: nfs
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /migrations/auth
+    server: 192.168.0.125

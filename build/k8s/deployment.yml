@@ -52,6 +52,10 @@ spec:
       labels:
         app: auth
     spec:
+      volumes:
+      - name: auth-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-auth
       containers:
       - image: dallanbhatti/auth:prod
         imagePullPolicy: Always
@@ -62,6 +66,9 @@ spec:
         - configMapRef:
             name: env-auth
         resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: auth-pv-storage
 ---
 apiVersion: apps/v1
 kind: Deployment
