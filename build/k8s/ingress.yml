@@ -61,6 +61,21 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  name: league
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: league.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: league
+          servicePort: 50004
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
   name: static
   annotations:
     kubernetes.io/ingress.class: kong

@@ -148,6 +148,44 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+    app: league
+  name: league
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: league
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: league
+    spec:
+      volumes:
+      - name: league-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-league
+      containers:
+      - image: dallanbhatti/league:prod
+        imagePullPolicy: Always
+        name: league
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-league
+        - secretRef:
+            name: s3-credentials
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: league-pv-storage
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
     app: static
   name: static
 spec:
