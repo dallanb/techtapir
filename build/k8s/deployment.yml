@@ -112,6 +112,42 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+    app: course
+  name: course
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: course
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: course
+    spec:
+      volumes:
+      - name: course-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-course
+      containers:
+      - image: dallanbhatti/course:prod
+        imagePullPolicy: Always
+        name: course
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-course
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: course-pv-storage
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
     app: static
   name: static
 spec:

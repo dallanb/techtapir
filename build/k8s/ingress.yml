@@ -46,6 +46,21 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  name: course
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: course.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: course
+          servicePort: 50003
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
   name: static
   annotations:
     kubernetes.io/ingress.class: kong
