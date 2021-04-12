@@ -204,6 +204,20 @@ spec:
       - name: mailer-pv-storage
         persistentVolumeClaim:
           claimName: nfs-pvc-mailer
+      initContainers:
+      - image: dallanbhatti/mailer:prod
+        imagePullPolicy: Always
+        name: mailer
+        envFrom:
+        - configMapRef:
+            name: env-mailer
+        - secretRef:
+            name: mailer-password
+        command: ["sh", "-c", "cp -r /home/app/. /home/shared"]
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/shared"
+            name: mailer-pv-storage
       containers:
       - image: dallanbhatti/mailer:prod
         imagePullPolicy: Always
@@ -216,9 +230,9 @@ spec:
         - secretRef:
             name: mailer-password
         resources: {}
-        volumeMounts:
-          - mountPath: "/home/app"
-            name: mailer-pv-storage
+#        volumeMounts:
+#          - mountPath: "/home/shared"
+#            name: mailer-pv-storage
       - image: dallanbhatti/mailer_web:prod
         imagePullPolicy: Always
         name: mailer-web
