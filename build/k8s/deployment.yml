@@ -19,7 +19,7 @@ spec:
       volumes:
       - name: account-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc
+          claimName: nfs-pvc-account
       containers:
       - image: dallanbhatti/account:prod
         imagePullPolicy: Always
@@ -31,7 +31,7 @@ spec:
             name: env-account
         resources: {}
         volumeMounts:
-          - mountPath: "/home/app/migrations/account"
+          - mountPath: "/home/app/migrations"
             name: account-pv-storage
 ---
 apiVersion: apps/v1

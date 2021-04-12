@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-pv
+  name: nfs-pv-account
 spec:
   capacity:
-    storage: 2Gi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
@@ -14,5 +14,5 @@ spec:
     - loud
     - nfsvers=4
   nfs:
-    path: /
+    path: /data/migrations/account
     server: 192.168.0.125
