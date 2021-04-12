@@ -110,6 +110,12 @@ deploy-konga:
 					--env-file build/env/.env \
 					-p konga up --build --remove-orphans -d
 
+deploy-nfs:
+	@docker-compose \
+					-f build/docker-compose.nfs.yaml \
+					--env-file build/env/.env \
+					-p nfs up --build --remove-orphans -d
+
 down:
 	@docker-compose \
 					-f build/docker-compose.yaml \
@@ -183,6 +189,12 @@ down-konga:
 	@docker-compose \
 					-f build/docker-compose.konga.yaml \
 					-p konga down --remove-orphans
+
+
+down-nfs:
+	@docker-compose \
+					-f build/docker-compose.nfs.yaml \
+					-p nfs down --remove-orphans
 
 elk-prepare:
 	@docker-compose \
