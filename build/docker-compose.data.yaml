@@ -33,6 +33,36 @@ services:
       retries: 20
     networks:
       - data-net
+  contest_cache:
+    container_name: contest_cache
+    image: redis:$REDIS_VERSION
+    restart: unless-stopped
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/contest_cache/redis_data:/var/libs/redis
+      - ${HUNCHO_DIR}/data/prod/contest_cache/redis.conf:/usr/local/etc/redis/redis.conf
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.contest_cache
+    healthcheck:
+      test: [ "CMD", "redis-cli","ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - data-net
+  contest_db:
+    container_name: contest_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/contest_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.contest_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U contest" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - data-net
 ###### KONG
   kong_db:
     container_name: kong_db
