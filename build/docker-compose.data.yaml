@@ -113,6 +113,112 @@ services:
       retries: 20
     networks:
       - data-net
+  member_db:
+    container_name: member_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/member_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.member_db
+    ports:
+      - 54326:5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U member" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - data-net
+  notification_cache:
+    container_name: notification_cache
+    image: redis:$REDIS_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/notification_cache/redis_data:/var/lib/redis
+      - ${HUNCHO_DIR}/data/prod/notification_cache/redis.conf:/usr/local/etc/redis/redis.conf
+      - ${HUNCHO_DIR}/build/bin/reset-redis.sh:/bin/reset-redis.sh
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.notification_cache
+    ports:
+      - 63727:5432
+    networks:
+      - data-net
+  notification_db:
+    container_name: notification_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/notification_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.notification_db
+    ports:
+      - 54327:5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U notification" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - data-net
+  notification_mongodb:
+    container_name: notification_mongodb
+    image: mongo:$MONGO_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/notification_mongodb/data:/data/db
+      - ${HUNCHO_DIR}/data/prod/notification_home:/home/mongodb # this must be manually created and chown'd to 999 https://github.com/docker-library/mongo/issues/323
+      - ${HUNCHO_DIR}/build/bin/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ${HUNCHO_DIR}/build/bin/reset-mongo.sh:/bin/reset-mongo.sh
+    command: [ --auth ]
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.notification_mongodb
+    ports:
+      - 27017:27017
+    networks:
+      - data-net
+  score_mongodb:
+    container_name: score_mongodb
+    image: mongo:$MONGO_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/score_mongodb/data:/data/db
+      - ${HUNCHO_DIR}/data/prod/score_home:/home/mongodb # this must be manually created and chown'd to 999 https://github.com/docker-library/mongo/issues/323
+      - ${HUNCHO_DIR}/build/bin/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ${HUNCHO_DIR}/build/bin/reset-mongo.sh:/bin/reset-mongo.sh
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.score_mongodb
+    ports:
+      - 27018:27017
+    networks:
+      - data-net
+  sport_db:
+    container_name: sport_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/sport_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.sport_db
+    ports:
+      - 54329:5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U sport" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - data-net
+  wager_db:
+    container_name: wager_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/wager_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.wager_db
+    ports:
+      - 54330:5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U wager" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - data-net
 ###### KONG
   kong_db:
     container_name: kong_db
@@ -137,8 +243,6 @@ services:
       - 8080:8080
     networks:
       - data-net
-#volumes:
-#  mailer_volume:
 networks:
   data-net:
     driver: bridge
