@@ -93,6 +93,8 @@ services:
       - ${HUNCHO_DIR}/build/bin/reset-redis.sh:/bin/reset-redis.sh
     env_file:
       - ${HUNCHO_DIR}/env/prod/.env.league_cache
+    ports:
+      - 63724:6372
     networks:
       - data-net
   league_db:
@@ -102,6 +104,8 @@ services:
       - ${HUNCHO_DIR}/data/prod/league_db/data:/var/lib/postgresql/data/
     env_file:
       - ${HUNCHO_DIR}/env/prod/.env.league_db
+    ports:
+      - 54324:5432
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U league" ]
       interval: 10s
