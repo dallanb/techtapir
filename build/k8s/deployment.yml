@@ -221,7 +221,7 @@ spec:
             name: mailer-pv-storage
       - image: dallanbhatti/mailer_web:prod
         imagePullPolicy: Always
-        name: mailer_web
+        name: mailer-web
         ports:
         - containerPort: 80
         resources: {}
