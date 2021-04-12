@@ -14,5 +14,5 @@ spec:
     - loud
     - nfsvers=4
   nfs:
-    path: /data/migrations/account
+    path: /migrations/account
     server: 192.168.0.125
