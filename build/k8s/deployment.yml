@@ -101,7 +101,7 @@ spec:
         envFrom:
         - configMapRef:
             name: env-contest
-          secretRef:
+        - secretRef:
             name: s3-credentials
         resources: {}
         volumeMounts:
