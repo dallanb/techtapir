@@ -83,6 +83,32 @@ services:
       retries: 20
     networks:
       - data-net
+  league_cache:
+    container_name: league_cache
+    image: redis:$REDIS_VERSION
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/league_cache/redis_data:/var/libs/redis
+      - ${HUNCHO_DIR}/data/prod/league_cache/redis.conf:/usr/local/etc/redis/redis.conf
+      - ${HUNCHO_DIR}/build/bin/reset-redis.sh:/bin/reset-redis.sh
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.league_cache
+    networks:
+      - data-net
+  league_db:
+    container_name: league_db
+    image: postgres:$POSTGRES_VERSION
+    volumes:
+      - ${HUNCHO_DIR}/data/prod/league_db/data:/var/lib/postgresql/data/
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.league_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U league" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - data-net
 ###### KONG
   kong_db:
     container_name: kong_db
