@@ -186,6 +186,54 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+    app: mailer
+  name: mailer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mailer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mailer
+    spec:
+      volumes:
+      - name: mailer-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-mailer
+      containers:
+      - image: dallanbhatti/mailer:prod
+        imagePullPolicy: Always
+        name: mailer
+        ports:
+        - containerPort: 9000
+        envFrom:
+        - configMapRef:
+            name: env-mailer
+        - secretRef:
+            name: mailer-password
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app"
+            name: mailer-pv-storage
+      - image: dallanbhatti/mailer_web:prod
+        imagePullPolicy: Always
+        name: mailer_web
+        ports:
+        - containerPort: 80
+        resources: {}
+        volumeMounts:
+          - mountPath: "/var/www/html"
+            name: mailer-pv-storage
+            readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
     app: static
   name: static
 spec:
