@@ -207,7 +207,7 @@ spec:
       initContainers:
       - image: dallanbhatti/mailer:prod
         imagePullPolicy: Always
-        name: mailer
+        name: init-mailer
         envFrom:
         - configMapRef:
             name: env-mailer
