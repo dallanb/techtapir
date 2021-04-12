@@ -74,6 +74,44 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+    app: contest
+  name: contest
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: contest
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: contest
+    spec:
+      volumes:
+      - name: contest-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-contest
+      containers:
+      - image: dallanbhatti/contest:prod
+        imagePullPolicy: Always
+        name: contest
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-contest
+          secretRef:
+            name: s3-credentials
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: contest-pv-storage
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
     app: static
   name: static
 spec:
