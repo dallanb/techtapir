@@ -2,6 +2,7 @@
 .idea
 env/prod
 data
+nfs
 migrations
 secrets
 node_modules
