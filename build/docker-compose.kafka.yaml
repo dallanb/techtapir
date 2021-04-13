@@ -22,7 +22,7 @@ services:
     ports:
       - "2181:2181"
     volumes:
-      - ${HUNCHO_DIR}/data/prod/zookeeper_data:data
+      - ${HUNCHO_DIR}/data/prod/zookeeper_data:/opt/zookeeper-3.4.13/data # keep an eye on this
     env_file:
       - ${HUNCHO_DIR}/env/prod/.env.zookeeper
     networks:
