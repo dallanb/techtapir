@@ -86,7 +86,7 @@ spec:
       paths:
       - backend:
           serviceName: member
-          servicePort: 50005
+          servicePort: 50006
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
