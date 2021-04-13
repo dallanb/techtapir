@@ -443,6 +443,9 @@ spec:
         name: web-pusher
         ports:
         - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: env-web-pusher
         resources: {}
         volumeMounts:
           - mountPath: "/home/app/secrets/firebase.json"
