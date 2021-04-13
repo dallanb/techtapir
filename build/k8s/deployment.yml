@@ -248,6 +248,116 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+    app: member
+  name: member
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: member
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: member
+    spec:
+      volumes:
+      - name: member-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-member
+      containers:
+      - image: dallanbhatti/member:prod
+        imagePullPolicy: Always
+        name: member
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-member
+        - secretRef:
+            name: s3-credentials
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: member-pv-storage
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sport
+  name: sport
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sport
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sport
+    spec:
+      volumes:
+      - name: sport-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-sport
+      containers:
+      - image: dallanbhatti/sport:prod
+        imagePullPolicy: Always
+        name: sport
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-sport
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: sport-pv-storage
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wager
+  name: wager
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wager
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: wager
+    spec:
+      volumes:
+      - name: wager-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-wager
+      containers:
+      - image: dallanbhatti/wager:prod
+        imagePullPolicy: Always
+        name: wager
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-wager
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: wager-pv-storage
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
     app: static
   name: static
 spec:
