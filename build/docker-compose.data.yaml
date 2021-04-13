@@ -43,7 +43,7 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/prod/.env.contest_cache
     ports:
-      - 63722:6372
+      - 63792:6379
     healthcheck:
       test: [ "CMD", "redis-cli","ping" ]
       interval: 10s
@@ -94,7 +94,7 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/prod/.env.league_cache
     ports:
-      - 63724:6372
+      - 63794:6379
     networks:
       - data-net
   league_db:
@@ -139,7 +139,7 @@ services:
     env_file:
       - ${HUNCHO_DIR}/env/prod/.env.notification_cache
     ports:
-      - 63727:5432
+      - 63797:6379
     networks:
       - data-net
   notification_db:
