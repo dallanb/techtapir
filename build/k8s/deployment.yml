@@ -286,6 +286,64 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+    app: notification
+  name: notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: notification
+    spec:
+      containers:
+      - image: dallanbhatti/notification:prod
+        imagePullPolicy: Always
+        name: notification
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: env-notification
+        resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: score
+  name: score
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: score
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: score
+    spec:
+      containers:
+      - image: dallanbhatti/score:prod
+        imagePullPolicy: Always
+        name: score
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: env-score
+        resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
     app: sport
   name: sport
 spec:
@@ -353,6 +411,44 @@ spec:
         volumeMounts:
           - mountPath: "/home/app/migrations"
             name: wager-pv-storage
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web-pusher
+  name: web-pusher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-pusher
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: web-pusher
+    spec:
+      volumes:
+      - name: web-pusher-firebase
+        secret:
+          secretName: secret-firebase
+          items:
+          - key: tech-tapir-firebase-adminsdk-3zrlh-3720b4d899.json
+            path: firebase.json
+      containers:
+      - image: dallanbhatti/web-pusher:prod
+        imagePullPolicy: Always
+        name: web-pusher
+        ports:
+        - containerPort: 3000
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/secrets/firebase.json"
+            subPath: "firebase.json"
+            name: web-pusher-firebase
+            readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment

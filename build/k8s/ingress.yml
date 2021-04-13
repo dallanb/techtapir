@@ -91,6 +91,36 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  name: notification
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: notification.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: notification
+          servicePort: 50007
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: score
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: score.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: score
+          servicePort: 50008
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
   name: sport
   annotations:
     kubernetes.io/ingress.class: kong
