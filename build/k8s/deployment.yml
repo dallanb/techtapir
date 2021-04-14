@@ -82,6 +82,19 @@ spec:
         volumeMounts:
           - mountPath: "/home/app/migrations"
             name: auth-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -120,6 +133,19 @@ spec:
         volumeMounts:
           - mountPath: "/home/app/migrations"
             name: contest-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -156,6 +182,19 @@ spec:
         volumeMounts:
           - mountPath: "/home/app/migrations"
             name: course-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -194,6 +233,19 @@ spec:
         volumeMounts:
           - mountPath: "/home/app/migrations"
             name: league-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -294,6 +346,19 @@ spec:
         volumeMounts:
           - mountPath: "/home/app/migrations"
             name: member-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -323,6 +388,19 @@ spec:
         - configMapRef:
             name: env-notification
         resources: {}
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 3000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 3000
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -352,6 +430,19 @@ spec:
         - configMapRef:
             name: env-score
         resources: {}
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 3000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 3000
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -388,6 +479,19 @@ spec:
         volumeMounts:
           - mountPath: "/home/app/migrations"
             name: sport-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -424,6 +528,19 @@ spec:
         volumeMounts:
           - mountPath: "/home/app/migrations"
             name: wager-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
