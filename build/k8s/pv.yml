@@ -9,6 +9,8 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs
+  claimRef:
+    name: nfs-pvc-account
   mountOptions:
     - loud
     - nfsvers=4
@@ -27,6 +29,8 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs
+  claimRef:
+    name: nfs-pvc-auth
   mountOptions:
     - loud
     - nfsvers=4
@@ -45,6 +49,8 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs
+  claimRef:
+    name: nfs-pvc-contest
   mountOptions:
     - loud
     - nfsvers=4
@@ -63,6 +69,8 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs
+  claimRef:
+    name: nfs-pvc-course
   mountOptions:
     - loud
     - nfsvers=4
@@ -81,6 +89,8 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs
+  claimRef:
+    name: nfs-pvc-league
   mountOptions:
     - loud
     - nfsvers=4
@@ -99,6 +109,8 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs
+  claimRef:
+    name: nfs-pvc-mailer
   mountOptions:
     - loud
     - nfsvers=4
@@ -117,6 +129,8 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs
+  claimRef:
+    name: nfs-pvc-member
   mountOptions:
     - loud
     - nfsvers=4
@@ -135,6 +149,8 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs
+  claimRef:
+    name: nfs-pvc-sport
   mountOptions:
     - loud
     - nfsvers=4
@@ -153,6 +169,8 @@ spec:
   accessModes:
     - ReadWriteMany
   storageClassName: nfs
+  claimRef:
+    name: nfs-pvc-wager
   mountOptions:
     - loud
     - nfsvers=4
