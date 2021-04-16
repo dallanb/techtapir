@@ -10,4 +10,4 @@ roleRef:
   kind: Role
   name: get-pods
   apiGroup: ""
- ---
+---
