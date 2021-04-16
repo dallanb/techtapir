@@ -1,0 +1,1 @@
+Currently, used to redeploy existing servers. For docker approach use 'make deploy-webhook'. For direct SW approach `webhook -hooks /path/to/webhooks/dir/hooks.json -port {port} -verbose -hotreload &`
