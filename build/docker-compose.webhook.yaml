@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     volumes:
       - ${HUNCHO_DIR}/webhooks:/etc/webhook
-      - /home/dallanbhatti/.ssh/github:/home/.ssh/mega
+#      - /home/dallanbhatti/.ssh/github:/home/.ssh/mega
       - ${HUNCHO_DIR}/bin/redeploy.sh:/etc/webhook/redeploy.sh
     command: [ "-verbose", "-hooks=/etc/webhook/hooks.json", "-hotreload" ]
     ports:
