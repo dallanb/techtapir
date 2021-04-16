@@ -8,10 +8,7 @@ echo "Starting Redeploy..."
 echo "Project Name: $PROJECT_NAME"
 echo "Project ENV: $PROJECT_ENV"
 
-ssh -i /home/.ssh/rpi0 -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null super_dallan@192.168.0.200 <<EOF
-  if docker ps --format '{{.Names}}' | grep -w "$PROJECT_NAME" &> /dev/null; then
-    cd /home/dallanbhatti/Documents/Personal/techtapir
-    kubectl rollout restart deployment/$PROJECT_NAME
-  fi
-EOF
+cd /home/dallanbhatti/Documents/Personal/techtapir
+kubectl --user=super_dallan rollout restart deployment/$PROJECT_NAME
+
 echo "...Done Redeploy"
