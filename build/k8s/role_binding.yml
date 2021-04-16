@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+ name: super-get-pods
+subjects:
+- apiGroup: ""
+ kind: User
+ name: super_dallan
+roleRef:
+ apiGroup: ""
+ kind: Role
+ name: get-pods
+ ---
