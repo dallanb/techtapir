@@ -1,0 +1,610 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: account
+  name: account
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: account
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: account
+    spec:
+      volumes:
+      - name: account-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-account
+      containers:
+      - image: dallanbhatti/account:prod
+        imagePullPolicy: Always
+        name: account
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-account
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: account-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: auth
+  name: auth
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auth
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: auth
+    spec:
+      volumes:
+      - name: auth-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-auth
+      containers:
+      - image: dallanbhatti/auth:prod
+        imagePullPolicy: Always
+        name: auth
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-auth
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: auth-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: contest
+  name: contest
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: contest
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: contest
+    spec:
+      volumes:
+      - name: contest-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-contest
+      containers:
+      - image: dallanbhatti/contest:prod
+        imagePullPolicy: Always
+        name: contest
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-contest
+        - secretRef:
+            name: s3-credentials
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: contest-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: course
+  name: course
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: course
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: course
+    spec:
+      volumes:
+      - name: course-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-course
+      containers:
+      - image: dallanbhatti/course:prod
+        imagePullPolicy: Always
+        name: course
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-course
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: course-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: league
+  name: league
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: league
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: league
+    spec:
+      volumes:
+      - name: league-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-league
+      containers:
+      - image: dallanbhatti/league:prod
+        imagePullPolicy: Always
+        name: league
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-league
+        - secretRef:
+            name: s3-credentials
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: league-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mailer
+  name: mailer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mailer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mailer
+    spec:
+      volumes:
+      - name: mailer-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-mailer
+      initContainers:
+      - image: dallanbhatti/mailer:prod
+        imagePullPolicy: Always
+        name: init-mailer
+        envFrom:
+        - configMapRef:
+            name: env-mailer
+        - secretRef:
+            name: mailer-password
+        command: ["sh", "-c", "cp -r /home/app/. /home/shared"]
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/shared"
+            name: mailer-pv-storage
+      containers:
+      - image: dallanbhatti/mailer:prod
+        imagePullPolicy: Always
+        name: mailer
+        ports:
+        - containerPort: 9000
+        envFrom:
+        - configMapRef:
+            name: env-mailer
+        - secretRef:
+            name: mailer-password
+        resources: {}
+#        volumeMounts:
+#          - mountPath: "/home/shared"
+#            name: mailer-pv-storage
+      - image: dallanbhatti/mailer_web:prod
+        imagePullPolicy: Always
+        name: mailer-web
+        ports:
+        - containerPort: 80
+        resources: {}
+        volumeMounts:
+          - mountPath: "/var/www/html"
+            name: mailer-pv-storage
+            readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: member
+  name: member
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: member
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: member
+    spec:
+      volumes:
+      - name: member-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-member
+      containers:
+      - image: dallanbhatti/member:prod
+        imagePullPolicy: Always
+        name: member
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-member
+        - secretRef:
+            name: s3-credentials
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: member-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: notification
+  name: notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: notification
+    spec:
+      containers:
+      - image: dallanbhatti/notification:prod
+        imagePullPolicy: Always
+        name: notification
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: env-notification
+        resources: {}
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 3000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 3000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: score
+  name: score
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: score
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: score
+    spec:
+      containers:
+      - image: dallanbhatti/score:prod
+        imagePullPolicy: Always
+        name: score
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: env-score
+        resources: {}
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 3000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 3000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sport
+  name: sport
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sport
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sport
+    spec:
+      volumes:
+      - name: sport-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-sport
+      containers:
+      - image: dallanbhatti/sport:prod
+        imagePullPolicy: Always
+        name: sport
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-sport
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: sport-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wager
+  name: wager
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wager
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: wager
+    spec:
+      volumes:
+      - name: wager-pv-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc-wager
+      containers:
+      - image: dallanbhatti/wager:prod
+        imagePullPolicy: Always
+        name: wager
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: env-wager
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/migrations"
+            name: wager-pv-storage
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 5
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /ping
+            port: 5000
+          failureThreshold: 30
+          periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web-pusher
+  name: web-pusher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-pusher
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: web-pusher
+    spec:
+      volumes:
+      - name: web-pusher-firebase
+        secret:
+          secretName: secret-firebase
+          items:
+          - key: tech-tapir-firebase-adminsdk-3zrlh-3720b4d899.json
+            path: firebase.json
+      containers:
+      - image: dallanbhatti/web-pusher:prod
+        imagePullPolicy: Always
+        name: web-pusher
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: env-web-pusher
+        resources: {}
+        volumeMounts:
+          - mountPath: "/home/app/secrets/firebase.json"
+            subPath: "firebase.json"
+            name: web-pusher-firebase
+            readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: static
+  name: static
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: static
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: static
+    spec:
+      containers:
+      - image: dallanbhatti/static:prod
+        imagePullPolicy: Always
+        name: static
+        ports:
+        - containerPort: 80
+        resources: {}

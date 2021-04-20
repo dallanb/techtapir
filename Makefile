@@ -92,11 +92,29 @@ deploy-kafka:
 					--env-file build/env/.env \
 					-p kafka up --build --remove-orphans -d
 
+deploy-data:
+	@docker-compose \
+					-f build/docker-compose.data.yaml \
+					--env-file build/env/.env \
+					-p data up --build --remove-orphans -d
+
 deploy-web:
 	@docker-compose \
 					-f build/docker-compose.web.yaml \
 					--env-file build/env/.env \
 					-p web up --build --remove-orphans -d
+
+deploy-konga:
+	@docker-compose \
+					-f build/docker-compose.konga.yaml \
+					--env-file build/env/.env \
+					-p konga up --build --remove-orphans -d
+
+deploy-nfs:
+	@docker-compose \
+					-f build/docker-compose.nfs.yaml \
+					--env-file build/env/.env \
+					-p nfs up --build --remove-orphans -d
 
 down:
 	@docker-compose \
@@ -152,6 +170,11 @@ down-kafka:
 					-f build/docker-compose.kafka.yaml \
 					-p kafka down --remove-orphans
 
+down-data:
+	@docker-compose \
+					-f build/docker-compose.data.yaml \
+					-p data down --remove-orphans
+
 down-static:
 	@docker-compose \
 					-f build/docker-compose.static.yaml \
@@ -161,6 +184,17 @@ down-web:
 	@docker-compose \
 					-f build/docker-compose.web.yaml \
 					-p web down --remove-orphans
+
+down-konga:
+	@docker-compose \
+					-f build/docker-compose.konga.yaml \
+					-p konga down --remove-orphans
+
+
+down-nfs:
+	@docker-compose \
+					-f build/docker-compose.nfs.yaml \
+					-p nfs down --remove-orphans
 
 elk-prepare:
 	@docker-compose \
@@ -188,6 +222,12 @@ kong-prepare:
 kong-prepare-qaw:
 	@docker-compose \
 					-f build/prepare/docker-compose.kong.qaw.prepare.yaml \
+					--env-file build/env/.env \
+					up --build
+
+kong-prepare-prod:
+	@docker-compose \
+					-f build/prepare/docker-compose.kong.prod.prepare.yaml \
 					--env-file build/env/.env \
 					up --build
 

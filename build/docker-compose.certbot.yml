@@ -1,0 +1,9 @@
+version: '2'
+services:
+  certbot:
+    container_name: certbot
+    image: certbot/dns-cloudflare
+    command: certonly --dns-cloudflare --dns-cloudflare-credentials /cloudflare.ini -m dallan.bhatti@techtapir.com --agree-tos --no-eff-email --dns-cloudflare-propagation-seconds 20 -d techtapir.com -d *.techtapir.com
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /root/.secrets/cloudflare.ini:/cloudflare.ini

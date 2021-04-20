@@ -8,14 +8,7 @@ echo "Starting Redeploy..."
 echo "Project Name: $PROJECT_NAME"
 echo "Project ENV: $PROJECT_ENV"
 
-ssh -i /home/.ssh/mega -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null super_dallan@192.168.0.150 <<EOF
-  if docker ps --format '{{.Names}}' | grep -w "$PROJECT_NAME" &> /dev/null; then
-    cd /home/dallanbhatti/Documents/Personal/techtapir
-    docker pull dallanbhatti/$PROJECT_NAME:$PROJECT_ENV
-    docker stop $PROJECT_NAME
-    docker container rm $PROJECT_NAME
-    docker system prune -f
-    docker-compose -f build/docker-compose.backend.yaml --env-file build/env/.env -p backend up -d $PROJECT_NAME
-  fi
-EOF
+cd /home/dallanbhatti/Documents/Personal/techtapir
+kubectl --user=super_dallan rollout restart deployment/$PROJECT_NAME
+
 echo "...Done Redeploy"

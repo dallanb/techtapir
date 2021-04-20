@@ -1,8 +1,7 @@
 [
   {
     "id": "redeploy",
-    "execute-command": "redeploy.sh",
-    "command-working-directory": "/etc/webhook",
+    "execute-command": "/home/dallanbhatti/Documents/Personal/techtapir/bin/redeploy.sh",
     "pass-arguments-to-command": [
       {
         "source": "payload",

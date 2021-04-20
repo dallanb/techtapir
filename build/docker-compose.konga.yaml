@@ -1,0 +1,10 @@
+version: '3.2'
+services:
+  konga:
+    container_name: konga
+    image: pantsel/konga:$KONGA_VERSION
+    restart: unless-stopped
+    env_file:
+      - ${HUNCHO_DIR}/env/prod/.env.konga
+    ports:
+      - 30001:1337

@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+  nfs:
+    container_name: nfs
+    image: itsthenetwork/nfs-server-alpine:$NFS_VERSION
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - SHARED_DIRECTORY=/data
+    volumes:
+      - ${HUNCHO_DIR}/nfs:/data
+    ports:
+      - 2049:2049
+    networks:
+      - nfs-net
+networks:
+  nfs-net:
+    driver: bridge

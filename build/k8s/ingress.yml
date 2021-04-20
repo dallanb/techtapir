@@ -1,0 +1,165 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: account
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: account.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: account
+          servicePort: 50000
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: auth
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: auth.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: auth
+          servicePort: 50001
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: contest
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: contest.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: contest
+          servicePort: 50002
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: course
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: course.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: course
+          servicePort: 50003
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: league
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: league.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: league
+          servicePort: 50004
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: member
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: member.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: member
+          servicePort: 50006
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: notification
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: notification.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: notification
+          servicePort: 50007
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: score
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: score.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: score
+          servicePort: 50008
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sport
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: sport.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: sport
+          servicePort: 50009
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wager
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - host: wager.techtapir.com
+    http:
+      paths:
+      - backend:
+          serviceName: wager
+          servicePort: 50010
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: static
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: static
+          servicePort: 40000
+---

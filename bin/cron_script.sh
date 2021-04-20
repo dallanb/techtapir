@@ -1,4 +1,5 @@
 #!/bin/bash
 
-ssh -i /home/dallanbhatti/.ssh/github super_dallan@mega 'docker exec contest python manage.py check_active'
-exit
+pod=$(kubectl --user=super_dallan get pod -l app=contest -o jsonpath="{.items[0].metadata.name}")
+kubectl --user=super_dallan exec $pod -it -- python manage.py check_active
+

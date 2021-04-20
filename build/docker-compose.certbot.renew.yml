@@ -1,0 +1,9 @@
+version: '2'
+services:
+  certbot:
+    container_name: certbot
+    image: certbot/dns-cloudflare
+    command: renew
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /root/.secrets/cloudflare.ini:/cloudflare.ini
