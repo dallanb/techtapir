@@ -661,7 +661,7 @@ spec:
         - name: KONG_DATABASE
           value: "postgres"
         - name: KONG_PG_HOST
-          value: "192.168.0.125"
+          value: "10.0.0.125"
         - name: KONG_PG_DATABASE
           value: "kong"
         - name: KONG_PG_USER
