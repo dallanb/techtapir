@@ -203,7 +203,7 @@ curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-rabbitmq",
-  "url": "http://192.168.0.198:15672"
+  "url": "http://10.0.0.198:15672"
 }'
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-rabbitmq/routes/' \
