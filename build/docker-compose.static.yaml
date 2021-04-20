@@ -1,15 +1,5 @@
 version: '3.2'
 services:
-  konga:
-    container_name: konga
-    image: pantsel/konga:$KONGA_VERSION
-    restart: unless-stopped
-    env_file:
-      - ${HUNCHO_DIR}/env/qaw/.env.konga
-    ports:
-      - 30001:1337
-    networks:
-      - static-net
   static:
     container_name: static
     image: dallanbhatti/static:latest
@@ -17,7 +7,7 @@ services:
     volumes:
       - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
     ports:
-      - 30000:80
+      - 8080:80
     networks:
       - static-net
 networks:
