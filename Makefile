@@ -116,6 +116,18 @@ deploy-nfs:
 					--env-file build/env/.env \
 					-p nfs up --build --remove-orphans -d
 
+deploy-certbot:
+	@docker-compose \
+					-f build/docker-compose.certbot.yaml \
+					--env-file build/env/.env \
+					-p certbot up --build --remove-orphans -d
+
+deploy-certbot-renew:
+	@docker-compose \
+					-f build/docker-compose.certbot.renew.yaml \
+					--env-file build/env/.env \
+					-p certbot up --build --remove-orphans -d
+
 down:
 	@docker-compose \
 					-f build/docker-compose.yaml \
