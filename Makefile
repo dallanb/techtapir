@@ -180,7 +180,7 @@ down-webhook:
 down-kafka:
 	@docker-compose \
 					-f build/docker-compose.kafka.yaml \
-					-p kafka down --remove-orphans
+					-p kafka down -v --remove-orphans
 
 down-data:
 	@docker-compose \
