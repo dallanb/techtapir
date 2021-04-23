@@ -8,7 +8,7 @@ echo "Starting Redeploy..."
 echo "Project Name: $PROJECT_NAME"
 echo "Project ENV: $PROJECT_ENV"
 
-ssh -i /home/.ssh/mega -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null super_dallan@192.168.0.150 <<EOF
+ssh -i /home/.ssh/mega -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null super_dallan@10.0.0.150 <<EOF
   if docker ps --format '{{.Names}}' | grep -w "$PROJECT_NAME" &> /dev/null; then
     cd /home/dallanbhatti/Documents/Personal/techtapir
     docker pull dallanbhatti/$PROJECT_NAME:$PROJECT_ENV

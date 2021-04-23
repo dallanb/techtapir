@@ -9,6 +9,6 @@ echo "Project Name: $PROJECT_NAME"
 echo "Project ENV: $PROJECT_ENV"
 
 cd /home/dallanbhatti/Documents/Personal/techtapir
-kubectl --user=super_dallan rollout restart deployment/$PROJECT_NAME
+kubectl rollout restart deployment/$PROJECT_NAME
 
 echo "...Done Redeploy"

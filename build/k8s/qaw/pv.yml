@@ -1,0 +1,180 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-account
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+#  claimRef:
+#    name: nfs-pvc-account
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /migrations/account
+    server: 10.0.0.125
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-auth
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+#  claimRef:
+#    name: nfs-pvc-auth
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /migrations/auth
+    server: 10.0.0.125
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-contest
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+#  claimRef:
+#    name: nfs-pvc-contest
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /migrations/contest
+    server: 10.0.0.125
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-course
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+#  claimRef:
+#    name: nfs-pvc-course
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /migrations/course
+    server: 10.0.0.125
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-league
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+#  claimRef:
+#    name: nfs-pvc-league
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /migrations/league
+    server: 10.0.0.125
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-mailer
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+#  claimRef:
+#    name: nfs-pvc-mailer
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /mailer
+    server: 10.0.0.125
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-member
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+#  claimRef:
+#    name: nfs-pvc-member
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /migrations/member
+    server: 10.0.0.125
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-sport
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+#  claimRef:
+#    name: nfs-pvc-sport
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /migrations/sport
+    server: 10.0.0.125
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-wager
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: nfs
+#  claimRef:
+#    name: nfs-pvc-wager
+  mountOptions:
+    - loud
+    - nfsvers=4
+  nfs:
+    path: /migrations/wager
+    server: 10.0.0.125
+---
