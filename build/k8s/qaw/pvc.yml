@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc-qaw-account
+  name: nfs-pvc-account
   namespace: qaw
 spec:
   storageClassName: nfs
@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc-qaw-auth
+  name: nfs-pvc-auth
   namespace: qaw
 spec:
   storageClassName: nfs
@@ -29,7 +29,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc-qaw-contest
+  name: nfs-pvc-contest
   namespace: qaw
 spec:
   storageClassName: nfs
@@ -43,7 +43,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc-qaw-course
+  name: nfs-pvc-course
   namespace: qaw
 spec:
   storageClassName: nfs
@@ -57,7 +57,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc-qaw-league
+  name: nfs-pvc-league
   namespace: qaw
 spec:
   storageClassName: nfs
@@ -71,7 +71,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc-qaw-mailer
+  name: nfs-pvc-mailer
   namespace: qaw
 spec:
   storageClassName: nfs
@@ -85,7 +85,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc-qaw-member
+  name: nfs-pvc-member
   namespace: qaw
 spec:
   storageClassName: nfs
@@ -99,7 +99,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc-qaw-sport
+  name: nfs-pvc-sport
   namespace: qaw
 spec:
   storageClassName: nfs
@@ -113,7 +113,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc-qaw-wager
+  name: nfs-pvc-wager
   namespace: qaw
 spec:
   storageClassName: nfs
