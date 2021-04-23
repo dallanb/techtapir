@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: account
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -17,6 +18,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: auth
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -32,6 +34,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: contest
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -47,6 +50,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: course
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -62,6 +66,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: league
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -77,6 +82,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: member
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -92,6 +98,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: notification
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -107,6 +114,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: score
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -122,6 +130,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: sport
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -137,6 +146,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: wager
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
@@ -152,6 +162,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: static
+  namespace: prod
   annotations:
     kubernetes.io/ingress.class: kong
 spec:

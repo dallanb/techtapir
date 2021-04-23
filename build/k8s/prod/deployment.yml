@@ -4,6 +4,7 @@ metadata:
   labels:
     app: account
   name: account
+  namespace: prod
 spec:
   replicas: 2
   selector:
@@ -53,6 +54,7 @@ metadata:
   labels:
     app: auth
   name: auth
+  namespace: prod
 spec:
   replicas: 2
   selector:
@@ -102,6 +104,7 @@ metadata:
   labels:
     app: contest
   name: contest
+  namespace: prod
 spec:
   replicas: 2
   selector:
@@ -153,6 +156,7 @@ metadata:
   labels:
     app: course
   name: course
+  namespace: prod
 spec:
   replicas: 2
   selector:
@@ -202,6 +206,7 @@ metadata:
   labels:
     app: league
   name: league
+  namespace: prod
 spec:
   replicas: 2
   selector:
@@ -253,6 +258,7 @@ metadata:
   labels:
     app: mailer
   name: mailer
+  namespace: prod
 spec:
   replicas: 1
   selector:
@@ -315,6 +321,7 @@ metadata:
   labels:
     app: member
   name: member
+  namespace: prod
 spec:
   replicas: 2
   selector:
@@ -366,6 +373,7 @@ metadata:
   labels:
     app: notification
   name: notification
+  namespace: prod
 spec:
   replicas: 1
   selector:
@@ -408,6 +416,7 @@ metadata:
   labels:
     app: score
   name: score
+  namespace: prod
 spec:
   replicas: 2
   selector:
@@ -450,6 +459,7 @@ metadata:
   labels:
     app: sport
   name: sport
+  namespace: prod
 spec:
   replicas: 2
   selector:
@@ -499,6 +509,7 @@ metadata:
   labels:
     app: wager
   name: wager
+  namespace: prod
 spec:
   replicas: 2
   selector:
@@ -548,6 +559,7 @@ metadata:
   labels:
     app: web-pusher
   name: web-pusher
+  namespace: prod
 spec:
   replicas: 1
   selector:
@@ -589,6 +601,7 @@ metadata:
   labels:
     app: static
   name: static
+  namespace: prod
 spec:
   replicas: 1
   selector:

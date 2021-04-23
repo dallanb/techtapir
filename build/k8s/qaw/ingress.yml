@@ -12,7 +12,7 @@ spec:
       paths:
       - backend:
           serviceName: account
-          servicePort: 51000
+          servicePort: 50000
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -28,7 +28,7 @@ spec:
       paths:
       - backend:
           serviceName: auth
-          servicePort: 51001
+          servicePort: 50001
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -44,7 +44,7 @@ spec:
       paths:
       - backend:
           serviceName: contest
-          servicePort: 51002
+          servicePort: 50002
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -60,7 +60,7 @@ spec:
       paths:
       - backend:
           serviceName: course
-          servicePort: 51003
+          servicePort: 50003
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -76,7 +76,7 @@ spec:
       paths:
       - backend:
           serviceName: league
-          servicePort: 51004
+          servicePort: 50004
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -92,7 +92,7 @@ spec:
       paths:
       - backend:
           serviceName: member
-          servicePort: 51006
+          servicePort: 50006
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -108,7 +108,7 @@ spec:
       paths:
       - backend:
           serviceName: notification
-          servicePort: 51007
+          servicePort: 50007
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -124,7 +124,7 @@ spec:
       paths:
       - backend:
           serviceName: score
-          servicePort: 51008
+          servicePort: 50008
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -140,7 +140,7 @@ spec:
       paths:
       - backend:
           serviceName: sport
-          servicePort: 51009
+          servicePort: 50009
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -156,7 +156,7 @@ spec:
       paths:
       - backend:
           serviceName: wager
-          servicePort: 51010
+          servicePort: 50010
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -172,5 +172,5 @@ spec:
       paths:
       - backend:
           serviceName: static
-          servicePort: 41000
+          servicePort: 40000
 ---

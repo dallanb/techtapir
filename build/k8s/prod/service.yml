@@ -4,6 +4,7 @@ metadata:
   labels:
     app: account
   name: account
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -20,6 +21,7 @@ metadata:
   labels:
     app: auth
   name: auth
+  namespace: prod
 spec:
   ports:
   - port: 50001
@@ -34,6 +36,7 @@ metadata:
   labels:
     app: contest
   name: contest
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -50,6 +53,7 @@ metadata:
   labels:
     app: course
   name: course
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -66,6 +70,7 @@ metadata:
   labels:
     app: league
   name: league
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -82,6 +87,7 @@ metadata:
   labels:
     app: mailer
   name: mailer
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -98,6 +104,7 @@ metadata:
   labels:
     app: member
   name: member
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -114,6 +121,7 @@ metadata:
   labels:
     app: notification
   name: notification
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -130,6 +138,7 @@ metadata:
   labels:
     app: score
   name: score
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -146,6 +155,7 @@ metadata:
   labels:
     app: sport
   name: sport
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -162,6 +172,7 @@ metadata:
   labels:
     app: wager
   name: wager
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -178,6 +189,7 @@ metadata:
   labels:
     app: web-pusher
   name: web-pusher
+  namespace: prod
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
@@ -194,6 +206,7 @@ metadata:
   labels:
     app: static
   name: static
+  namespace: prod
 spec:
   ports:
   - port: 40000

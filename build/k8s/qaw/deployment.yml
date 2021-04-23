@@ -20,7 +20,7 @@ spec:
       volumes:
       - name: account-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc-account
+          claimName: nfs-pvc-qaw-account
       containers:
       - image: dallanbhatti/account:qaw
         imagePullPolicy: Always
@@ -70,7 +70,7 @@ spec:
       volumes:
       - name: auth-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc-auth
+          claimName: nfs-pvc-qaw-auth
       containers:
       - image: dallanbhatti/auth:qaw
         imagePullPolicy: Always
@@ -120,7 +120,7 @@ spec:
       volumes:
       - name: contest-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc-contest
+          claimName: nfs-pvc-qaw-contest
       containers:
       - image: dallanbhatti/contest:qaw
         imagePullPolicy: Always
@@ -172,7 +172,7 @@ spec:
       volumes:
       - name: course-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc-course
+          claimName: nfs-pvc-qaw-course
       containers:
       - image: dallanbhatti/course:qaw
         imagePullPolicy: Always
@@ -222,7 +222,7 @@ spec:
       volumes:
       - name: league-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc-league
+          claimName: nfs-pvc-qaw-league
       containers:
       - image: dallanbhatti/league:qaw
         imagePullPolicy: Always
@@ -274,7 +274,7 @@ spec:
       volumes:
       - name: mailer-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc-mailer
+          claimName: nfs-pvc-qaw-mailer
       initContainers:
       - image: dallanbhatti/mailer:qaw
         imagePullPolicy: Always
@@ -337,7 +337,7 @@ spec:
       volumes:
       - name: member-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc-member
+          claimName: nfs-pvc-qaw-member
       containers:
       - image: dallanbhatti/member:qaw
         imagePullPolicy: Always
@@ -475,7 +475,7 @@ spec:
       volumes:
       - name: sport-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc-sport
+          claimName: nfs-pvc-qaw-sport
       containers:
       - image: dallanbhatti/sport:qaw
         imagePullPolicy: Always
@@ -525,7 +525,7 @@ spec:
       volumes:
       - name: wager-pv-storage
         persistentVolumeClaim:
-          claimName: nfs-pvc-wager
+          claimName: nfs-pvc-qaw-wager
       containers:
       - image: dallanbhatti/wager:qaw
         imagePullPolicy: Always
