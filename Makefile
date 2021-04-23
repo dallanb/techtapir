@@ -98,6 +98,12 @@ deploy-data:
 					--env-file build/env/.env \
 					-p data up --build --remove-orphans -d
 
+deploy-data-qaw:
+	@docker-compose \
+					-f build/docker-compose.qaw.data.yaml \
+					--env-file build/env/.env \
+					-p data up --build --remove-orphans -d
+
 deploy-web:
 	@docker-compose \
 					-f build/docker-compose.web.yaml \
@@ -185,6 +191,11 @@ down-kafka:
 down-data:
 	@docker-compose \
 					-f build/docker-compose.data.yaml \
+					-p data down --remove-orphans
+
+down-data-qaw:
+	@docker-compose \
+					-f build/docker-compose.data.qaw.yaml \
 					-p data down --remove-orphans
 
 down-static:
