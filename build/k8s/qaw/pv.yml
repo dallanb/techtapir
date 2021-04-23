@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-pv-account
+  namespace: qaw
 spec:
   capacity:
     storage: 1Gi
@@ -16,12 +17,13 @@ spec:
     - nfsvers=4
   nfs:
     path: /migrations/account
-    server: 10.0.0.125
+    server: 10.0.0.150
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-pv-auth
+  namespace: qaw
 spec:
   capacity:
     storage: 1Gi
@@ -36,12 +38,13 @@ spec:
     - nfsvers=4
   nfs:
     path: /migrations/auth
-    server: 10.0.0.125
+    server: 10.0.0.150
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-pv-contest
+  namespace: qaw
 spec:
   capacity:
     storage: 1Gi
@@ -56,12 +59,13 @@ spec:
     - nfsvers=4
   nfs:
     path: /migrations/contest
-    server: 10.0.0.125
+    server: 10.0.0.150
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-pv-course
+  namespace: qaw
 spec:
   capacity:
     storage: 1Gi
@@ -76,12 +80,13 @@ spec:
     - nfsvers=4
   nfs:
     path: /migrations/course
-    server: 10.0.0.125
+    server: 10.0.0.150
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-pv-league
+  namespace: qaw
 spec:
   capacity:
     storage: 1Gi
@@ -96,12 +101,13 @@ spec:
     - nfsvers=4
   nfs:
     path: /migrations/league
-    server: 10.0.0.125
+    server: 10.0.0.150
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-pv-mailer
+  namespace: qaw
 spec:
   capacity:
     storage: 1Gi
@@ -116,12 +122,13 @@ spec:
     - nfsvers=4
   nfs:
     path: /mailer
-    server: 10.0.0.125
+    server: 10.0.0.150
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-pv-member
+  namespace: qaw
 spec:
   capacity:
     storage: 1Gi
@@ -136,12 +143,13 @@ spec:
     - nfsvers=4
   nfs:
     path: /migrations/member
-    server: 10.0.0.125
+    server: 10.0.0.150
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-pv-sport
+  namespace: qaw
 spec:
   capacity:
     storage: 1Gi
@@ -156,12 +164,13 @@ spec:
     - nfsvers=4
   nfs:
     path: /migrations/sport
-    server: 10.0.0.125
+    server: 10.0.0.150
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: nfs-pv-wager
+  namespace: qaw
 spec:
   capacity:
     storage: 1Gi
@@ -176,5 +185,5 @@ spec:
     - nfsvers=4
   nfs:
     path: /migrations/wager
-    server: 10.0.0.125
+    server: 10.0.0.150
 ---

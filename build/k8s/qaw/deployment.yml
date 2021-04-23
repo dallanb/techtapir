@@ -6,7 +6,7 @@ metadata:
   name: account
   namespace: qaw
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: account
@@ -22,7 +22,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc-account
       containers:
-      - image: dallanbhatti/account:prod
+      - image: dallanbhatti/account:qaw
         imagePullPolicy: Always
         name: account
         ports:
@@ -54,8 +54,9 @@ metadata:
   labels:
     app: auth
   name: auth
+  namespace: qaw
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: auth
@@ -71,7 +72,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc-auth
       containers:
-      - image: dallanbhatti/auth:prod
+      - image: dallanbhatti/auth:qaw
         imagePullPolicy: Always
         name: auth
         ports:
@@ -103,8 +104,9 @@ metadata:
   labels:
     app: contest
   name: contest
+  namespace: qaw
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: contest
@@ -120,7 +122,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc-contest
       containers:
-      - image: dallanbhatti/contest:prod
+      - image: dallanbhatti/contest:qaw
         imagePullPolicy: Always
         name: contest
         ports:
@@ -154,8 +156,9 @@ metadata:
   labels:
     app: course
   name: course
+  namespace: qaw
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: course
@@ -171,7 +174,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc-course
       containers:
-      - image: dallanbhatti/course:prod
+      - image: dallanbhatti/course:qaw
         imagePullPolicy: Always
         name: course
         ports:
@@ -203,8 +206,9 @@ metadata:
   labels:
     app: league
   name: league
+  namespace: qaw
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: league
@@ -220,7 +224,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc-league
       containers:
-      - image: dallanbhatti/league:prod
+      - image: dallanbhatti/league:qaw
         imagePullPolicy: Always
         name: league
         ports:
@@ -254,6 +258,7 @@ metadata:
   labels:
     app: mailer
   name: mailer
+  namespace: qaw
 spec:
   replicas: 1
   selector:
@@ -271,7 +276,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc-mailer
       initContainers:
-      - image: dallanbhatti/mailer:prod
+      - image: dallanbhatti/mailer:qaw
         imagePullPolicy: Always
         name: init-mailer
         envFrom:
@@ -285,7 +290,7 @@ spec:
           - mountPath: "/home/shared"
             name: mailer-pv-storage
       containers:
-      - image: dallanbhatti/mailer:prod
+      - image: dallanbhatti/mailer:qaw
         imagePullPolicy: Always
         name: mailer
         ports:
@@ -299,7 +304,7 @@ spec:
 #        volumeMounts:
 #          - mountPath: "/home/shared"
 #            name: mailer-pv-storage
-      - image: dallanbhatti/mailer_web:prod
+      - image: dallanbhatti/mailer_web:qaw
         imagePullPolicy: Always
         name: mailer-web
         ports:
@@ -316,8 +321,9 @@ metadata:
   labels:
     app: member
   name: member
+  namespace: qaw
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: member
@@ -333,7 +339,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc-member
       containers:
-      - image: dallanbhatti/member:prod
+      - image: dallanbhatti/member:qaw
         imagePullPolicy: Always
         name: member
         ports:
@@ -367,6 +373,7 @@ metadata:
   labels:
     app: notification
   name: notification
+  namespace: qaw
 spec:
   replicas: 1
   selector:
@@ -380,7 +387,7 @@ spec:
         app: notification
     spec:
       containers:
-      - image: dallanbhatti/notification:prod
+      - image: dallanbhatti/notification:qaw
         imagePullPolicy: Always
         name: notification
         ports:
@@ -409,8 +416,9 @@ metadata:
   labels:
     app: score
   name: score
+  namespace: qaw
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: score
@@ -422,7 +430,7 @@ spec:
         app: score
     spec:
       containers:
-      - image: dallanbhatti/score:prod
+      - image: dallanbhatti/score:qaw
         imagePullPolicy: Always
         name: score
         ports:
@@ -451,8 +459,9 @@ metadata:
   labels:
     app: sport
   name: sport
+  namespace: qaw
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: sport
@@ -468,7 +477,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc-sport
       containers:
-      - image: dallanbhatti/sport:prod
+      - image: dallanbhatti/sport:qaw
         imagePullPolicy: Always
         name: sport
         ports:
@@ -500,8 +509,9 @@ metadata:
   labels:
     app: wager
   name: wager
+  namespace: qaw
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: wager
@@ -517,7 +527,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc-wager
       containers:
-      - image: dallanbhatti/wager:prod
+      - image: dallanbhatti/wager:qaw
         imagePullPolicy: Always
         name: wager
         ports:
@@ -549,6 +559,7 @@ metadata:
   labels:
     app: web-pusher
   name: web-pusher
+  namespace: qaw
 spec:
   replicas: 1
   selector:
@@ -569,7 +580,7 @@ spec:
           - key: tech-tapir-firebase-adminsdk-3zrlh-3720b4d899.json
             path: firebase.json
       containers:
-      - image: dallanbhatti/web-pusher:prod
+      - image: dallanbhatti/web-pusher:qaw
         imagePullPolicy: Always
         name: web-pusher
         ports:
@@ -590,6 +601,7 @@ metadata:
   labels:
     app: static
   name: static
+  namespace: qaw
 spec:
   replicas: 1
   selector:
@@ -603,7 +615,7 @@ spec:
         app: static
     spec:
       containers:
-      - image: dallanbhatti/static:prod
+      - image: dallanbhatti/static:qaw
         imagePullPolicy: Always
         name: static
         ports:
