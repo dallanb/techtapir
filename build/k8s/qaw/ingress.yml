@@ -2,164 +2,175 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: account
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: account.techtapir.com
+  - host: account.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: account
-          servicePort: 50000
+          servicePort: 51000
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: auth
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: auth.techtapir.com
+  - host: auth.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: auth
-          servicePort: 50001
+          servicePort: 51001
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: contest
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: contest.techtapir.com
+  - host: contest.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: contest
-          servicePort: 50002
+          servicePort: 51002
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: course
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: course.techtapir.com
+  - host: course.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: course
-          servicePort: 50003
+          servicePort: 51003
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: league
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: league.techtapir.com
+  - host: league.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: league
-          servicePort: 50004
+          servicePort: 51004
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: member
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: member.techtapir.com
+  - host: member.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: member
-          servicePort: 50006
+          servicePort: 51006
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: notification
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: notification.techtapir.com
+  - host: notification.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: notification
-          servicePort: 50007
+          servicePort: 51007
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: score
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: score.techtapir.com
+  - host: score.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: score
-          servicePort: 50008
+          servicePort: 51008
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: sport
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: sport.techtapir.com
+  - host: sport.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: sport
-          servicePort: 50009
+          servicePort: 51009
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: wager
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: wager.techtapir.com
+  - host: wager.qaw.techtapir.com
     http:
       paths:
       - backend:
           serviceName: wager
-          servicePort: 50010
+          servicePort: 51010
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: static
+  namespace: qaw
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - http:
+  - host: qaw.techtapir.com
+    http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: static
-          servicePort: 40000
+          servicePort: 41000
 ---

@@ -4,11 +4,12 @@ metadata:
   labels:
     app: account
   name: account
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50000
+  - port: 51000
     protocol: TCP
     targetPort: 5000
   selector:
@@ -20,9 +21,10 @@ metadata:
   labels:
     app: auth
   name: auth
+  namespace: qaw
 spec:
   ports:
-  - port: 50001
+  - port: 51001
     protocol: TCP
     targetPort: 5000
   selector:
@@ -34,11 +36,12 @@ metadata:
   labels:
     app: contest
   name: contest
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50002
+  - port: 51002
     protocol: TCP
     targetPort: 5000
   selector:
@@ -50,11 +53,12 @@ metadata:
   labels:
     app: course
   name: course
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50003
+  - port: 51003
     protocol: TCP
     targetPort: 5000
   selector:
@@ -66,11 +70,12 @@ metadata:
   labels:
     app: league
   name: league
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50004
+  - port: 51004
     protocol: TCP
     targetPort: 5000
   selector:
@@ -82,11 +87,12 @@ metadata:
   labels:
     app: mailer
   name: mailer
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50005
+  - port: 51005
     protocol: TCP
     targetPort: 80
   selector:
@@ -98,11 +104,12 @@ metadata:
   labels:
     app: member
   name: member
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50006
+  - port: 51006
     protocol: TCP
     targetPort: 5000
   selector:
@@ -114,11 +121,12 @@ metadata:
   labels:
     app: notification
   name: notification
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50007
+  - port: 51007
     protocol: TCP
     targetPort: 3000
   selector:
@@ -130,11 +138,12 @@ metadata:
   labels:
     app: score
   name: score
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50008
+  - port: 51008
     protocol: TCP
     targetPort: 3000
   selector:
@@ -146,11 +155,12 @@ metadata:
   labels:
     app: sport
   name: sport
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50009
+  - port: 51009
     protocol: TCP
     targetPort: 5000
   selector:
@@ -162,11 +172,12 @@ metadata:
   labels:
     app: wager
   name: wager
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50010
+  - port: 51010
     protocol: TCP
     targetPort: 5000
   selector:
@@ -178,11 +189,12 @@ metadata:
   labels:
     app: web-pusher
   name: web-pusher
+  namespace: qaw
   annotations:
     konghq.com/plugins: kong-jwt
 spec:
   ports:
-  - port: 50011
+  - port: 51011
     protocol: TCP
     targetPort: 3000
   selector:
@@ -194,9 +206,10 @@ metadata:
   labels:
     app: static
   name: static
+  namespace: qaw
 spec:
   ports:
-  - port: 40000
+  - port: 41000
     protocol: TCP
     targetPort: 80
   selector:
