@@ -100,7 +100,7 @@ deploy-data:
 
 deploy-data-qaw:
 	@docker-compose \
-					-f build/docker-compose.qaw.data.yaml \
+					-f build/docker-compose.data.qaw.yaml \
 					--env-file build/env/.env \
 					-p data up --build --remove-orphans -d
 
