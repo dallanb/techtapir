@@ -5,7 +5,7 @@ metadata:
   namespace: qaw
 spec:
   storageClassName: nfs
-  volumeName: nfs-pv-account
+  volumeName: nfs-pv-qaw-account
   accessModes:
     - ReadWriteMany
   resources:
@@ -19,7 +19,7 @@ metadata:
   namespace: qaw
 spec:
   storageClassName: nfs
-  volumeName: nfs-pv-auth
+  volumeName: nfs-pv-qaw-auth
   accessModes:
     - ReadWriteMany
   resources:
@@ -33,7 +33,7 @@ metadata:
   namespace: qaw
 spec:
   storageClassName: nfs
-  volumeName: nfs-pv-contest
+  volumeName: nfs-pv-qaw-contest
   accessModes:
     - ReadWriteMany
   resources:
@@ -47,7 +47,7 @@ metadata:
   namespace: qaw
 spec:
   storageClassName: nfs
-  volumeName: nfs-pv-course
+  volumeName: nfs-pv-qaw-course
   accessModes:
     - ReadWriteMany
   resources:
@@ -61,7 +61,7 @@ metadata:
   namespace: qaw
 spec:
   storageClassName: nfs
-  volumeName: nfs-pv-league
+  volumeName: nfs-pv-qaw-league
   accessModes:
     - ReadWriteMany
   resources:
@@ -75,7 +75,7 @@ metadata:
   namespace: qaw
 spec:
   storageClassName: nfs
-  volumeName: nfs-pv-mailer
+  volumeName: nfs-pv-qaw-mailer
   accessModes:
     - ReadWriteMany
   resources:
@@ -89,7 +89,7 @@ metadata:
   namespace: qaw
 spec:
   storageClassName: nfs
-  volumeName: nfs-pv-member
+  volumeName: nfs-pv-qaw-member
   accessModes:
     - ReadWriteMany
   resources:
@@ -103,7 +103,7 @@ metadata:
   namespace: qaw
 spec:
   storageClassName: nfs
-  volumeName: nfs-pv-sport
+  volumeName: nfs-pv-qaw-sport
   accessModes:
     - ReadWriteMany
   resources:
@@ -117,7 +117,7 @@ metadata:
   namespace: qaw
 spec:
   storageClassName: nfs
-  volumeName: nfs-pv-wager
+  volumeName: nfs-pv-qaw-wager
   accessModes:
     - ReadWriteMany
   resources:

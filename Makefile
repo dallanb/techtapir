@@ -57,6 +57,14 @@ deploy-event:
 					--env-file build/env/.env \
 					-p event up --build --remove-orphans -d
 
+
+
+deploy-event-qaw:
+	@docker-compose \
+					-f build/docker-compose.event.qaw.yaml \
+					--env-file build/env/.env \
+					-p event up --build --remove-orphans -d
+
 deploy-event-rpi:
 	@docker-compose \
 					-f build/docker-compose.event.rpi.yaml \
@@ -162,6 +170,12 @@ down-backend:
 down-event:
 	@docker-compose \
 					-f build/docker-compose.event.yaml \
+					-p event down --remove-orphans
+
+
+down-event-qaw:
+	@docker-compose \
+					-f build/docker-compose.event.qaw.yaml \
 					-p event down --remove-orphans
 
 down-event-rpi:
