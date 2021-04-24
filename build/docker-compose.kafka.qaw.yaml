@@ -1,0 +1,32 @@
+version: '3.2'
+services:
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka:$KAFKA_VERSION
+    restart: on-failure
+    ports:
+      - "9092:9092"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${HUNCHO_DIR}/data/qaw/kafka_data:/kafka
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.kafka
+    depends_on:
+      - zookeeper
+    networks:
+      - kafka-net
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper:$ZOOKEEPER_VERSION
+    restart: on-failure
+    ports:
+      - "2181:2181"
+    volumes:
+      - ${HUNCHO_DIR}/data/qaw/zookeeper_data:/opt/zookeeper-3.4.13/data # keep an eye on this
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.zookeeper
+    networks:
+      - kafka-net
+networks:
+  kafka-net:
+    driver: bridge
