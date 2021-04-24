@@ -100,6 +100,12 @@ deploy-kafka:
 					--env-file build/env/.env \
 					-p kafka up --build --remove-orphans -d
 
+deploy-kafka-qaw:
+	@docker-compose \
+					-f build/docker-compose.kafka.qaw.yaml \
+					--env-file build/env/.env \
+					-p kafka up --build --remove-orphans -d
+
 deploy-data:
 	@docker-compose \
 					-f build/docker-compose.data.yaml \
@@ -200,6 +206,11 @@ down-webhook:
 down-kafka:
 	@docker-compose \
 					-f build/docker-compose.kafka.yaml \
+					-p kafka down -v --remove-orphans
+
+down-kafka-qaw:
+	@docker-compose \
+					-f build/docker-compose.kafka.qaw.yaml \
 					-p kafka down -v --remove-orphans
 
 down-data:
