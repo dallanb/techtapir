@@ -167,10 +167,10 @@ metadata:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: qaw.techtapir.com
-    http:
+  - http:
       paths:
-      - backend:
+      - path: /
+        backend:
           serviceName: static
           servicePort: 40000
 ---
