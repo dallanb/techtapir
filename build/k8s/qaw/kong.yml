@@ -201,6 +201,8 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
+        - name: CONTROLLER_INGRESS_CLASS
+          value: qaw
         image: dallanbhatti/ingress-controller:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
