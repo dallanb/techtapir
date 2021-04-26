@@ -4,7 +4,7 @@ metadata:
   name: account
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: account.qaw.techtapir.com
@@ -20,7 +20,7 @@ metadata:
   name: auth
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: auth.qaw.techtapir.com
@@ -36,7 +36,7 @@ metadata:
   name: contest
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: contest.qaw.techtapir.com
@@ -52,7 +52,7 @@ metadata:
   name: course
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: course.qaw.techtapir.com
@@ -68,7 +68,7 @@ metadata:
   name: league
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: league.qaw.techtapir.com
@@ -84,7 +84,7 @@ metadata:
   name: member
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: member.qaw.techtapir.com
@@ -100,7 +100,7 @@ metadata:
   name: notification
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: notification.qaw.techtapir.com
@@ -116,7 +116,7 @@ metadata:
   name: score
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: score.qaw.techtapir.com
@@ -132,7 +132,7 @@ metadata:
   name: sport
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: sport.qaw.techtapir.com
@@ -148,7 +148,7 @@ metadata:
   name: wager
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - host: wager.qaw.techtapir.com
@@ -164,7 +164,7 @@ metadata:
   name: static
   namespace: qaw
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: qaw
 spec:
   rules:
   - http:
