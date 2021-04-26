@@ -746,6 +746,8 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
+        - name: CONTROLLER_INGRESS_CLASS
+          value: prod
         image: dallanbhatti/ingress-controller:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
