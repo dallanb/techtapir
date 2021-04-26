@@ -4,7 +4,7 @@ metadata:
   name: account
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: account.techtapir.com
@@ -20,7 +20,7 @@ metadata:
   name: auth
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: auth.techtapir.com
@@ -36,7 +36,7 @@ metadata:
   name: contest
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: contest.techtapir.com
@@ -52,7 +52,7 @@ metadata:
   name: course
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: course.techtapir.com
@@ -68,7 +68,7 @@ metadata:
   name: league
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: league.techtapir.com
@@ -84,7 +84,7 @@ metadata:
   name: member
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: member.techtapir.com
@@ -100,7 +100,7 @@ metadata:
   name: notification
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: notification.techtapir.com
@@ -116,7 +116,7 @@ metadata:
   name: score
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: score.techtapir.com
@@ -132,7 +132,7 @@ metadata:
   name: sport
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: sport.techtapir.com
@@ -148,7 +148,7 @@ metadata:
   name: wager
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - host: wager.techtapir.com
@@ -164,7 +164,7 @@ metadata:
   name: static
   namespace: prod
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
 spec:
   rules:
   - http:

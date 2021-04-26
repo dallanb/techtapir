@@ -799,7 +799,7 @@ kind: Ingress
 metadata:
   name: admin-api
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
     konghq.com/strip-path: "true"
     konghq.com/plugins: admin-key-auth
   namespace: kong
@@ -817,7 +817,7 @@ kind: KongConsumer
 metadata:
   name: konga
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
   namespace: kong
 username: konga
 credentials:
@@ -828,7 +828,7 @@ kind: KongConsumer
 metadata:
   name: auth
   annotations:
-    kubernetes.io/ingress.class: kong
+    kubernetes.io/ingress.class: prod
   namespace: kong
 username: auth
 credentials:
