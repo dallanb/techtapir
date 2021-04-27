@@ -246,7 +246,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
   name: kong-jwt
-  namespace: kong-qaw
+  namespace: qaw
 config:
   secret_is_base64: false
   run_on_preflight: false
