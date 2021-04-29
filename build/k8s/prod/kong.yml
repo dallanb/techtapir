@@ -1,8 +1,8 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: kong
----
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: kong
+#---
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
@@ -470,7 +470,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: kong-serviceaccount
-  namespace: kong
+  namespace: prod
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -565,7 +565,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kong-serviceaccount
-  namespace: kong
+  namespace: prod
 ---
 apiVersion: v1
 kind: Service
@@ -574,7 +574,7 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
   name: kong-proxy
-  namespace: kong
+  namespace: prod
 spec:
   ports:
   - name: proxy
@@ -595,7 +595,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kong-validation-webhook
-  namespace: kong
+  namespace: prod
 spec:
   ports:
   - name: webhook
@@ -609,7 +609,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kong-admin
-  namespace: kong
+  namespace: prod
 spec:
   ports:
   - name: admin
@@ -632,7 +632,7 @@ metadata:
   labels:
     app: ingress-kong
   name: ingress-kong
-  namespace: kong
+  namespace: prod
 spec:
   replicas: 1
   selector:
@@ -781,7 +781,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
   name: admin-key-auth
-  namespace: kong
+  namespace: prod
 config:
   key_names:
   - apikey
@@ -805,7 +805,7 @@ metadata:
     kubernetes.io/ingress.class: prod
     konghq.com/strip-path: "true"
     konghq.com/plugins: admin-key-auth
-  namespace: kong
+  namespace: prod
 spec:
   rules:
   - http:
@@ -821,7 +821,7 @@ metadata:
   name: konga
   annotations:
     kubernetes.io/ingress.class: prod
-  namespace: kong
+  namespace: prod
 username: konga
 credentials:
 - konga-apikey
@@ -832,7 +832,7 @@ metadata:
   name: auth
   annotations:
     kubernetes.io/ingress.class: prod
-  namespace: kong
+  namespace: prod
 username: auth
 credentials:
 - auth-apikey

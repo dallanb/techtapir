@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: kong-qaw
----
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: kong-qaw
+#---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: kong-serviceaccount
-  namespace: kong-qaw
+  namespace: qaw
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -20,7 +20,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kong-serviceaccount
-  namespace: kong-qaw
+  namespace: qaw
 ---
 apiVersion: v1
 kind: Service
@@ -29,7 +29,7 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
   name: kong-proxy
-  namespace: kong-qaw
+  namespace: qaw
 spec:
   ports:
   - name: proxy
@@ -50,7 +50,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kong-validation-webhook
-  namespace: kong-qaw
+  namespace: qaw
 spec:
   ports:
   - name: webhook
@@ -64,7 +64,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kong-admin
-  namespace: kong-qaw
+  namespace: qaw
 spec:
   ports:
   - name: admin
@@ -87,7 +87,7 @@ metadata:
   labels:
     app: ingress-kong
   name: ingress-kong
-  namespace: kong-qaw
+  namespace: qaw
 spec:
   replicas: 1
   selector:
@@ -236,7 +236,7 @@ apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
   name: admin-key-auth
-  namespace: kong-qaw
+  namespace: qaw
 config:
   key_names:
   - apikey
@@ -260,7 +260,7 @@ metadata:
     kubernetes.io/ingress.class: qaw
     konghq.com/strip-path: "true"
     konghq.com/plugins: admin-key-auth
-  namespace: kong-qaw
+  namespace: qaw
 spec:
   rules:
   - http:
@@ -276,7 +276,7 @@ metadata:
   name: konga
   annotations:
     kubernetes.io/ingress.class: qaw
-  namespace: kong-qaw
+  namespace: qaw
 username: konga
 credentials:
 - konga-apikey
@@ -287,7 +287,7 @@ metadata:
   name: auth
   annotations:
     kubernetes.io/ingress.class: qaw
-  namespace: kong-qaw
+  namespace: qaw
 username: auth
 credentials:
 - auth-apikey
