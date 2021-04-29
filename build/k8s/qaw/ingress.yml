@@ -158,19 +158,19 @@ spec:
           serviceName: wager
           servicePort: 50010
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: static
-  namespace: qaw
-  annotations:
-    kubernetes.io/ingress.class: prod
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: static
-          servicePort: 40000
----
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: static
+#  namespace: qaw
+#  annotations:
+#    kubernetes.io/ingress.class: prod
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /
+#        backend:
+#          serviceName: static
+#          servicePort: 40000
+#---
