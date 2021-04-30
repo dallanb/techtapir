@@ -1,0 +1,207 @@
+version: '3.2'
+services:
+  account:
+    container_name: account
+    image: dallanbhatti/account:qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/account:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.account
+    healthcheck:
+      test: curl --fail -s account:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 50000:5000
+    networks:
+      - app-net
+  auth:
+    container_name: auth
+    image: dallanbhatti/auth:qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/auth:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.auth
+    healthcheck:
+      test: curl --fail -s auth:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 50001:5000
+    networks:
+      - app-net
+  contest:
+    container_name: contest
+    image: dallanbhatti/contest:qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/contest:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.contest
+      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
+    healthcheck:
+      test: curl --fail -s contest:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 50002:5000
+    networks:
+      - app-net
+  course:
+    container_name: course
+    image: dallanbhatti/course:qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/course:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.course
+      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
+    healthcheck:
+      test: curl --fail -s course:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 50003:5000
+    networks:
+      - app-net
+  league:
+    container_name: league
+    image: dallanbhatti/league:qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/league:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.league
+      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
+    healthcheck:
+      test: curl --fail -s league:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 50004:5000
+    networks:
+      - app-net
+  mailer:
+    container_name: mailer
+    image: dallanbhatti/mailer:qaw
+    restart: on-failure
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.mailer
+      - ${HUNCHO_DIR}/secrets/mailer/mailer_password.txt
+    volumes:
+      - mailer_volume:/home/app
+    networks:
+      - app-net
+  mailer_web:
+    container_name: mailer_web
+    image: dallanbhatti/mailer_web:qaw
+    restart: on-failure
+    ports:
+      - 50005:80
+    volumes:
+      - mailer_volume:/var/www/html
+    depends_on:
+      - mailer
+    networks:
+      - app-net
+  member:
+    container_name: member
+    image: dallanbhatti/member:qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/member:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.member
+      - ${HUNCHO_DIR}/secrets/s3/credentials.txt
+    healthcheck:
+      test: curl --fail -s member:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 50006:5000
+    networks:
+      - app-net
+  notification:
+    container_name: notification
+    image: dallanbhatti/notification:qaw
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/notification:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.notification
+    ports:
+      - 50007:3000
+    networks:
+      - app-net
+  score:
+    container_name: score
+    image: dallanbhatti/score:qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/score:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.score
+    healthcheck:
+      test: curl --fail -s score:3000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 50008:3000
+    networks:
+      - app-net
+  sport:
+    container_name: sport
+    image: dallanbhatti/sport:qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/sport:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.sport
+    healthcheck:
+      test: curl --fail -s sport:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 50009:5000
+    networks:
+      - app-net
+  wager:
+    container_name: wager
+    image: dallanbhatti/wager:qaw
+    restart: on-failure
+    volumes:
+      - ${HUNCHO_DIR}/migrations/qaw/wager:/home/app/migrations
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.wager
+    healthcheck:
+      test: curl --fail -s wager:5000/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 50010:5000
+    networks:
+      - app-net
+  web_pusher:
+    container_name: web_pusher
+    image: dallanbhatti/web-pusher:qaw
+    volumes:
+      - ${HUNCHO_DIR}/secrets/golftapir/tech-tapir-firebase-adminsdk-3zrlh-3720b4d899.json:/home/app/secrets/firebase.json
+    env_file:
+      - ${HUNCHO_DIR}/env/qaw/.env.web-pusher
+    networks:
+      - app-net
+volumes:
+  mailer_volume:
+networks:
+  app-net:
+    driver: bridge
