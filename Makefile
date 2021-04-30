@@ -51,6 +51,13 @@ deploy-backend:
 					-p backend up --build --remove-orphans -d
 
 
+deploy-api:
+	@docker-compose \
+					-f build/docker-compose.api.yaml \
+					--env-file build/env/.env \
+					-p api up --build --remove-orphans -d
+
+
 deploy-event:
 	@docker-compose \
 					-f build/docker-compose.event.yaml \
@@ -172,6 +179,11 @@ down-backend:
 	@docker-compose \
 					-f build/docker-compose.backend.yaml \
 					-p backend down --remove-orphans
+
+down-api:
+	@docker-compose \
+					-f build/docker-compose.api.yaml \
+					-p api down --remove-orphans
 
 down-event:
 	@docker-compose \
