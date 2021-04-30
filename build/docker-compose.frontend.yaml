@@ -38,6 +38,8 @@ services:
       - ${HUNCHO_DIR}/env/qaw/.env.konga
     depends_on:
       - kong_db
+    ports:
+      - 1337:1337
     networks:
       - kong-net
   static:

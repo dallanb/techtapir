@@ -615,7 +615,7 @@ spec:
         app: static
     spec:
       containers:
-      - image: dallanbhatti/static:qaw
+      - image: dallanbhatti/static:prod
         imagePullPolicy: Always
         name: static
         ports:
