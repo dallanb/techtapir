@@ -7,8 +7,30 @@ curl --location --request POST 'localhost:8001/consumers' \
   "username": "konga",
   "custom_id": "1"
 }'
-
 # Add Kong Service
+curl --location --request POST '0.0.0.0:8001/services/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "api-v1-kong",
+  "url": "http://kong:8000"
+}'
+curl --location --request POST '0.0.0.0:8001/services/api-v1-kong/routes/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "techtapir-kong",
+  "methods": [
+    "OPTIONS",
+    "HEAD",
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "PATCH"
+  ],
+  "hosts": ["kong.qaw.techtapir.com"]
+}'
+
+# Add Kong Admin Service
 curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -29,7 +51,7 @@ curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-statics",
-  "url": "http://auth_proxy"
+  "url": "http://static"
 }'
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-statics/routes/' \
@@ -47,7 +69,7 @@ curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-auth",
-  "url": "http://auth:5000"
+  "url": "http://10.0.0.100:50001"
 }'
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-auth/routes/' \
@@ -63,14 +85,14 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-auth/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["auth.techtapir.com"]
+  "hosts": ["auth.qaw.techtapir.com"]
 }'
 # Account
 curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-account",
-  "url": "http://account:5000"
+  "url": "http://10.0.0.100:50000"
 }'
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-account/routes/' \
@@ -86,7 +108,7 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-account/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["account.techtapir.com"]
+  "hosts": ["account.qaw.techtapir.com"]
 }'
 
 curl --location --request POST 'localhost:8001/services/api-v1-account/plugins' \
@@ -99,7 +121,7 @@ curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-contest",
-  "url": "http://contest:5000"
+  "url": "http://10.0.0.100:50002"
 }'
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-contest/routes/' \
@@ -115,7 +137,7 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-contest/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["contest.techtapir.com"]
+  "hosts": ["contest.qaw.techtapir.com"]
 }'
 
 curl --location --request POST 'localhost:8001/services/api-v1-contest/plugins' \
@@ -123,18 +145,18 @@ curl --location --request POST 'localhost:8001/services/api-v1-contest/plugins' 
 --data-raw '{
   "name": "jwt"
 }'
-# Kibana
+# Course
 curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "name": "api-v1-kibana",
-  "url": "http://kibana:5601"
+  "name": "api-v1-course",
+  "url": "http://10.0.0.100:50003"
 }'
 
-curl --location --request POST '0.0.0.0:8001/services/api-v1-kibana/routes/' \
+curl --location --request POST '0.0.0.0:8001/services/api-v1-course/routes/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "name": "techtapir-kibana",
+  "name": "techtapir-course",
   "methods": [
     "OPTIONS",
     "HEAD",
@@ -144,8 +166,66 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-kibana/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["kibana.techtapir.com"]
+  "hosts": ["course.qaw.techtapir.com"]
 }'
+
+curl --location --request POST 'localhost:8001/services/api-v1-course/plugins' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "jwt"
+}'
+# League
+curl --location --request POST '0.0.0.0:8001/services/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "api-v1-league",
+  "url": "http://10.0.0.100:50004"
+}'
+
+curl --location --request POST '0.0.0.0:8001/services/api-v1-league/routes/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "techtapir-league",
+  "methods": [
+    "OPTIONS",
+    "HEAD",
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "PATCH"
+  ],
+  "hosts": ["league.qaw.techtapir.com"]
+}'
+
+curl --location --request POST 'localhost:8001/services/api-v1-league/plugins' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "jwt"
+}'
+## Kibana
+#curl --location --request POST '0.0.0.0:8001/services/' \
+#--header 'Content-Type: application/json' \
+#--data-raw '{
+#  "name": "api-v1-kibana",
+#  "url": "http://kibana:5601"
+#}'
+#
+#curl --location --request POST '0.0.0.0:8001/services/api-v1-kibana/routes/' \
+#--header 'Content-Type: application/json' \
+#--data-raw '{
+#  "name": "techtapir-kibana",
+#  "methods": [
+#    "OPTIONS",
+#    "HEAD",
+#    "GET",
+#    "POST",
+#    "PUT",
+#    "DELETE",
+#    "PATCH"
+#  ],
+#  "hosts": ["kibana.techtapir.com"]
+#}'
 # Konga
 curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
@@ -167,14 +247,14 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-konga/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["konga.techtapir.com"]
+  "hosts": ["konga.qaw.techtapir.com"]
 }'
 # Mailer
 curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-mailer",
-  "url": "http://mailer_web"
+  "url": "http://10.0.0.100:50005"
 }'
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-mailer/routes/' \
@@ -190,7 +270,7 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-mailer/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["mailer.techtapir.com"]
+  "hosts": ["mailer.qaw.techtapir.com"]
 }'
 
 curl --location --request POST 'localhost:8001/services/api-v1-mailer/plugins' \
@@ -198,13 +278,75 @@ curl --location --request POST 'localhost:8001/services/api-v1-mailer/plugins' \
 --data-raw '{
   "name": "jwt"
 }'
+
+# Member
+curl --location --request POST '0.0.0.0:8001/services/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "api-v1-member",
+  "url": "http://10.0.0.100:50006"
+}'
+
+curl --location --request POST '0.0.0.0:8001/services/api-v1-member/routes/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "techtapir-member",
+  "methods": [
+    "OPTIONS",
+    "HEAD",
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "PATCH"
+  ],
+  "hosts": ["member.qaw.techtapir.com"]
+}'
+
+curl --location --request POST 'localhost:8001/services/api-v1-member/plugins' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "jwt"
+}'
+
+# Notification
+curl --location --request POST '0.0.0.0:8001/services/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "api-v1-notification",
+  "url": "http://10.0.0.100:50007"
+}'
+
+curl --location --request POST '0.0.0.0:8001/services/api-v1-notification/routes/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "techtapir-notification",
+  "methods": [
+    "OPTIONS",
+    "HEAD",
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "PATCH"
+  ],
+  "hosts": ["notification.qaw.techtapir.com"]
+}'
+
+curl --location --request POST 'localhost:8001/services/api-v1-notification/plugins' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "jwt"
+}'
+
 # RabbitMQ
 curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-rabbitmq",
-  "url": "http://10.0.0.198:15672"
+  "url": "http://10.0.0.150:56720"
 }'
+
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-rabbitmq/routes/' \
 --header 'Content-Type: application/json' \
@@ -219,14 +361,14 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-rabbitmq/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["rabbitmq.techtapir.com"]
+  "hosts": ["rabbitmq.qaw.techtapir.com"]
 }'
 # Score
 curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-score",
-  "url": "http://score:5000"
+  "url": "http://10.0.0.100:50008"
 }'
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-score/routes/' \
@@ -242,7 +384,7 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-score/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["score.techtapir.com"]
+  "hosts": ["score.qaw.techtapir.com"]
 }'
 
 curl --location --request POST 'localhost:8001/services/api-v1-score/plugins' \
@@ -255,7 +397,7 @@ curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-sport",
-  "url": "http://sport:5000"
+  "url": "http://10.0.0.100:50009"
 }'
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-sport/routes/' \
@@ -271,7 +413,7 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-sport/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["sport.techtapir.com"]
+  "hosts": ["sport.qaw.techtapir.com"]
 }'
 
 curl --location --request POST 'localhost:8001/services/api-v1-sport/plugins' \
@@ -284,7 +426,7 @@ curl --location --request POST '0.0.0.0:8001/services/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "name": "api-v1-wager",
-  "url": "http://wager:5000"
+  "url": "http://10.0.0.100:50010"
 }'
 
 curl --location --request POST '0.0.0.0:8001/services/api-v1-wager/routes/' \
@@ -300,7 +442,7 @@ curl --location --request POST '0.0.0.0:8001/services/api-v1-wager/routes/' \
     "DELETE",
     "PATCH"
   ],
-  "hosts": ["wager.techtapir.com"]
+  "hosts": ["wager.qaw.techtapir.com"]
 }'
 
 curl --location --request POST 'localhost:8001/services/api-v1-wager/plugins' \
