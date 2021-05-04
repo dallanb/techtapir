@@ -1,11 +1,56 @@
-.default-heading {
-    text-align: center;
+body, html {
+    font-family: Arial, sans-serif;
+    height: 100%;
+    margin: 0;
 }
 
 .default-body {
     text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.default-body-heading {
+    text-align: center;
+    height: 450px;
+}
+
+
 .default-img {
     height: 500px;
     width: 500px;
+}
+
+.default-body-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.body-content-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.body-content-icon {
+    height: 150px;
+    width: 150px;
+}
+
+.body-content-icon-img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.body-content-text {
+    font-size: larger;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
