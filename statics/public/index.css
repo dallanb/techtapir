@@ -1,0 +1,67 @@
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+#root,
+#app {
+    height: 100%;
+}
+.spinner {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background: rgba(222, 182, 246, 1);
+    background: linear-gradient(
+        90deg,
+        rgba(222, 182, 246, 1) 0%,
+        rgba(141, 207, 252, 1) 100%
+    );
+    background: -moz-linear-gradient(
+        90deg,
+        rgba(222, 182, 246, 1) 0%,
+        rgba(141, 207, 252, 1) 100%
+    );
+    background: -webkit-linear-gradient(
+        90deg,
+        rgba(222, 182, 246, 1) 0%,
+        rgba(141, 207, 252, 1) 100%
+    );
+}
+
+.app-logo {
+    position: absolute;
+    background: url(./tapir.png) no-repeat center;
+    background-size: cover;
+    height: 66px;
+    width: 100px;
+}
+
+.loading {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    border: 1px solid transparent;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
