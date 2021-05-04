@@ -2,10 +2,8 @@ version: '3.2'
 services:
   static:
     container_name: static
-    image: dallanbhatti/static:latest
+    image: dallanbhatti/static:prod
     restart: unless-stopped
-    volumes:
-      - ${HUNCHO_DIR}/statics/.:/usr/share/nginx/
     ports:
       - 8080:80
     networks:
